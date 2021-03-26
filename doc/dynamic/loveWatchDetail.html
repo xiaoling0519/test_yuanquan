@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>爱看点详情</title>
+		<link rel="stylesheet" href="../../mui/css/mui.min.css" />
+		<link rel="stylesheet" href="../../mui/css/previewImage.css">
+		<link rel="stylesheet" href="../../css/reset.css" />
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/jly.css" />
+		<script src="../../js/rem.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../plugin/js/fastclick.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div id="myApp">
+			<header class="common-header">
+				<div class="common-header-content">
+					<a @click="back" class="lf common-header-leftA">
+						<img class="common-header-leftImg" src="../../img/back.png" alt="" />
+					</a>
+					<h1 class="common-header-h1">
+                    全网最牛事件
+                </h1>
+					<div class="clear"></div>
+				</div>
+			</header>
+
+			<div class="common-content">
+				<div class="common-content-padded loveWatchDetail-padded">
+					<h2 v-html="info.title" class="loveWatchDetail-title"></h2>
+					<div class="loveWatchDetail-time-and">
+						<span v-html="info.time"></span>
+						<a v-html="info.source"></a>
+					</div>
+					<div v-html="info.content" class="loveWatchDetail-main">
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="../../vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../mui/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../mui/js/mui.zoom.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../mui/js/mui.previewimage.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/param.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/system.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jly.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var currWebviewId = null;
+
+			var vm = new Vue({
+				el: "#myApp",
+				data: {
+					info: {
+						title: "",
+						time: "",
+						source: "",
+						content: ""
+					}
+				},
+				mounted: function() {
+					ajaxRequest();
+				},
+				methods: {
+					back: function() {
+						Webview.close({
+							id: currWebviewId
+						});
+					}
+				}
+			})
+
+			mui.init({
+				gestureConfig: {
+					longtap: true
+				}
+			});
+			mui.plusReady(function() {
+				currWebviewId = plus.webview.currentWebview().id;
+
+				mui.back = function() {
+					var previewImage = mui.isFunction(mui.getPreviewImage) && mui.getPreviewImage();
+					if(previewImage && previewImage.isShown()) { //图片预览
+						previewImage.close();
+					} else {
+						Webview.close({
+							id: currWebviewId
+						})
+					}
+				}
+			})
+			publicStatusbar();
+
+			//图片预览
+			mui.previewImage();
+			
+			 mui('#__MUI_PREVIEWIMAGE').on('longtap', '.mui-zoom', function () {
+	            saveImage(this.getAttribute('src'));
+	        })
+
+			function ajaxRequest() {
+				mui.getJSON('loveWatchDetail.json', function(data) {
+					if(JSON.stringify(data) != "{}") {
+						vm.info = data;
+
+						var str = '';
+						for(var i = 0; i < data.content.length; i++) {
+							if(data.content[i].type === 'image') {
+								str += "<img data-preview-group='1' data-preview-src='' src='" + data.content[i].detail + "'>";
+							}
+							if(data.content[i].type === 'text') {
+								str += "<p>" + data.content[i].detail + "</p>";
+							}
+						}
+						vm.info.content = str;
+					}
+				})
+			}
+		</script>
+	</body>
+
+</html>

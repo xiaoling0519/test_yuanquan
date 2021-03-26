@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>发布幸福</title>
+    <link rel="stylesheet" href="../../mui/css/mui.min.css" />
+    <link rel="stylesheet" href="../../mui/css/previewImage.css">
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/common.css" />
+    <link rel="stylesheet" href="../../css/jly.css" />
+    <script src="../../js/rem.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../plugin/js/fastclick.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+    <div id="myApp">
+        <header class="common-header">
+            <div class="common-header-content">
+                <a @click="back()" class="lf common-header-leftA">
+                    <img class="common-header-leftImg" src="../../img/back.png" alt="" />
+                </a>
+                <h1 class="common-header-h1">
+                    发布
+                </h1>
+                <div class="clear"></div>
+            </div>
+        </header>
+
+        <div class="common-content">
+            <div class="common-content-padded publishHappiness-padded">
+                <div class="publishDynamic-main">
+                    <input id="title" v-model="title" class="publishHappiness-titleInput" placeholder="请输入一个响亮的标题" type="text">
+                    <textarea v-model="text" rows="6" placeholder="请输入相对大家说的独白"></textarea>
+                    <ul class="empty">
+                        <li onclick="selectImage()" class="lf publishDynamic-camera-li">
+                            <div class="publishDynamic-camera-main">
+                                <img src="../../img/publishDynamic/camera.png" alt="" />
+                                <div class="font28">照片</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="feedback-submitBtn">
+                    <div @click='publish()' class="myWallet-rechargeBtn">
+                        立即发布
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/templete" id="waitUploadImage">
+        <li class="lf publishDynamic-image-li">
+            <div class="publishDynamic-image-container">
+                <img data-preview-src="" data-preview-group="1" class="publishDynamic-image" src="{{image}}" alt="" />
+            </div>
+            <img class="publishDynamic-delete" src="../../img/publishDynamic/delete.svg" alt="" />
+        </li>
+    </script>
+
+    <script src="../../vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../mui/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../mui/js/mui.zoom.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../mui/js/mui.previewimage.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/param.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/system.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jly.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        var currWebviewId = null;
+
+        var vm = new Vue({
+            el: "#myApp",
+            data: {
+                title: '',
+                text: '',
+            },
+            methods: {
+                publish: function () {
+                    if (this.title === '') {
+                        plus.nativeUI.toast('请输入标题');
+                        return;
+                    }
+                    if (this.text === '') {
+                        plus.nativeUI.toast('请输入独白');
+                        return;
+                    }
+                    if (document.querySelectorAll('.publishDynamic-image-li').length === 0) {
+                        plus.nativeUI.toast('请上传照片');
+                        return;
+                    }
+                    plus.nativeUI.toast('发布成功');
+                },
+				back:function(){
+					 Webview.close({
+						id: currWebviewId
+					});
+				}
+            }
+        })
+
+        mui.init();
+        mui.plusReady(function () {
+            currWebviewId = plus.webview.currentWebview().id;
+
+            mui.back = function () {
+                var previewImage = mui.isFunction(mui.getPreviewImage) && mui.getPreviewImage();
+                if (previewImage && previewImage.isShown()) { //图片预览
+                    previewImage.close();
+                } else {
+                    Webview.close({
+                        id: currWebviewId
+                    })
+                }
+            }
+        })
+        publicStatusbar();
+
+        //图片预览
+        mui.previewImage();
+
+        //图片显示处理
+        function imageShow() {
+            showImgCenter(document.querySelector('.publishDynamic-image-li'), document.querySelector(
+                '.publishDynamic-image'));
+        }
+
+        //选取图片
+        function selectImage() {
+            selectImg(function (p) {
+                if (document.querySelectorAll('.publishDynamic-image-li').length === 1) {
+                    document.querySelector('.publishDynamic-image').setAttribute('src', p);
+                } else {
+                    var waitUploadImage = document.querySelector('#waitUploadImage').innerHTML.replace(
+                        '{{image}}',
+                        p);
+                    document.querySelector('.publishDynamic-main ul').innerHTML += waitUploadImage;
+                }
+                imageShow();
+            })
+        }
+    </script>
+</body>
+
+</html>

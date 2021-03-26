@@ -1,0 +1,383 @@
+/*浮动*/
+
+.lf {
+	float: left;
+}
+
+.rf {
+	float: right;
+}
+
+.clear {
+	clear: both;
+}
+
+
+/*超出隐藏*/
+
+.overflowHidden {
+	overflow: hidden;
+}
+
+.overflowEllipsis {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.overflowTwoEllipsis {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
+}
+
+.overflowThreeEllipsis {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 3;
+	overflow: hidden;
+}
+
+
+/*伪元素*/
+
+.empty:after {
+	display: block;
+	clear: both;
+	content: "";
+	visibility: hidden;
+	height: 0;
+}
+
+
+/*块级元素居中*/
+
+.margin0Auto {
+	margin: 0 auto;
+}
+
+
+/*元素显示*/
+
+.displayBlock {
+	display: block;
+}
+
+.displayNone {
+	display: none;
+}
+
+.displayInlineBlock {
+	display: inline-block;
+}
+
+.displayInline {
+	display: inline;
+}
+
+
+/*定位*/
+
+.relative {
+	position: relative;
+}
+
+.absolute {
+	position: absolute;
+}
+
+.fixed {
+	position: fixed;
+}
+
+
+/*圆角*/
+
+.radius50 {
+	border-radius: 50%;
+}
+
+
+/*文本对齐方式*/
+
+.textCenter {
+	text-align: center;
+}
+
+.textLeft {
+	text-align: left;
+}
+
+.textRight {
+	text-align: right;
+}
+
+
+/*字体*/
+
+.font20 {
+	font-size: .20rem;
+}
+
+.font22 {
+	font-size: .22rem;
+}
+
+.font26 {
+	font-size: .26rem;
+}
+
+.font28 {
+	font-size: .28rem;
+}
+
+.font30 {
+	font-size: .30rem;
+}
+
+.font34 {
+	font-size: .34rem;
+}
+
+.font38 {
+	font-size: .38rem;
+}
+
+
+/*字体颜色*/
+
+.colorWhite {
+	color: #fff;
+}
+
+
+/*背景颜色*/
+
+.backgroundWhite {
+	background: #fff;
+}
+
+
+/*顶部*/
+
+.common-header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 30;
+}
+
+.common-header-content {
+	width: 7.5rem;
+	height: 100%;
+	margin: 0 auto;
+	background: linear-gradient(to right ,#7C08F2,#9401FB);
+	position: relative;
+}
+
+.common-header-leftA {
+	margin-left: .15rem;
+	width: .64rem;
+	text-align: center;
+	height: .88rem;
+}
+
+.common-header-rightA {
+	margin-right: .15rem;
+	width: .64rem;
+	text-align: center;
+	height: .88rem;
+}
+
+.common-header-rightA:active {
+	color: #fff;
+}
+
+.common-header-rightA-text{
+	color: #fff;font-size: .34rem;width: 1.06rem;line-height: .88rem;
+}
+
+.common-header-leftImg {
+	width: .24rem;
+	height: .42rem;
+	margin-top: .23rem;
+}
+
+.common-header-h1 {
+	text-align: center;
+	color: #fff;
+	font-size: .34rem;
+	line-height: .88rem;
+	margin: 0 1.4rem;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	width: 4.7rem;
+	overflow: hidden;
+}
+
+
+/*主体*/
+
+.common-content {
+	padding-top: .88rem;
+}
+
+.common-content-padded {
+	width: 7.5rem;
+	padding: 0 .15rem;
+	margin: 0 auto;
+}
+
+
+/*底部*/
+
+.common-bottom {
+	position: fixed;
+	bottom: 2rem;
+	left: 0;
+	width: 100%;
+}
+
+
+/*类似设置页的列表*/
+
+.common-list {
+	margin-bottom: .3rem;
+}
+
+.common-list-li {
+	border-radius: .1rem;
+	height: 1rem;
+	padding: 0 .2rem;
+	font-size: .28rem;
+	background-color: #fff;
+	margin-bottom: 1px;
+}
+
+.common-list-li-content {
+	background: url(../img/more.png) no-repeat right;
+	background-size: .2rem .36rem;
+}
+
+.common-list-li-label {
+	line-height: 1rem;
+}
+
+.common-list-li-label.active {
+	color: #FF063C;
+}
+
+.common-list-li-txt {
+	line-height: 1rem;
+	margin-right: .6rem;
+}
+
+
+/*类似设置的退出按钮*/
+
+.common-bigBtn {
+	width: 100%;
+	text-align: center;
+	font-size: .34rem;
+	height: 1rem;
+	line-height: 1rem;
+	background: #fff;
+	border-radius: .1rem;
+	color: #000;
+}
+
+.common-bigBtn:active {
+	color: #000;
+}
+
+
+/*只遮住主体的遮罩层*/
+
+.common-bodyCover {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: #000;
+	z-index: 10;
+	display: none;
+	opacity: .3;
+}
+
+
+/*弹出窗口*/
+
+.common-popup {
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	transform: translateY(-50%);
+	margin-left: -3.33rem;
+	width: 6.66rem;
+	z-index: 9999;
+	background: #fff;
+	border-radius: .1rem;
+	font-size: .3rem;
+}
+
+.common-popup-close {
+	position: absolute;
+	right: -.22rem;
+	top: -.22rem;
+	width: .44rem;
+	height: .44rem;
+}
+
+.common-popup-h3 {
+	height: .92rem;
+	text-align: center;
+	line-height: .92rem;
+	border-bottom: 1px solid #F5F5F5;
+	font-size: .3rem;
+}
+
+.common-popup-li {
+	height: .96rem;
+	border-bottom: 1px solid #F5F5F5;
+	padding: 0 .3rem;
+}
+
+.common-popup-confirmBtn {
+	padding: .2rem .3rem;
+}
+
+.common-popup-confirmBtn .myWallet-rechargeBtn {
+	margin-top: 0;
+}
+
+
+/*确认框*/
+
+.common-confirm {
+	font-size: .32rem;
+}
+
+.common-confirm h3 {
+	font-size: .32rem;
+	line-height: 1.14rem;
+	text-align: center;
+	border-bottom: 1px solid #F5F5F5;
+}
+
+.common-confirm-tipTxt {
+	padding: .56rem .3rem .3rem .3rem;
+	text-align: center;
+}
+
+.common-confirm-btns span {
+	width: 50%;
+	text-align: center;
+	line-height: 1.3rem;
+}
+
+.common-confirm-yes {
+	color: #7D24FA;
+}

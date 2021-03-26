@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>关于缘圈</title>
+		<link rel="stylesheet" href="../../mui/css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/reset.css" />
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/jly.css" />
+		<script src="../../js/rem.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../plugin/js/fastclick.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body style="background: #fff;">
+		<div id='myApp'>
+			<header id="headerContent" class="common-header">
+				<div class="common-header-content">
+					<a class="lf common-header-leftA">
+						<img class="common-header-leftImg" src="../../img/back.png" alt="" />
+					</a>
+					<h1 class="common-header-h1">
+	                关于缘圈
+	            </h1>
+					<div class="clear"></div>
+				</div>
+			</header>
+			<div class="common-content">
+				<div class="common-content-padded about-padded">
+					<div id="logo" class="about-logo-and">
+						<img v-bind:src="info.logo" alt="">
+						<div>缘圈</div>
+					</div>
+					<div id="main" class="about-main">
+						产品描述：
+						<p v-html="info.describe">
+
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="../../vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../mui/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/param.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/system.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jly.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el: "#myApp",
+				data: {
+					info: {
+						logo: '../../img/logo.png',
+						describe: '的时刻了发生地佛山地发挥iOS好滴哦回复时都会发ID是地方本科地上那边覅死哦达康书记疯狂的时刻分别是肯定是解放军开始实得分卡兰蒂斯哪里看分内的事你发的'
+					}
+				},
+				methods: {
+
+				}
+			})
+
+			mui.init();
+			mui.plusReady(function() {
+				publicBack();
+			})
+
+			publicStatusbar();
+		</script>
+	</body>
+
+</html>

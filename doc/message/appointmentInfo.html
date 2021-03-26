@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>约会信息</title>
+    <link rel="stylesheet" href="../../mui/css/mui.min.css" />
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/common.css" />
+    <link rel="stylesheet" href="../../css/jly.css" />
+    <script src="../../js/rem.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../plugin/js/fastclick.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+    <div id="myApp">
+        <header class="common-header">
+            <div class="common-header-content">
+                <a class="lf common-header-leftA">
+                    <img class="common-header-leftImg" src="../../img/back.png" alt="" />
+                </a>
+                <h1 class="common-header-h1">
+                    约会信息
+                </h1>
+                <div class="clear"></div>
+            </div>
+        </header>
+
+        <div class="common-content">
+            <div class="common-content-padded appointmentInfo-padded">
+                <div class="myAppointment-commonLi appointmentInfo-main">
+                    <div class="myAppointment-commonLi-main">
+                        <div class="lf index-message-list-avatar-div myAppointment-commonLi-avatar-div">
+                            <img v-bind:src="info.avatar" class="index-message-list-avatar" alt="">
+                        </div>
+                        <div class="lf index-message-list-main myAppointment-commonLi-nickName-and">
+                            <span v-html="info.name"></span>
+                            <p class="overflowEllipsis">主题：
+                                <label v-html="info.theme"></label>
+                            </p>
+                        </div>
+                        <span v-html="info.status" class="rf index-message-list-date myAppointment-commonLi-date appointmentInfo-status"></span>
+                        <div class="clear"></div>
+                        <div class="myAppointment-commonLi-money">
+                            赏金：
+                            <label v-html="info.price"></label>元
+                        </div>
+                    </div>
+                    <div class="appointmentInfo-detail">
+                        <ul class="appointmentInfo-detail-ul">
+                            <li>
+                                <label>性别要求：</label>
+                                <span v-html="info.sexRequest"></span>
+                            </li>
+                            <li>
+                                <label>时间：</label>
+                                <span v-html="info.time"></span>
+                                <span v-html="info.date" class="appointmentInfo-detail-date"></span>
+                            </li>
+                            <li>
+                                <label>地点：</label>
+                                <span v-html="info.address"></span>
+                            </li>
+                            <li>
+                                <label>邀约留言：</label>
+                                <span v-html="info.leaveMsg"></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="appointmentInfo-detail-operate">
+                        <div class="appointmentInfo-detail-agree-and">
+                            <span @click="agree()" class="lf appointmentInfo-detail-btn">同意约会</span>
+                            <span @click="refuse()" class="rf appointmentInfo-detail-btn">拒绝约会</span>
+                            <div class="clear"></div>
+                        </div>
+                        <div @click="toChat()" class="appointmentInfo-detail-btn appointmentInfo-detail-chat">聊天</div>
+
+                        <p class='appointmentInfo-detail-tip'>
+                            注意：当对方确认约会后赏金才会到达你的账户约会有风险 约会需谨慎
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="../../vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../mui/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/param.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/system.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jly.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: "#myApp",
+            data: {
+                info: {
+                    id: null,
+					userId:null,
+                    avatar: '',
+                    name: '',
+                    theme: '',
+                    status: '',
+                    price: '',
+                    sexRequest: '',
+                    time: '',
+                    date: '',
+                    address: '',
+                    leaveMsg: ''
+                }
+            },
+            mounted: function () {
+                ajaxRequest();
+            },
+            methods: {
+                //同意
+                agree: function () {
+                    plus.nativeUI.toast('你已同意');
+                },
+                //拒绝
+                refuse: function () {
+                    plus.nativeUI.toast('你已拒绝');
+                },
+                //聊天
+                toChat: function () {
+					publicToChat();
+                }
+            }
+        })
+
+        mui.init();
+        mui.plusReady(function () {
+            publicBack();
+        })
+        publicStatusbar();
+
+        //设置刚好一屏
+        var h = getBodyH();
+        var clientWidth = document.querySelector('.common-header-content').offsetWidth;
+        document.querySelector('.myAppointment-commonLi').style.height = h - 2 * 0.15 * 100 * clientWidth /
+            750 +
+            'px';
+
+        function getBodyH() {
+            var windowH = document.documentElement.clientHeight;
+            var topH = document.querySelector('.common-header').offsetHeight;
+            return windowH - topH;
+        }
+
+        function ajaxRequest() {
+            mui.getJSON('appointmentInfo.json', function (data) {
+                if (JSON.stringify(data) != "{}") {
+                    vm.info = data;
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>

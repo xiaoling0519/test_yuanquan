@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>我的动态</title>
+    <link rel="stylesheet" href="../../mui/css/mui.min.css" />
+    <link rel="stylesheet" href="../../mui/css/previewImage.css">
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/common.css" />
+    <link rel="stylesheet" href="../../css/jly.css" />
+    <script src="../../js/rem.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../plugin/js/fastclick.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+    <div id="myApp">
+        <header class="common-header">
+            <div class="common-header-content">
+                <a @click="back()" class="lf common-header-leftA">
+                    <img class="common-header-leftImg" src="../../img/back.png" alt="" />
+                </a>
+                <h1 class="common-header-h1">
+                    我的动态
+                </h1>
+                <div class="clear"></div>
+            </div>
+        </header>
+
+        <div class="common-content">
+            <div class="common-content-padded myDynamic-padded">
+                <ul>
+                    <li v-for='(item,index) in items' class="index-dynamic-li">
+                        <div class="index-dynamic-li-content">
+                            <div>
+                                <div @click.stop="toUserDetail(item.userId)" class="lf index-dynamic-li-avatar-div">
+                                    <img v-bind:src="item.avatar" class="index-dynamic-li-avatar" alt="" />
+                                </div>
+                                <div class="lf index-dynamic-li-name-and">
+                                    <span v-html="item.name" class="index-dynamic-li-name"></span>
+                                    <p v-html="item.time" class="index-dynamic-li-time"></p>
+                                </div>
+                                <div @click.stop="deleteDynamic(index)" class="rf index-dynamic-li-operate myDynamic-delete">
+                                    <img src="../../img/myDynamic/delete.png" alt="" />
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <p v-html="item.text" class="index-dynamic-li-publishTxt"></p>
+                            <ul class="index-dynamic-li-publishImg-ul">
+                                <li v-for='image in item.images' class="lf">
+                                    <img v-bind:src="image" v-bind:data-preview-group="index" data-preview-src="" alt="" />
+                                </li>
+                            </ul>
+                            <div class="font20">
+                                <span v-html="item.like"></span>人赞过
+                            </div>
+                            <ul class="index-dynamic-li-comments">
+                                <li v-for="comment in item.comments">
+                                    <a @click.stop="toUserDetail(comment.fromId)" v-html="comment.fromName"></a>
+                                    回复
+                                    <a @click.stop="toUserDetail(comment.toId)" v-html="comment.toName"></a>：
+                                    <span v-html="comment.content"></span>
+                                </li>
+                            </ul>
+                             <div class="index-dynamic-li-toComment">
+                                评论
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div v-show="confirmShow" class="common-popup common-confirm">
+                <h3>温馨提示</h3>
+                <div class="common-confirm-tipTxt">
+                    你确定要删除这条动态吗？
+                </div>
+                <div class="common-confirm-btns">
+                    <span @click="cancel()" class='lf common-confirm-cancel'>取消</span>
+                    <span @click="confirm()" class='lf common-confirm-yes'>确定</span>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../mui/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../mui/js/mui.zoom.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../mui/js/mui.previewimage.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/param.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/system.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jly.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        var page = 0;
+
+        var currWebviewId = null;
+        var mask = mui.createMask();
+
+        publicStatusbar();
+
+        var vm = new Vue({
+            el: '#myApp',
+            data: {
+                willDelete: null,
+                confirmShow: false,
+                items: []
+            },
+            updated: function () {
+                var listH = document.querySelector('.common-content').offsetHeight;
+                if (listH < h) {
+                    mui('.common-content').pullRefresh().disablePullupToRefresh();
+                } else {
+                    mui('.common-content').pullRefresh().enablePullupToRefresh();
+                }
+            },
+            methods: {
+                //顶部返回
+                back: function () {
+                    Webview.close({
+                        id: currWebviewId
+                    });
+                },
+                //删除
+                deleteDynamic: function (index) {
+                    this.willDelete = index;
+
+                    mask.show();
+                    this.confirmShow = true;
+
+                    document.querySelector('.mui-backdrop').addEventListener('click', function () {
+                        vm.confirmShow = false;
+                    })
+                },
+                //取消
+                cancel: function () {
+                    mask.close();
+                    this.confirmShow = false;
+                },
+                //确定
+                confirm: function () {
+                    this.items.splice(this.willDelete, 1);
+
+                    mask.close();
+                    this.confirmShow = false;
+                },
+                //用户详情
+                toUserDetail: function (id) {
+                    publicToUser();
+                }
+            }
+        })
+
+        mui.init({
+            pullRefresh: {
+                container: '.common-content',
+                down: {
+                    style: 'circle',
+                    auto: true,
+                    callback: pulldownRefresh
+                },
+                up: {
+                    callback: pullupLoadmore
+                }
+            },
+            gestureConfig: {
+				longtap: true
+			}
+        });
+
+        mui.plusReady(function () {
+            currWebviewId = plus.webview.currentWebview().id;
+
+            mui.back = function () {
+                var previewImage = mui.isFunction(mui.getPreviewImage) && mui.getPreviewImage();
+                if (previewImage && previewImage.isShown()) { //图片预览
+                    previewImage.close();
+                } else if (vm.confirmShow) {
+                    vm.confirmShow = false;
+                    mask.close();
+                } else {
+                    Webview.close({
+                        id: currWebviewId
+                    })
+                }
+            }
+        })
+
+        //图片预览
+        mui.previewImage();
+        
+        mui('#__MUI_PREVIEWIMAGE').on('longtap', '.mui-zoom', function () {
+            saveImage(this.getAttribute('src'));
+        })
+
+        //阻止页面滚动
+        document.querySelector('.common-confirm').addEventListener('touchmove', function (e) {
+            e.preventDefault();
+        })
+
+        //获取主体高度
+        var h = getBodyH();
+
+        function getBodyH() {
+            var windowH = document.documentElement.clientHeight;
+            var topH = document.querySelector('.common-header').offsetHeight;
+            return windowH - topH;
+        }
+
+        //下拉
+        function pulldownRefresh() {
+            page = 1;
+            vm.items = [];
+            ajaxRequest('down');
+
+            mui('.common-content').pullRefresh().enablePullupToRefresh();
+        }
+
+        //上拉
+        function pullupLoadmore() {
+            page++;
+            ajaxRequest('up');
+        }
+
+        //请求数据
+        function ajaxRequest(type) {
+            mui.getJSON('myDynamic.json', function (data) {
+                if (JSON.stringify(data) == "{}") {
+                    if (type === 'down') {
+                        setTimeout(function () {
+                            mui('.common-content').pullRefresh().endPulldown();
+                        }, 500);
+                    }
+                    if (type === 'up') {
+                        setTimeout(function () {
+                            mui('.common-content').pullRefresh().endPullup(true);
+                        }, 500);
+                    }
+                } else {
+                    var count = 0;
+                    for (var i in data) {
+                        if (i == page) {
+                            count = 1;
+                            vm.items = vm.items.concat(data[i]);
+
+                            if (type === 'down') {
+                                setTimeout(function () {
+                                    mui('.common-content').pullRefresh().endPulldown();
+                                }, 500);
+                            }
+                            if (type === 'up') {
+                                setTimeout(function () {
+                                    mui('.common-content').pullRefresh().endPullup();
+                                }, 500);
+                            }
+                            break;
+                        }
+                    }
+                    if (count === 0) {
+                        if (type === 'down') {
+                            setTimeout(function () {
+                                mui('.common-content').pullRefresh().endPulldown();
+                            }, 500);
+                        }
+                        if (type === 'up') {
+                            setTimeout(function () {
+                                mui('.common-content').pullRefresh().endPullup(true);
+                            }, 500);
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

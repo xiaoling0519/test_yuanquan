@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>分享</title>
+		<link rel="stylesheet" href="../../mui/css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/reset.css" />
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/jly.css" />
+		<script src="../../js/rem.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../plugin/js/fastclick.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div id="myApp">
+			<header class="common-header" style="z-index: -1;">
+				<div class="common-header-content">
+					<a class="lf common-header-leftA">
+						<img class="common-header-leftImg" src="../../img/back.png" alt="" />
+					</a>
+					<h1 class="common-header-h1">
+					
+				</h1>
+					<div class="clear"></div>
+				</div>
+			</header>
+			<div class="common-content share-content">
+				<div class="common-content-padded" style="padding: 0;">
+					<img id="shareImg" style="width: 100%;" src="../../img/share/shareImg.png" alt="" />
+					<div class="share-weixin-and">
+						<ul>
+							<li @click="share('weixin')" class="lf">
+								<img src="../../img/share/weixin.png" alt="" />
+								<div>微信</div>
+							</li>
+							<li @click="share('friendCircle')" class="lf">
+								<img src="../../img/share/friendCircle.png" alt="" />
+								<div>朋友圈</div>
+							</li>
+							<li @click="save" class="lf">
+								<img src="../../img/share/download.png" alt="" />
+								<div>保存到本地</div>
+							</li>
+						</ul>
+						<div class="share-cancel" @click="back">
+							取消
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="../../vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../mui/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/param.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/system.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jly.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var currWebviewId = null;
+
+			var vm = new Vue({
+				el: "#myApp",
+				data: {
+
+				},
+				methods: {
+					back: function() {
+						Webview.close({
+							id: currWebviewId
+						});
+					},
+					share:function(type){
+						var shareType = '';
+						var scene = '';
+						if(type==='friendCircle') {
+							shareType = "weixin";
+							scene = 'WXSceneTimeline';
+						}
+						if(type==='weixin') {
+							shareType = "weixin";
+							scene = 'WXSceneSession';
+						}
+						
+						share(shareType, '缘圈邀请函', 'http://www.huihejituan.com/yichujing/download/download.html', [document.querySelector('#shareImg').getAttribute('src')], scene);
+					},
+					save:function(){
+						saveImageNow(document.querySelector('#shareImg').getAttribute('src'));
+					}
+				}
+			})
+
+			mui.init();
+			mui.plusReady(function() {
+				publicBack();
+
+				currWebviewId = plus.webview.currentWebview().id;
+			})
+			publicStatusbar();
+		</script>
+	</body>
+
+</html>

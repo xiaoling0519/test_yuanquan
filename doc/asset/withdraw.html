@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>提现</title>
+		<link rel="stylesheet" href="../../mui/css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/reset.css" />
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/jly.css" />
+		<script src="../../js/rem.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../plugin/js/fastclick.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div id="myApp">
+			<header class="common-header">
+				<div class="common-header-content">
+					<a class="lf common-header-leftA">
+						<img class="common-header-leftImg" src="../../img/back.png" alt="" />
+					</a>
+					<h1 class="common-header-h1">
+					提现
+				</h1>
+					<div class="clear"></div>
+				</div>
+			</header>
+			<div class="common-content">
+				<div class="common-content-padded withdraw-padded">
+					<div class="withdraw-content">
+						<div class="withdraw-asset">
+							<div class="withdraw-asset-content">
+								<span class="withdraw-where lf">支付宝</span>
+								<a v-if="notAdd" @click="toManage" class="withdraw-addAsset rf">立即添加</a>
+								<div v-else @click="toManage" class="overflowEllipsis">
+									<span v-html="asset" class="withdraw-asset-num"></span>
+									<span v-html="name" class="withdraw-name"></span>
+								</div>
+								<div class="clear"></div>
+							</div>
+						</div>
+						<div class="withdraw-main">
+							<label>提现金额</label>
+							<div class="withdraw-input-div">
+								￥<input id="input" oninput="clearNoNum(this);input(this.value)" type="number" />
+							</div>
+							<p v-if="beyond" class="withdraw-beyond-tip">输入金额超过钱包余额</p>
+							<p v-else class="withdraw-balance">当前钱包可提现余额<span v-html="balance"></span>元</p>
+							<div class="feedback-submitBtn withdraw-btn">
+								<div class="myWallet-rechargeBtn">
+									确认提现
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="../../vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../mui/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/param.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/system.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jly.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el: "#myApp",
+				data: {
+					balance: 1000,
+					beyond: false,
+					notAdd: true,
+					asset: '',
+					name: ''
+				},
+				methods: {
+					toManage: function() {
+						publicWebviewShow({
+							id: '/doc/asset/manageAlipay.html',
+							extras: {
+								asset: vm.asset,
+								name: vm.name
+							}
+						})
+					}
+				}
+			})
+
+			mui.init();
+			mui.plusReady(function() {
+				publicBack();
+			})
+
+			publicStatusbar();
+
+			function input(val) {
+				if(val !== '') {
+					if(parseFloat(val) > parseFloat(vm.balance)) {
+						vm.beyond = true;
+						document.querySelector('.withdraw-btn').style.opacity = '0.5';
+					} else {
+						vm.beyond = false;
+						document.querySelector('.withdraw-btn').style.opacity = '1';
+					}
+				} else {
+					document.querySelector('.withdraw-btn').style.opacity = '0.5';
+				}
+			}
+		</script>
+	</body>
+
+</html>

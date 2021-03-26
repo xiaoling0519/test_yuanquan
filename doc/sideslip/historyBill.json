@@ -1,0 +1,16 @@
+{
+	"1":[
+		{
+			"type": "约会赏金",
+			"time": "2018-05-25 15:11",
+			"price": 88.00,
+			"priceType": "spending"
+		},
+		{
+			"type": "在线充值",
+			"time": "2018-05-25 15:11",
+			"price": 88.00,
+			"priceType": "income"
+		}
+	]
+}

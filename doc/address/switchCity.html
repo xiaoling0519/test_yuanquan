@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>切换城市</title>
+		<link rel="stylesheet" href="../../mui/css/mui.min.css" />
+		<link rel="stylesheet" href="../../mui/css/mui.indexedlist.css" />
+		<link rel="stylesheet" href="../../css/reset.css" />
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/jly.css" />
+		<style>
+			html,
+			body {
+				height: 100%;
+				overflow: hidden;
+			}
+			
+			.mui-bar {
+				-webkit-box-shadow: none;
+				box-shadow: none;
+			}
+		</style>
+		<script src="../../js/rem.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../plugin/js/fastclick.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div id="myApp">
+			<header class="common-header">
+				<div class="common-header-content">
+					<a class="lf common-header-leftA">
+						<img class="common-header-leftImg" src="../../img/back.png" alt="" />
+					</a>
+					<h1 class="common-header-h1">
+					选择城市
+				</h1>
+					<div class="clear"></div>
+				</div>
+			</header>
+			<div class="mui-content" style="padding-top: .88rem;">
+				<div id='list' class="mui-indexed-list">
+					<div class="mui-indexed-list-search mui-input-row mui-search">
+						<input type="search" class="mui-input-clear mui-indexed-list-search-input switchCity-search" placeholder="搜索城市">
+					</div>
+					<div class="mui-indexed-list-bar">
+						<a>A</a>
+						<a>B</a>
+						<a>C</a>
+						<a>D</a>
+						<a>E</a>
+						<a>F</a>
+						<a>G</a>
+						<a>H</a>
+						<a>I</a>
+						<a>J</a>
+						<a>K</a>
+						<a>L</a>
+						<a>M</a>
+						<a>N</a>
+						<a>O</a>
+						<a>P</a>
+						<a>Q</a>
+						<a>R</a>
+						<a>S</a>
+						<a>T</a>
+						<a>U</a>
+						<a>V</a>
+						<a>W</a>
+						<a>X</a>
+						<a>Y</a>
+						<a>Z</a>
+					</div>
+					<div class="mui-indexed-list-alert"></div>
+					<div class="mui-indexed-list-inner">
+						<div id="quickSelect" class="switchCity-quickSelect">
+							<div class="switchCity-quickSelect-li">
+								<label>当前城市</label>
+								<div class="userDetail-data-li-ul">
+									<div class="lf">杭州市</div>
+								</div>
+							</div>
+							<div class="switchCity-quickSelect-li">
+								<label>热门城市</label>
+								<div class="userDetail-data-li-ul">
+									<div class="lf">北京市</div>
+									<div class="lf">上海市</div>
+									<div class="lf">广州市</div>
+									<div class="lf">深圳市</div>
+								</div>
+							</div>
+						</div>
+						<div class="mui-indexed-list-empty-alert">没有数据</div>
+						<ul class="mui-table-view mui-table-ul sceniceMuiTable" id="listView">
+							<li data-group="A" class="mui-table-view-divider mui-indexed-list-group">A</li>
+							<li data-value="" code="82" parent_code="82" parent_id="47495" id="47495" class="mui-table-view-cell mui-indexed-list-item">澳门</li>
+							<li data-value="ASS" code="210300" parent_code="210000" parent_id="451" id="477" class="mui-table-view-cell mui-indexed-list-item">鞍山市</li>
+							<li data-value="AQS" code="340800" parent_code="340000" parent_id="999" id="1050" class="mui-table-view-cell mui-indexed-list-item">安庆市</li>
+							<li data-value="AYS" code="410500" parent_code="410000" parent_id="1467" id="1518" class="mui-table-view-cell mui-indexed-list-item">安阳市</li>
+							<li data-value="ASS" code="520400" parent_code="520000" parent_id="2417" id="2449" class="mui-table-view-cell mui-indexed-list-item">安顺市</li>
+							<li data-value="AKS" code="610900" parent_code="610000" parent_id="2742" id="2839" class="mui-table-view-cell mui-indexed-list-item">安康市</li>
+							<li data-group="B" class="mui-table-view-divider mui-indexed-list-group">B</li>
+							<li data-value="" code="11" parent_code="11" parent_id="1" id="1" class="mui-table-view-cell mui-indexed-list-item">北京市</li>
+							<li data-value="BDS" code="130600" parent_code="130000" parent_id="34" id="119" class="mui-table-view-cell mui-indexed-list-item">保定市</li>
+							<li data-value="BTS" code="150200" parent_code="150000" parent_id="337" id="347" class="mui-table-view-cell mui-indexed-list-item">包头市</li>
+							<li data-value="BYNES" code="150800" parent_code="150000" parent_id="337" id="407" class="mui-table-view-cell mui-indexed-list-item">巴彦淖尔市</li>
+							<li data-value="BXS" code="210500" parent_code="210000" parent_id="451" id="492" class="mui-table-view-cell mui-indexed-list-item">本溪市</li>
+							<li data-value="BSS" code="220600" parent_code="220000" parent_id="564" id="605" class="mui-table-view-cell mui-indexed-list-item">白山市</li>
+							<li data-value="BCS" code="220800" parent_code="220000" parent_id="564" id="618" class="mui-table-view-cell mui-indexed-list-item">白城市</li>
+							<li data-value="BBS" code="340300" parent_code="340000" parent_id="999" id="1019" class="mui-table-view-cell mui-indexed-list-item">蚌埠市</li>
+							<li data-value="BZS" code="341600" parent_code="340000" parent_id="999" id="1102" class="mui-table-view-cell mui-indexed-list-item">亳州市</li>
+							<li data-value="BZS" code="371600" parent_code="370000" parent_id="1322" id="1450" class="mui-table-view-cell mui-indexed-list-item">滨州市</li>
+							<li data-value="BSS" code="440600" parent_code="440000" parent_id="1889" id="1932" class="mui-table-view-cell mui-indexed-list-item">佛山市</li>
+							<li data-value="BHS" code="450500" parent_code="450000" parent_id="2022" id="2073" class="mui-table-view-cell mui-indexed-list-item">北海市</li>
+							<li data-value="BSS" code="451000" parent_code="450000" parent_id="2022" id="2100" class="mui-table-view-cell mui-indexed-list-item">百色市</li>
+							<li data-value="BZS" code="511900" parent_code="510000" parent_id="2214" id="2355" class="mui-table-view-cell mui-indexed-list-item">巴中市</li>
+							<li data-value="BJS" code="520500" parent_code="520000" parent_id="2417" id="2456" class="mui-table-view-cell mui-indexed-list-item">毕节市</li>
+							<li data-value="BSS" code="530500" parent_code="530000" parent_id="2515" id="2551" class="mui-table-view-cell mui-indexed-list-item">保山市</li>
+							<li data-value="BJS" code="610300" parent_code="610000" parent_id="2742" id="2761" class="mui-table-view-cell mui-indexed-list-item">宝鸡市</li>
+							<li data-value="BYS" code="620400" parent_code="620000" parent_id="2858" id="2872" class="mui-table-view-cell mui-indexed-list-item">白银市</li>
+							<li data-group="C" class="mui-table-view-divider mui-indexed-list-group">C</li>
+							<li data-value="" code="50" parent_code="50" parent_id="31929" id="31929" class="mui-table-view-cell mui-indexed-list-item">重庆市</li>
+							<li data-value="CDS" code="130800" parent_code="130000" parent_id="34" id="163" class="mui-table-view-cell mui-indexed-list-item">承德市</li>
+							<li data-value="CZS" code="130900" parent_code="130000" parent_id="34" id="175" class="mui-table-view-cell mui-indexed-list-item">沧州市</li>
+							<li data-value="CFS" code="150400" parent_code="150000" parent_id="337" id="361" class="mui-table-view-cell mui-indexed-list-item">赤峰市</li>
+							<li data-value="CZS" code="320400" parent_code="320000" parent_id="792" id="825" class="mui-table-view-cell mui-indexed-list-item">常州市</li>
+							<li data-value="CZS" code="341100" parent_code="340000" parent_id="999" id="1070" class="mui-table-view-cell mui-indexed-list-item">滁州市</li>
+							<li data-value="CZS" code="341700" parent_code="340000" parent_id="999" id="1106" class="mui-table-view-cell mui-indexed-list-item">池州市</li>
+							<li data-value="CDS" code="430700" parent_code="430000" parent_id="1755" id="1817" class="mui-table-view-cell mui-indexed-list-item">常德市</li>
+							<li data-value="CZS" code="431000" parent_code="430000" parent_id="1755" id="1838" class="mui-table-view-cell mui-indexed-list-item">郴州市</li>
+							<li data-value="CZS" code="445100" parent_code="440000" parent_id="1889" id="2008" class="mui-table-view-cell mui-indexed-list-item">潮州市</li>
+							<li data-value="CZS" code="451400" parent_code="450000" parent_id="2022" id="2137" class="mui-table-view-cell mui-indexed-list-item">崇左市</li>
+							<li data-value="CDS" code="510100" parent_code="510000" parent_id="2214" id="2215" class="mui-table-view-cell mui-indexed-list-item">成都市</li>
+							<li data-group="D" class="mui-table-view-divider mui-indexed-list-group">D</li>
+							<li data-value="DTS" code="140200" parent_code="140000" parent_id="214" id="226" class="mui-table-view-cell mui-indexed-list-item">大同市</li>
+							<li data-value="DLS" code="210200" parent_code="210000" parent_id="451" id="466" class="mui-table-view-cell mui-indexed-list-item">大连市</li>
+							<li data-value="DDS" code="210600" parent_code="210000" parent_id="451" id="499" class="mui-table-view-cell mui-indexed-list-item">丹东市</li>
+							<li data-value="DQS" code="230600" parent_code="230000" parent_id="633" id="697" class="mui-table-view-cell mui-indexed-list-item">大庆市</li>
+							<li data-value="DYS" code="370500" parent_code="370000" parent_id="1322" id="1358" class="mui-table-view-cell mui-indexed-list-item">东营市</li>
+							<li data-value="DZS" code="371400" parent_code="370000" parent_id="1322" id="1431" class="mui-table-view-cell mui-indexed-list-item">德州市</li>
+							<li data-value="DWS,DGS" code="441900" parent_code="440000" parent_id="1889" id="2006" class="mui-table-view-cell mui-indexed-list-item">东莞市</li>
+							<li data-value="DYS" code="510600" parent_code="510000" parent_id="2214" id="2256" class="mui-table-view-cell mui-indexed-list-item">德阳市</li>
+							<li data-value="DZS" code="511700" parent_code="510000" parent_id="2214" id="2339" class="mui-table-view-cell mui-indexed-list-item">达州市</li>
+							<li data-value="DXS" code="621100" parent_code="620000" parent_id="2858" id="2923" class="mui-table-view-cell mui-indexed-list-item">定西市</li>
+							<li data-group="E" class="mui-table-view-divider mui-indexed-list-group">E</li>
+							<li data-value="EEDSS" code="150600" parent_code="150000" parent_id="337" id="383" class="mui-table-view-cell mui-indexed-list-item">鄂尔多斯市</li>
+							<li data-value="EZS" code="420700" parent_code="420000" parent_id="1640" id="1693" class="mui-table-view-cell mui-indexed-list-item">鄂州市</li>
+							<li data-group="F" class="mui-table-view-divider mui-indexed-list-group">F</li>
+							<li data-value="FSS" code="210400" parent_code="210000" parent_id="451" id="485" class="mui-table-view-cell mui-indexed-list-item">抚顺市</li>
+							<li data-value="FXS" code="210900" parent_code="210000" parent_id="451" id="521" class="mui-table-view-cell mui-indexed-list-item">阜新市</li>
+							<li data-value="FYS" code="341200" parent_code="340000" parent_id="999" id="1079" class="mui-table-view-cell mui-indexed-list-item">阜阳市</li>
+							<li data-value="FZS" code="350100" parent_code="350000" parent_id="1119" id="1120" class="mui-table-view-cell mui-indexed-list-item">福州市</li>
+							<li data-value="FZS" code="361000" parent_code="360000" parent_id="1210" id="1297" class="mui-table-view-cell mui-indexed-list-item">抚州市</li>
+							<li data-value="FCGS" code="450600" parent_code="450000" parent_id="2022" id="2077" class="mui-table-view-cell mui-indexed-list-item">防城港市</li>
+							<li data-group="G" class="mui-table-view-divider mui-indexed-list-group">G</li>
+							<li data-value="GZS" code="360700" parent_code="360000" parent_id="1210" id="1253" class="mui-table-view-cell mui-indexed-list-item">赣州市</li>
+							<li data-value="GZS,AZS" code="440100" parent_code="440000" parent_id="1889" id="1890" class="mui-table-view-cell mui-indexed-list-item">广州市</li>
+							<li data-value="GLS" code="450300" parent_code="450000" parent_id="2022" id="2047" class="mui-table-view-cell mui-indexed-list-item">桂林市</li>
+							<li data-value="GGS" code="450800" parent_code="450000" parent_id="2022" id="2086" class="mui-table-view-cell mui-indexed-list-item">贵港市</li>
+							<li data-value="GYS,AYS" code="510800" parent_code="510000" parent_id="2214" id="2272" class="mui-table-view-cell mui-indexed-list-item">广元市</li>
+							<li data-value="GAS,AAS" code="511600" parent_code="510000" parent_id="2214" id="2332" class="mui-table-view-cell mui-indexed-list-item">广安市</li>
+							<li data-value="GYS" code="520100" parent_code="520000" parent_id="2417" id="2418" class="mui-table-view-cell mui-indexed-list-item">贵阳市</li>
+							<li data-value="GYS" code="640400" parent_code="640000" parent_id="3011" id="3029" class="mui-table-view-cell mui-indexed-list-item">固原市</li>
+							<li data-group="H" class="mui-table-view-divider mui-indexed-list-group">H</li>
+							<li data-value="HDS" code="130400" parent_code="130000" parent_id="34" id="79" class="mui-table-view-cell mui-indexed-list-item">邯郸市</li>
+							<li data-value="HSS" code="131100" parent_code="130000" parent_id="34" id="203" class="mui-table-view-cell mui-indexed-list-item">衡水市</li>
+							<li data-value="HHHTS" code="150100" parent_code="150000" parent_id="337" id="338" class="mui-table-view-cell mui-indexed-list-item">呼和浩特市</li>
+							<li data-value="HLBES" code="150700" parent_code="150000" parent_id="337" id="392" class="mui-table-view-cell mui-indexed-list-item">呼伦贝尔市</li>
+							<li data-value="HLDS" code="211400" parent_code="210000" parent_id="451" id="557" class="mui-table-view-cell mui-indexed-list-item">葫芦岛市</li>
+							<li data-value="HEBS" code="230100" parent_code="230000" parent_id="633" id="634" class="mui-table-view-cell mui-indexed-list-item">哈尔滨市</li>
+							<li data-value="HGS" code="230400" parent_code="230000" parent_id="633" id="679" class="mui-table-view-cell mui-indexed-list-item">鹤岗市</li>
+							<li data-value="HHS" code="231100" parent_code="230000" parent_id="633" id="751" class="mui-table-view-cell mui-indexed-list-item">黑河市</li>
+							<li data-value="HAS" code="320800" parent_code="320000" parent_id="792" id="858" class="mui-table-view-cell mui-indexed-list-item">淮安市</li>
+							<li data-value="HZS" code="330100" parent_code="330000" parent_id="903" id="904" class="mui-table-view-cell mui-indexed-list-item">杭州市</li>
+							<li data-value="HZS" code="330500" parent_code="330000" parent_id="903" id="947" class="mui-table-view-cell mui-indexed-list-item">湖州市</li>
+							<li data-value="HFS,GFS" code="340100" parent_code="340000" parent_id="999" id="1000" class="mui-table-view-cell mui-indexed-list-item">合肥市</li>
+							<li data-value="HNS" code="340400" parent_code="340000" parent_id="999" id="1027" class="mui-table-view-cell mui-indexed-list-item">淮南市</li>
+							<li data-value="HBS" code="340600" parent_code="340000" parent_id="999" id="1041" class="mui-table-view-cell mui-indexed-list-item">淮北市</li>
+							<li data-value="HSS" code="341000" parent_code="340000" parent_id="999" id="1062" class="mui-table-view-cell mui-indexed-list-item">黄山市</li>
+							<li data-value="HZS" code="371700" parent_code="370000" parent_id="1322" id="1457" class="mui-table-view-cell mui-indexed-list-item">菏泽市</li>
+							<li data-value="HBS" code="410600" parent_code="410000" parent_id="1467" id="1528" class="mui-table-view-cell mui-indexed-list-item">鹤壁市</li>
+							<li data-value="HSS,HDS" code="420200" parent_code="420000" parent_id="1640" id="1655" class="mui-table-view-cell mui-indexed-list-item">黄石市</li>
+							<li data-value="HGS" code="421100" parent_code="420000" parent_id="1640" id="1719" class="mui-table-view-cell mui-indexed-list-item">黄冈市</li>
+							<li data-value="HYS" code="430400" parent_code="430000" parent_id="1755" id="1781" class="mui-table-view-cell mui-indexed-list-item">衡阳市</li>
+							<li data-value="HHS" code="431200" parent_code="430000" parent_id="1755" id="1862" class="mui-table-view-cell mui-indexed-list-item">怀化市</li>
+							<li data-value="HZS" code="441300" parent_code="440000" parent_id="1889" id="1970" class="mui-table-view-cell mui-indexed-list-item">惠州市</li>
+							<li data-value="HYS" code="441600" parent_code="440000" parent_id="1889" id="1988" class="mui-table-view-cell mui-indexed-list-item">河源市</li>
+							<li data-value="HZS" code="451100" parent_code="450000" parent_id="2022" id="2113" class="mui-table-view-cell mui-indexed-list-item">贺州市</li>
+							<li data-value="HCS" code="451200" parent_code="450000" parent_id="2022" id="2118" class="mui-table-view-cell mui-indexed-list-item">河池市</li>
+							<li data-value="HKS" code="460100" parent_code="460000" parent_id="2145" id="2146" class="mui-table-view-cell mui-indexed-list-item">海口市</li>
+							<li data-value="HZS" code="610700" parent_code="610000" parent_id="2742" id="2814" class="mui-table-view-cell mui-indexed-list-item">汉中市</li>
+							<li data-value="HDS" code="630200" parent_code="630000" parent_id="2959" id="2968" class="mui-table-view-cell mui-indexed-list-item">海东市</li>
+							<li data-group="J" class="mui-table-view-divider mui-indexed-list-group">J</li>
+							<li data-value="JCS" code="140500" parent_code="140000" parent_id="214" id="252" class="mui-table-view-cell mui-indexed-list-item">晋城市</li>
+							<li data-value="JZS" code="140700" parent_code="140000" parent_id="214" id="264" class="mui-table-view-cell mui-indexed-list-item">晋中市</li>
+							<li data-value="JZS" code="210700" parent_code="210000" parent_id="451" id="506" class="mui-table-view-cell mui-indexed-list-item">锦州市</li>
+							<li data-value="JLS" code="220200" parent_code="220000" parent_id="564" id="575" class="mui-table-view-cell mui-indexed-list-item">吉林市</li>
+							<li data-value="JXS" code="230300" parent_code="230000" parent_id="633" id="669" class="mui-table-view-cell mui-indexed-list-item">鸡西市</li>
+							<li data-value="JMSS" code="230800" parent_code="230000" parent_id="633" id="725" class="mui-table-view-cell mui-indexed-list-item">佳木斯市</li>
+							<li data-value="JXS" code="330400" parent_code="330000" parent_id="903" id="939" class="mui-table-view-cell mui-indexed-list-item">嘉兴市</li>
+							<li data-value="JHS" code="330700" parent_code="330000" parent_id="903" id="959" class="mui-table-view-cell mui-indexed-list-item">金华市</li>
+							<li data-value="JDZS" code="360200" parent_code="360000" parent_id="1210" id="1221" class="mui-table-view-cell mui-indexed-list-item">景德镇市</li>
+							<li data-value="JJS" code="360400" parent_code="360000" parent_id="1210" id="1232" class="mui-table-view-cell mui-indexed-list-item">九江市</li>
+							<li data-value="JAS" code="360800" parent_code="360000" parent_id="1210" id="1272" class="mui-table-view-cell mui-indexed-list-item">吉安市</li>
+							<li data-value="JNS" code="370100" parent_code="370000" parent_id="1322" id="1323" class="mui-table-view-cell mui-indexed-list-item">济南市</li>
+							<li data-value="JNS" code="370800" parent_code="370000" parent_id="1322" id="1389" class="mui-table-view-cell mui-indexed-list-item">济宁市</li>
+							<li data-value="JZS" code="410800" parent_code="410000" parent_id="1467" id="1546" class="mui-table-view-cell mui-indexed-list-item">焦作市</li>
+							<li data-value="JMS" code="420800" parent_code="420000" parent_id="1640" id="1696" class="mui-table-view-cell mui-indexed-list-item">荆门市</li>
+							<li data-value="JZS" code="421000" parent_code="420000" parent_id="1640" id="1710" class="mui-table-view-cell mui-indexed-list-item">荆州市</li>
+							<li data-value="JMS" code="440700" parent_code="440000" parent_id="1889" id="1937" class="mui-table-view-cell mui-indexed-list-item">江门市</li>
+							<li data-value="JYS" code="445200" parent_code="440000" parent_id="1889" id="2012" class="mui-table-view-cell mui-indexed-list-item">揭阳市</li>
+							<li data-value="JYGS" code="620200" parent_code="620000" parent_id="2858" id="2868" class="mui-table-view-cell mui-indexed-list-item">嘉峪关市</li>
+							<li data-value="JCS" code="620300" parent_code="620000" parent_id="2858" id="2869" class="mui-table-view-cell mui-indexed-list-item">金昌市</li>
+							<li data-value="JQS" code="620900" parent_code="620000" parent_id="2858" id="2906" class="mui-table-view-cell mui-indexed-list-item">酒泉市</li>
+							<li data-group="K" class="mui-table-view-divider mui-indexed-list-group">K</li>
+							<li data-value="KFS" code="410200" parent_code="410000" parent_id="1467" id="1481" class="mui-table-view-cell mui-indexed-list-item">开封市</li>
+							<li data-value="KMS" code="530100" parent_code="530000" parent_id="2515" id="2516" class="mui-table-view-cell mui-indexed-list-item">昆明市</li>
+							<li data-value="KLMYS" code="650200" parent_code="650000" parent_id="3039" id="3048" class="mui-table-view-cell mui-indexed-list-item">克拉玛依市</li>
+							<li data-group="L" class="mui-table-view-divider mui-indexed-list-group">L</li>
+							<li data-value="LFS" code="131000" parent_code="130000" parent_id="34" id="192" class="mui-table-view-cell mui-indexed-list-item">廊坊市</li>
+							<li data-value="LFS" code="141000" parent_code="140000" parent_id="214" id="305" class="mui-table-view-cell mui-indexed-list-item">临汾市</li>
+							<li data-value="LLS" code="141100" parent_code="140000" parent_id="214" id="323" class="mui-table-view-cell mui-indexed-list-item">吕梁市</li>
+							<li data-value="LYS" code="211000" parent_code="210000" parent_id="451" id="529" class="mui-table-view-cell mui-indexed-list-item">辽阳市</li>
+							<li data-value="LYS" code="220400" parent_code="220000" parent_id="564" id="592" class="mui-table-view-cell mui-indexed-list-item">辽源市</li>
+							<li data-value="LYGS" code="320700" parent_code="320000" parent_id="792" id="851" class="mui-table-view-cell mui-indexed-list-item">连云港市</li>
+							<li data-value="LSS" code="331100" parent_code="330000" parent_id="903" id="989" class="mui-table-view-cell mui-indexed-list-item">丽水市</li>
+							<li data-value="LAS" code="341500" parent_code="340000" parent_id="999" id="1094" class="mui-table-view-cell mui-indexed-list-item">六安市</li>
+							<li data-value="LYS" code="350800" parent_code="350000" parent_id="1119" id="1193" class="mui-table-view-cell mui-indexed-list-item">龙岩市</li>
+							<li data-value="LWS" code="371200" parent_code="370000" parent_id="1322" id="1417" class="mui-table-view-cell mui-indexed-list-item">莱芜市</li>
+							<li data-value="LYS" code="371300" parent_code="370000" parent_id="1322" id="1418" class="mui-table-view-cell mui-indexed-list-item">临沂市</li>
+							<li data-value="LCS" code="371500" parent_code="370000" parent_id="1322" id="1441" class="mui-table-view-cell mui-indexed-list-item">聊城市</li>
+							<li data-value="LYS" code="410300" parent_code="410000" parent_id="1467" id="1492" class="mui-table-view-cell mui-indexed-list-item">洛阳市</li>
+							<li data-value="LDS" code="431300" parent_code="430000" parent_id="1755" id="1874" class="mui-table-view-cell mui-indexed-list-item">娄底市</li>
+							<li data-value="LZS" code="450200" parent_code="450000" parent_id="2022" id="2036" class="mui-table-view-cell mui-indexed-list-item">柳州市</li>
+							<li data-value="LBS" code="451300" parent_code="450000" parent_id="2022" id="2130" class="mui-table-view-cell mui-indexed-list-item">来宾市</li>
+							<li data-value="LZS" code="510500" parent_code="510000" parent_id="2214" id="2248" class="mui-table-view-cell mui-indexed-list-item">泸州市</li>
+							<li data-value="LPSS" code="520200" parent_code="520000" parent_id="2417" id="2429" class="mui-table-view-cell mui-indexed-list-item">六盘水市</li>
+							<li data-value="LJS" code="530700" parent_code="530000" parent_id="2515" id="2569" class="mui-table-view-cell mui-indexed-list-item">丽江市</li>
+							<li data-value="LCS" code="530900" parent_code="530000" parent_id="2515" id="2585" class="mui-table-view-cell mui-indexed-list-item">临沧市</li>
+							<li data-value="LSS" code="540100" parent_code="540000" parent_id="2660" id="2661" class="mui-table-view-cell mui-indexed-list-item">拉萨市</li>
+							<li data-value="LZS" code="620100" parent_code="620000" parent_id="2858" id="2859" class="mui-table-view-cell mui-indexed-list-item">兰州市</li>
+							<li data-value="LNS" code="621200" parent_code="620000" parent_id="2858" id="2931" class="mui-table-view-cell mui-indexed-list-item">陇南市</li>
+							<li data-group="M" class="mui-table-view-divider mui-indexed-list-group">M</li>
+							<li data-value="MDJS" code="231000" parent_code="230000" parent_id="633" id="740" class="mui-table-view-cell mui-indexed-list-item">牡丹江市</li>
+							<li data-value="MASS" code="340500" parent_code="340000" parent_id="999" id="1034" class="mui-table-view-cell mui-indexed-list-item">马鞍山市</li>
+							<li data-value="MMS" code="440900" parent_code="440000" parent_id="1889" id="1955" class="mui-table-view-cell mui-indexed-list-item">茂名市</li>
+							<li data-value="MZS" code="441400" parent_code="440000" parent_id="1889" id="1975" class="mui-table-view-cell mui-indexed-list-item">梅州市</li>
+							<li data-value="MYS" code="510700" parent_code="510000" parent_id="2214" id="2263" class="mui-table-view-cell mui-indexed-list-item">绵阳市</li>
+							<li data-value="MSS" code="511400" parent_code="510000" parent_id="2214" id="2314" class="mui-table-view-cell mui-indexed-list-item">眉山市</li>
+							<li data-group="N" class="mui-table-view-divider mui-indexed-list-group">N</li>
+							<li data-value="NJS" code="320100" parent_code="320000" parent_id="792" id="793" class="mui-table-view-cell mui-indexed-list-item">南京市</li>
+							<li data-value="NTS" code="320600" parent_code="320000" parent_id="792" id="842" class="mui-table-view-cell mui-indexed-list-item">南通市</li>
+							<li data-value="NBS" code="330200" parent_code="330000" parent_id="903" id="916" class="mui-table-view-cell mui-indexed-list-item">宁波市</li>
+							<li data-value="NPS" code="350700" parent_code="350000" parent_id="1119" id="1182" class="mui-table-view-cell mui-indexed-list-item">南平市</li>
+							<li data-value="NDS" code="350900" parent_code="350000" parent_id="1119" id="1201" class="mui-table-view-cell mui-indexed-list-item">宁德市</li>
+							<li data-value="NCS" code="360100" parent_code="360000" parent_id="1210" id="1211" class="mui-table-view-cell mui-indexed-list-item">南昌市</li>
+							<li data-value="NYS" code="411300" parent_code="410000" parent_id="1467" id="1583" class="mui-table-view-cell mui-indexed-list-item">南阳市</li>
+							<li data-value="NNS" code="450100" parent_code="450000" parent_id="2022" id="2023" class="mui-table-view-cell mui-indexed-list-item">南宁市</li>
+							<li data-value="NJS" code="511000" parent_code="510000" parent_id="2214" id="2286" class="mui-table-view-cell mui-indexed-list-item">内江市</li>
+							<li data-value="NCS" code="511300" parent_code="510000" parent_id="2214" id="2304" class="mui-table-view-cell mui-indexed-list-item">南充市</li>
+							<li data-group="P" class="mui-table-view-divider mui-indexed-list-group">P</li>
+							<li data-value="PJS" code="211100" parent_code="210000" parent_id="451" id="537" class="mui-table-view-cell mui-indexed-list-item">盘锦市</li>
+							<li data-value="PTS" code="350300" parent_code="350000" parent_id="1119" id="1141" class="mui-table-view-cell mui-indexed-list-item">莆田市</li>
+							<li data-value="PXS" code="360300" parent_code="360000" parent_id="1210" id="1226" class="mui-table-view-cell mui-indexed-list-item">萍乡市</li>
+							<li data-value="PDSS" code="410400" parent_code="410000" parent_id="1467" id="1507" class="mui-table-view-cell mui-indexed-list-item">平顶山市</li>
+							<li data-value="PYS" code="410900" parent_code="410000" parent_id="1467" id="1557" class="mui-table-view-cell mui-indexed-list-item">濮阳市</li>
+							<li data-value="PZHS" code="510400" parent_code="510000" parent_id="2214" id="2242" class="mui-table-view-cell mui-indexed-list-item">攀枝花市</li>
+							<li data-value="PES" code="530800" parent_code="530000" parent_id="2515" id="2574" class="mui-table-view-cell mui-indexed-list-item">普洱市</li>
+							<li data-value="PLS" code="620800" parent_code="620000" parent_id="2858" id="2898" class="mui-table-view-cell mui-indexed-list-item">平凉市</li>
+							<li data-group="Q" class="mui-table-view-divider mui-indexed-list-group">Q</li>
+							<li data-value="QHDS" code="130300" parent_code="130000" parent_id="34" id="71" class="mui-table-view-cell mui-indexed-list-item">秦皇岛市</li>
+							<li data-value="QQHES,JQHES,QJHES,JJHES" code="230200" parent_code="230000" parent_id="633" id="652" class="mui-table-view-cell mui-indexed-list-item">齐齐哈尔市</li>
+							<li data-value="QTHS" code="230900" parent_code="230000" parent_id="633" id="735" class="mui-table-view-cell mui-indexed-list-item">七台河市</li>
+							<li data-value="QZS" code="330800" parent_code="330000" parent_id="903" id="968" class="mui-table-view-cell mui-indexed-list-item">衢州市</li>
+							<li data-value="QZS" code="350500" parent_code="350000" parent_id="1119" id="1159" class="mui-table-view-cell mui-indexed-list-item">泉州市</li>
+							<li data-value="QDS" code="370200" parent_code="370000" parent_id="1322" id="1333" class="mui-table-view-cell mui-indexed-list-item">青岛市</li>
+							<li data-value="QYS" code="441800" parent_code="440000" parent_id="1889" id="1998" class="mui-table-view-cell mui-indexed-list-item">清远市</li>
+							<li data-value="QZS" code="450700" parent_code="450000" parent_id="2022" id="2081" class="mui-table-view-cell mui-indexed-list-item">钦州市</li>
+							<li data-value="QJS" code="530300" parent_code="530000" parent_id="2515" id="2531" class="mui-table-view-cell mui-indexed-list-item">曲靖市</li>
+							<li data-value="QYS" code="621000" parent_code="620000" parent_id="2858" id="2914" class="mui-table-view-cell mui-indexed-list-item">庆阳市</li>
+							<li data-group="R" class="mui-table-view-divider mui-indexed-list-group">R</li>
+							<li data-value="RZS" code="371100" parent_code="370000" parent_id="1322" id="1412" class="mui-table-view-cell mui-indexed-list-item">日照市</li>
+							<li data-value="RKZS" code="540200" parent_code="540000" parent_id="2660" id="2670" class="mui-table-view-cell mui-indexed-list-item">日喀则市</li>
+							<li data-group="S" class="mui-table-view-divider mui-indexed-list-group">S</li>
+							<li data-value="" code="31" parent_code="31" parent_id="10543" id="10543" class="mui-table-view-cell mui-indexed-list-item">上海市</li>
+							<li data-value="SJZS,DJZS" code="130100" parent_code="130000" parent_id="34" id="35" class="mui-table-view-cell mui-indexed-list-item">石家庄市</li>
+							<li data-value="SZS" code="140600" parent_code="140000" parent_id="214" id="258" class="mui-table-view-cell mui-indexed-list-item">朔州市</li>
+							<li data-value="SYS,CYS" code="210100" parent_code="210000" parent_id="451" id="452" class="mui-table-view-cell mui-indexed-list-item">沈阳市</li>
+							<li data-value="SPS" code="220300" parent_code="220000" parent_id="564" id="585" class="mui-table-view-cell mui-indexed-list-item">四平市</li>
+							<li data-value="SYS" code="220700" parent_code="220000" parent_id="564" id="612" class="mui-table-view-cell mui-indexed-list-item">松原市</li>
+							<li data-value="SYSS" code="230500" parent_code="230000" parent_id="633" id="688" class="mui-table-view-cell mui-indexed-list-item">双鸭山市</li>
+							<li data-value="SHS" code="231200" parent_code="230000" parent_id="633" id="758" class="mui-table-view-cell mui-indexed-list-item">绥化市</li>
+							<li data-value="SZS" code="320500" parent_code="320000" parent_id="792" id="833" class="mui-table-view-cell mui-indexed-list-item">苏州市</li>
+							<li data-value="SQS,XQS" code="321300" parent_code="320000" parent_id="792" id="898" class="mui-table-view-cell mui-indexed-list-item">宿迁市</li>
+							<li data-value="SXS" code="330600" parent_code="330000" parent_id="903" id="953" class="mui-table-view-cell mui-indexed-list-item">绍兴市</li>
+							<li data-value="SZS,XZS" code="341300" parent_code="340000" parent_id="999" id="1088" class="mui-table-view-cell mui-indexed-list-item">宿州市</li>
+							<li data-value="SMS" code="350400" parent_code="350000" parent_id="1119" id="1146" class="mui-table-view-cell mui-indexed-list-item">三明市</li>
+							<li data-value="SRS" code="361100" parent_code="360000" parent_id="1210" id="1309" class="mui-table-view-cell mui-indexed-list-item">上饶市</li>
+							<li data-value="SMXS" code="411200" parent_code="410000" parent_id="1467" id="1576" class="mui-table-view-cell mui-indexed-list-item">三门峡市</li>
+							<li data-value="SQS" code="411400" parent_code="410000" parent_id="1467" id="1596" class="mui-table-view-cell mui-indexed-list-item">商丘市</li>
+							<li data-value="SYS" code="420300" parent_code="420000" parent_id="1640" id="1662" class="mui-table-view-cell mui-indexed-list-item">十堰市</li>
+							<li data-value="SZS" code="421300" parent_code="420000" parent_id="1640" id="1737" class="mui-table-view-cell mui-indexed-list-item">随州市</li>
+							<li data-value="SYS" code="430500" parent_code="430000" parent_id="1755" id="1794" class="mui-table-view-cell mui-indexed-list-item">邵阳市</li>
+							<li data-value="SGS" code="440200" parent_code="440000" parent_id="1889" id="1902" class="mui-table-view-cell mui-indexed-list-item">韶关市</li>
+							<li data-value="SZS" code="440300" parent_code="440000" parent_id="1889" id="1913" class="mui-table-view-cell mui-indexed-list-item">深圳市</li>
+							<li data-value="STS" code="440500" parent_code="440000" parent_id="1889" id="1924" class="mui-table-view-cell mui-indexed-list-item">汕头市</li>
+							<li data-value="SYS,SWS" code="441500" parent_code="440000" parent_id="1889" id="1984" class="mui-table-view-cell mui-indexed-list-item">汕尾市</li>
+							<li data-value="SYS" code="460200" parent_code="460000" parent_id="2145" id="2151" class="mui-table-view-cell mui-indexed-list-item">三亚市</li>
+							<li data-value="SSS" code="460300" parent_code="460000" parent_id="2145" id="2156" class="mui-table-view-cell mui-indexed-list-item">三沙市</li>
+							<li data-value="SNS" code="510900" parent_code="510000" parent_id="2214" id="2280" class="mui-table-view-cell mui-indexed-list-item">遂宁市</li>
+							<li data-value="SLS" code="611000" parent_code="610000" parent_id="2742" id="2850" class="mui-table-view-cell mui-indexed-list-item">商洛市</li>
+							<li data-value="SZSS,DZSS" code="640200" parent_code="640000" parent_id="3011" id="3019" class="mui-table-view-cell mui-indexed-list-item">石嘴山市</li>
+							<li data-group="T" class="mui-table-view-divider mui-indexed-list-group">T</li>
+							<li data-value="" code="12" parent_code="12" parent_id="338" id="338" class="mui-table-view-cell mui-indexed-list-item">天津市</li>
+							<li data-value="TSS" code="130200" parent_code="130000" parent_id="34" id="56" class="mui-table-view-cell mui-indexed-list-item">唐山市</li>
+							<li data-value="TYS" code="140100" parent_code="140000" parent_id="214" id="215" class="mui-table-view-cell mui-indexed-list-item">太原市</li>
+							<li data-value="TLS" code="150500" parent_code="150000" parent_id="337" id="374" class="mui-table-view-cell mui-indexed-list-item">通辽市</li>
+							<li data-value="TLS" code="211200" parent_code="210000" parent_id="451" id="542" class="mui-table-view-cell mui-indexed-list-item">铁岭市</li>
+							<li data-value="THS" code="220500" parent_code="220000" parent_id="564" id="597" class="mui-table-view-cell mui-indexed-list-item">通化市</li>
+							<li data-value="TZS" code="321200" parent_code="320000" parent_id="792" id="891" class="mui-table-view-cell mui-indexed-list-item">泰州市</li>
+							<li data-value="TZS" code="331000" parent_code="330000" parent_id="903" id="979" class="mui-table-view-cell mui-indexed-list-item">台州市</li>
+							<li data-value="TLS" code="340700" parent_code="340000" parent_id="999" id="1046" class="mui-table-view-cell mui-indexed-list-item">铜陵市</li>
+							<li data-value="TAS" code="370900" parent_code="370000" parent_id="1322" id="1400" class="mui-table-view-cell mui-indexed-list-item">泰安市</li>
+							<li data-value="THS,LHS" code="411100" parent_code="410000" parent_id="1467" id="1571" class="mui-table-view-cell mui-indexed-list-item">漯河市</li>
+							<li data-value="TRS" code="520600" parent_code="520000" parent_id="2417" id="2465" class="mui-table-view-cell mui-indexed-list-item">铜仁市</li>
+							<li data-value="TCS" code="610200" parent_code="610000" parent_id="2742" id="2756" class="mui-table-view-cell mui-indexed-list-item">铜川市</li>
+							<li data-value="TSS" code="620500" parent_code="620000" parent_id="2858" id="2878" class="mui-table-view-cell mui-indexed-list-item">天水市</li>
+							<li data-group="W" class="mui-table-view-divider mui-indexed-list-group">W</li>
+							<li data-value="WHS" code="150300" parent_code="150000" parent_id="337" id="357" class="mui-table-view-cell mui-indexed-list-item">乌海市</li>
+							<li data-value="WLCBS" code="150900" parent_code="150000" parent_id="337" id="415" class="mui-table-view-cell mui-indexed-list-item">乌兰察布市</li>
+							<li data-value="WXS,MXS" code="320200" parent_code="320000" parent_id="792" id="805" class="mui-table-view-cell mui-indexed-list-item">无锡市</li>
+							<li data-value="WZS" code="330300" parent_code="330000" parent_id="903" id="928" class="mui-table-view-cell mui-indexed-list-item">温州市</li>
+							<li data-value="WHS" code="340200" parent_code="340000" parent_id="999" id="1010" class="mui-table-view-cell mui-indexed-list-item">芜湖市</li>
+							<li data-value="WFS" code="370700" parent_code="370000" parent_id="1322" id="1377" class="mui-table-view-cell mui-indexed-list-item">潍坊市</li>
+							<li data-value="WHS" code="371000" parent_code="370000" parent_id="1322" id="1407" class="mui-table-view-cell mui-indexed-list-item">威海市</li>
+							<li data-value="WHS" code="420100" parent_code="420000" parent_id="1640" id="1641" class="mui-table-view-cell mui-indexed-list-item">武汉市</li>
+							<li data-value="WZS" code="450400" parent_code="450000" parent_id="2022" id="2065" class="mui-table-view-cell mui-indexed-list-item">梧州市</li>
+							<li data-value="WNS" code="610500" parent_code="610000" parent_id="2742" id="2788" class="mui-table-view-cell mui-indexed-list-item">渭南市</li>
+							<li data-value="WWS" code="620600" parent_code="620000" parent_id="2858" id="2886" class="mui-table-view-cell mui-indexed-list-item">武威市</li>
+							<li data-value="WZS" code="640300" parent_code="640000" parent_id="3011" id="3023" class="mui-table-view-cell mui-indexed-list-item">吴忠市</li>
+							<li data-value="WLMQS,WLMJS" code="650100" parent_code="650000" parent_id="3039" id="3040" class="mui-table-view-cell mui-indexed-list-item">乌鲁木齐市</li>
+							<li data-group="X" class="mui-table-view-divider mui-indexed-list-group">X</li>
+							<li data-value="" code="81" parent_code="81" parent_id="47494" id="47494" class="mui-table-view-cell mui-indexed-list-item">香港</li>
+							<li data-value="XTS" code="130500" parent_code="130000" parent_id="34" id="99" class="mui-table-view-cell mui-indexed-list-item">邢台市</li>
+							<li data-value="XZS" code="140900" parent_code="140000" parent_id="214" id="290" class="mui-table-view-cell mui-indexed-list-item">忻州市</li>
+							<li data-value="XZS" code="320300" parent_code="320000" parent_id="792" id="814" class="mui-table-view-cell mui-indexed-list-item">徐州市</li>
+							<li data-value="XCS" code="341800" parent_code="340000" parent_id="999" id="1111" class="mui-table-view-cell mui-indexed-list-item">宣城市</li>
+							<li data-value="XMS,SMS" code="350200" parent_code="350000" parent_id="1119" id="1134" class="mui-table-view-cell mui-indexed-list-item">厦门市</li>
+							<li data-value="XYS" code="360500" parent_code="360000" parent_id="1210" id="1246" class="mui-table-view-cell mui-indexed-list-item">新余市</li>
+							<li data-value="XXS" code="410700" parent_code="410000" parent_id="1467" id="1533" class="mui-table-view-cell mui-indexed-list-item">新乡市</li>
+							<li data-value="XCS" code="411000" parent_code="410000" parent_id="1467" id="1564" class="mui-table-view-cell mui-indexed-list-item">许昌市</li>
+							<li data-value="XYS" code="411500" parent_code="410000" parent_id="1467" id="1606" class="mui-table-view-cell mui-indexed-list-item">信阳市</li>
+							<li data-value="XYS" code="420600" parent_code="420000" parent_id="1640" id="1685" class="mui-table-view-cell mui-indexed-list-item">襄阳市</li>
+							<li data-value="XGS" code="420900" parent_code="420000" parent_id="1640" id="1702" class="mui-table-view-cell mui-indexed-list-item">孝感市</li>
+							<li data-value="XNS" code="421200" parent_code="420000" parent_id="1640" id="1730" class="mui-table-view-cell mui-indexed-list-item">咸宁市</li>
+							<li data-value="XTS" code="430300" parent_code="430000" parent_id="1755" id="1775" class="mui-table-view-cell mui-indexed-list-item">湘潭市</li>
+							<li data-value="XAS" code="610100" parent_code="610000" parent_id="2742" id="2743" class="mui-table-view-cell mui-indexed-list-item">西安市</li>
+							<li data-value="XYS" code="610400" parent_code="610000" parent_id="2742" id="2774" class="mui-table-view-cell mui-indexed-list-item">咸阳市</li>
+							<li data-value="XNS" code="630100" parent_code="630000" parent_id="2959" id="2960" class="mui-table-view-cell mui-indexed-list-item">西宁市</li>
+							<li data-group="Y" class="mui-table-view-divider mui-indexed-list-group">Y</li>
+							<li data-value="YQS" code="140300" parent_code="140000" parent_id="214" id="236" class="mui-table-view-cell mui-indexed-list-item">阳泉市</li>
+							<li data-value="YCS" code="140800" parent_code="140000" parent_id="214" id="276" class="mui-table-view-cell mui-indexed-list-item">运城市</li>
+							<li data-value="YKS" code="210800" parent_code="210000" parent_id="451" id="514" class="mui-table-view-cell mui-indexed-list-item">营口市</li>
+							<li data-value="YCS" code="230700" parent_code="230000" parent_id="633" id="707" class="mui-table-view-cell mui-indexed-list-item">伊春市</li>
+							<li data-value="YCS" code="320900" parent_code="320000" parent_id="792" id="867" class="mui-table-view-cell mui-indexed-list-item">盐城市</li>
+							<li data-value="YZS" code="321000" parent_code="320000" parent_id="792" id="877" class="mui-table-view-cell mui-indexed-list-item">扬州市</li>
+							<li data-value="YTS" code="360600" parent_code="360000" parent_id="1210" id="1249" class="mui-table-view-cell mui-indexed-list-item">鹰潭市</li>
+							<li data-value="YCS" code="360900" parent_code="360000" parent_id="1210" id="1286" class="mui-table-view-cell mui-indexed-list-item">宜春市</li>
+							<li data-value="YTS" code="370600" parent_code="370000" parent_id="1322" id="1364" class="mui-table-view-cell mui-indexed-list-item">烟台市</li>
+							<li data-value="YCS" code="420500" parent_code="420000" parent_id="1640" id="1671" class="mui-table-view-cell mui-indexed-list-item">宜昌市</li>
+							<li data-value="YYS" code="430600" parent_code="430000" parent_id="1755" id="1807" class="mui-table-view-cell mui-indexed-list-item">岳阳市</li>
+							<li data-value="YYS" code="430900" parent_code="430000" parent_id="1755" id="1831" class="mui-table-view-cell mui-indexed-list-item">益阳市</li>
+							<li data-value="YZS" code="431100" parent_code="430000" parent_id="1755" id="1850" class="mui-table-view-cell mui-indexed-list-item">永州市</li>
+							<li data-value="YJS" code="441700" parent_code="440000" parent_id="1889" id="1994" class="mui-table-view-cell mui-indexed-list-item">阳江市</li>
+							<li data-value="YFS" code="445300" parent_code="440000" parent_id="1889" id="2017" class="mui-table-view-cell mui-indexed-list-item">云浮市</li>
+							<li data-value="YLS" code="450900" parent_code="450000" parent_id="2022" id="2092" class="mui-table-view-cell mui-indexed-list-item">玉林市</li>
+							<li data-value="YSS,LSS" code="511100" parent_code="510000" parent_id="2214" id="2292" class="mui-table-view-cell mui-indexed-list-item">乐山市</li>
+							<li data-value="YBS" code="511500" parent_code="510000" parent_id="2214" id="2321" class="mui-table-view-cell mui-indexed-list-item">宜宾市</li>
+							<li data-value="YAS" code="511800" parent_code="510000" parent_id="2214" id="2347" class="mui-table-view-cell mui-indexed-list-item">雅安市</li>
+							<li data-value="YXS" code="530400" parent_code="530000" parent_id="2515" id="2541" class="mui-table-view-cell mui-indexed-list-item">玉溪市</li>
+							<li data-value="YAS" code="610600" parent_code="610000" parent_id="2742" id="2800" class="mui-table-view-cell mui-indexed-list-item">延安市</li>
+							<li data-value="YLS" code="610800" parent_code="610000" parent_id="2742" id="2826" class="mui-table-view-cell mui-indexed-list-item">榆林市</li>
+							<li data-value="YCS" code="640100" parent_code="640000" parent_id="3011" id="3012" class="mui-table-view-cell mui-indexed-list-item">银川市</li>
+							<li data-group="Z" class="mui-table-view-divider mui-indexed-list-group">Z</li>
+							<li data-value="ZJKS" code="130700" parent_code="130000" parent_id="34" id="145" class="mui-table-view-cell mui-indexed-list-item">张家口市</li>
+							<li data-value="ZZS,CZS" code="140400" parent_code="140000" parent_id="214" id="240" class="mui-table-view-cell mui-indexed-list-item">长治市</li>
+							<li data-value="ZYS,CYS" code="211300" parent_code="210000" parent_id="451" id="550" class="mui-table-view-cell mui-indexed-list-item">朝阳市</li>
+							<li data-value="ZCS,CCS" code="220100" parent_code="220000" parent_id="564" id="565" class="mui-table-view-cell mui-indexed-list-item">长春市</li>
+							<li data-value="ZJS" code="321100" parent_code="320000" parent_id="792" id="884" class="mui-table-view-cell mui-indexed-list-item">镇江市</li>
+							<li data-value="ZSS" code="330900" parent_code="330000" parent_id="903" id="974" class="mui-table-view-cell mui-indexed-list-item">舟山市</li>
+							<li data-value="ZZS" code="350600" parent_code="350000" parent_id="1119" id="1171" class="mui-table-view-cell mui-indexed-list-item">漳州市</li>
+							<li data-value="ZBS" code="370300" parent_code="370000" parent_id="1322" id="1344" class="mui-table-view-cell mui-indexed-list-item">淄博市</li>
+							<li data-value="ZZS" code="370400" parent_code="370000" parent_id="1322" id="1353" class="mui-table-view-cell mui-indexed-list-item">枣庄市</li>
+							<li data-value="ZZS" code="410100" parent_code="410000" parent_id="1467" id="1468" class="mui-table-view-cell mui-indexed-list-item">郑州市</li>
+							<li data-value="ZKS" code="411600" parent_code="410000" parent_id="1467" id="1617" class="mui-table-view-cell mui-indexed-list-item">周口市</li>
+							<li data-value="ZMDS" code="411700" parent_code="410000" parent_id="1467" id="1628" class="mui-table-view-cell mui-indexed-list-item">驻马店市</li>
+							<li data-value="ZSS,CSS" code="430100" parent_code="430000" parent_id="1755" id="1756" class="mui-table-view-cell mui-indexed-list-item">长沙市</li>
+							<li data-value="ZZS" code="430200" parent_code="430000" parent_id="1755" id="1765" class="mui-table-view-cell mui-indexed-list-item">株洲市</li>
+							<li data-value="ZJJS" code="430800" parent_code="430000" parent_id="1755" id="1826" class="mui-table-view-cell mui-indexed-list-item">张家界市</li>
+							<li data-value="ZHS" code="440400" parent_code="440000" parent_id="1889" id="1920" class="mui-table-view-cell mui-indexed-list-item">珠海市</li>
+							<li data-value="ZJS" code="440800" parent_code="440000" parent_id="1889" id="1945" class="mui-table-view-cell mui-indexed-list-item">湛江市</li>
+							<li data-value="ZQS" code="441200" parent_code="440000" parent_id="1889" id="1961" class="mui-table-view-cell mui-indexed-list-item">肇庆市</li>
+							<li data-value="ZSS" code="442000" parent_code="440000" parent_id="1889" id="2007" class="mui-table-view-cell mui-indexed-list-item">中山市</li>
+							<li data-value="ZGS" code="510300" parent_code="510000" parent_id="2214" id="2235" class="mui-table-view-cell mui-indexed-list-item">自贡市</li>
+							<li data-value="ZYS" code="512000" parent_code="510000" parent_id="2214" id="2361" class="mui-table-view-cell mui-indexed-list-item">资阳市</li>
+							<li data-value="ZYS" code="520300" parent_code="520000" parent_id="2417" id="2434" class="mui-table-view-cell mui-indexed-list-item">遵义市</li>
+							<li data-value="ZTS" code="530600" parent_code="530000" parent_id="2515" id="2557" class="mui-table-view-cell mui-indexed-list-item">昭通市</li>
+							<li data-value="ZYS" code="620700" parent_code="620000" parent_id="2858" id="2891" class="mui-table-view-cell mui-indexed-list-item">张掖市</li>
+							<li data-value="ZWS" code="640500" parent_code="640000" parent_id="3011" id="3035" class="mui-table-view-cell mui-indexed-list-item">中卫市</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../../vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../mui/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../mui/js/mui.indexedlist.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/param.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/system.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jly.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el: "#myApp",
+				data: {
+
+				},
+				methods: {
+
+				}
+			})
+
+			mui.init();
+			mui.plusReady(function() {
+				publicBack();
+			})
+
+			var immersed = 0;
+			var ms = (/Html5Plus\/.+\s\(.*(Immersed\/(\d+\.?\d*).*)\)/gi).exec(navigator.userAgent);
+			if(ms && ms.length >= 3) { // 当前环境为沉浸式状态栏模式
+				immersed = parseFloat(ms[2]); // 获取状态栏的高度
+			}
+			document.querySelector('.common-header-content').style.paddingTop = immersed + 'px';
+			document.querySelector('.mui-content').style.marginTop = immersed + 'px';
+
+			var header = document.querySelector('.common-header');
+			var list = document.getElementById('list');
+			//calc hieght
+			list.style.height = (document.body.offsetHeight - header.offsetHeight) + 'px';
+			//create
+			window.indexedList = new mui.IndexedList(list);
+
+			mui('#list').on('tap', '.mui-indexed-list-item', function() {
+				plus.nativeUI.toast('选择了' + this.innerText);
+			})
+		</script>
+	</body>
+
+</html>

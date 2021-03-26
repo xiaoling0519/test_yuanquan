@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>我的钱包</title>
+		<link rel="stylesheet" href="../../mui/css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/reset.css" />
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/jly.css" />
+		<script src="../../js/rem.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../plugin/js/fastclick.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<header class="common-header">
+			<div class="common-header-content">
+				<a class="lf common-header-leftA">
+					<img class="common-header-leftImg" src="../../img/back.png" alt="" />
+				</a>
+				<a class="rf common-header-rightA">
+					<img class="myWallet-header-rightImg" src="../../img/myWallet/history.png" alt="" />
+				</a>
+				<h1 class="common-header-h1">
+                我的钱包
+            </h1>
+				<div class="clear"></div>
+			</div>
+		</header>
+		<div id="myApp" class="common-content">
+			<div class="common-content-padded myWallet-padded">
+				<div class="myWallet-balance-div">
+					<div class="colorWhite myWallet-appName">缘圈</div>
+					<p class="colorWhite myWallet-balance">余额：<span>12.08</span>元</p>
+					<span @click="withdrawNow()" class="textCenter myWallet-withdrawBtn">立即提现</span>
+				</div>
+				<div class="myWallet-recharge">
+					<h3>充值<span>(人民币)</span></h3>
+					<ul class="myWallet-rechargeAmount-ul">
+						<li @click="selectPrice(item)" :class="{active:selectedprice==item.val}" v-for="item in items" class="lf">
+							<span v-html="item.val"></span>元
+						</li>
+					</ul>
+					<div class="myWallet-waitPayAmount">
+						支付金额:<span v-html="selectedprice"></span>元
+					</div>
+					<div @click="comfirmRecharge()" class="myWallet-rechargeBtn">
+						确认充值
+					</div>
+					<p class="myWallet-tip">注：<br>
+						<span>充值金额任何时候都可以提现，提现到账时间预计为1~3个工作日。</span>
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<script src="../../vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../mui/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/param.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/system.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jly.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			publicStatusbar();
+
+			var vm = new Vue({
+				el: "#myApp",
+				data: {
+					selectedprice: '6',
+					items: [{
+							val: '6'
+						},
+						{
+							val: '66'
+						},
+						{
+							val: '166'
+						},
+						{
+							val: '366'
+						},
+						{
+							val: '666'
+						},
+						{
+							val: '966'
+						},
+					],
+				},
+				methods: {
+					//选择充值金额
+					selectPrice: function(item) {
+						this.selectedprice = item.val;
+					},
+					//确认充值
+					comfirmRecharge: function() {
+						plus.nativeUI.toast('跳转到充值页,你将要充值' + vm.selectedprice + '元');
+					},
+					//立即提现
+					withdrawNow: function() {
+						publicWebviewShow({
+							id: '/doc/asset/withdraw.html'
+						});
+					}
+				}
+			})
+
+			mui.init();
+			mui.plusReady(function() {
+				publicBack();
+			})
+
+			document.querySelector('.common-header-rightA').addEventListener('click', function() {
+				publicWebviewShow({
+					id: '/doc/sideslip/historyBill.html'
+				});
+			})
+		</script>
+	</body>
+
+</html>

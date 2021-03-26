@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>用户详情</title>
+    <link rel="stylesheet" href="../../mui/css/mui.min.css" />
+    <link rel="stylesheet" href="../../mui/css/previewImage.css">
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/common.css" />
+    <link rel="stylesheet" href="../../css/jly.css" />
+    <style type="text/css">
+        #__MUI_PREVIEWIMAGE {
+            z-index: 9999;
+        }
+        /*解决上拉下拉导致左右滚动失效*/
+
+        .mui-plus-pullrefresh .mui-scroll-wrapper {
+            position: absolute !important;
+            z-index: 2 !important;
+            top: 0 !important;
+            bottom: 0 !important;
+            left: 0 !important;
+            overflow: hidden !important;
+            width: 100% !important;
+        }
+
+        .mui-plus-pullrefresh .mui-scroll {
+            position: absolute !important;
+        }
+    </style>
+    <script src="../../js/rem.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../plugin/js/fastclick.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+    <div id="myApp">
+        <header class="common-header">
+            <div class="common-header-content" style="background: none;">
+                <a @click="back" class="lf common-header-leftA">
+                    <img class="common-header-leftImg" src="../../img/back.png" alt="" />
+                </a>
+                <a class="rf common-header-rightA">
+                    <img class="chat-header-rightImg" src="../../img/chat/more.png" alt="" />
+                </a>
+                <h1 class="common-header-h1">
+
+                </h1>
+                <div class="clear"></div>
+            </div>
+        </header>
+        <div id="tabsFixed" class="userDetail-mainTabs" style="position: fixed;top: .88rem;left: 0;width: 100%;z-index: 400;display: none;">
+            <div class="userDetail-mainTabs-content">
+                <span class="lf active">资料</span>
+                <span class="lf">动态</span>
+            </div>
+        </div>
+        <div class="common-content userDetail-content">
+            <div class="common-content-padded userDetail-padded">
+                <div class="userDetail-basicInfo">
+                    <div class="appointmentList-li-avatar-and-main userDetail-avatar-and">
+                        <img src="../../img/avatar.jpg" alt="">
+                        <span>26</span>
+                    </div>
+                    <div class="userDetail-nickname-and">
+                        <p class="userDetail-nickname">sei摸挑</p>
+                        <p class="userDetail-appAccount">缘圈号：9734783743</p>
+                        <p class="overflowEllipsis userDetail-signature">可是打烦得很就觉得减肥的减肥点到付款了对方空间广阔的飞哥艰苦奋斗跨境开发见到过击很费劲的</p>
+                    </div>
+                </div>
+                <div class="userDetail-album">
+                    <div class="userDetail-album-content">
+                        <div class="mui-scroll-wrapper">
+                            <div class="mui-scroll" style="width: auto;">
+                                <div class="userDetail-album-main">
+                                    <img data-preview-group="1" data-preview-src="" src="../../img/avatar.jpg" alt="" />
+                                    <img data-preview-group="1" data-preview-src="" src="../../img/avatar.jpg" alt="" />
+                                    <img data-preview-group="1" data-preview-src="" src="../../img/avatar.jpg" alt="" />
+                                    <img data-preview-group="1" data-preview-src="" src="../../img/avatar.jpg" alt="" />
+                                    <img data-preview-group="1" data-preview-src="" src="../../img/avatar.jpg" alt="" />
+                                    <img data-preview-group="1" data-preview-src="" src="../../img/avatar.jpg" alt="" />
+                                    <img data-preview-group="1" data-preview-src="" src="../../img/avatar.jpg" alt="" />
+                                    <img data-preview-group="1" data-preview-src="" src="../../img/avatar.jpg" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div id="tabs" class="userDetail-mainTabs">
+                        <div class="userDetail-mainTabs-content">
+                            <span class="lf active">资料</span>
+                            <span class="lf">动态</span>
+                        </div>
+                    </div>
+                    <div id="userDetailMain">
+                        <div id="dataPart">
+                            <ul>
+                                <li class="userDetail-data-li">
+                                    <div class="userDetail-data-li-type">
+                                        <label>Ta的理想型</label>
+                                    </div>
+                                    <ul class="userDetail-data-li-ul">
+                                        <li class="lf">男性</li>
+                                        <li class="lf">22岁</li>
+                                        <li class="lf">167CM</li>
+                                        <li class="lf">星座:不限</li>
+                                        <li class="lf">行业:不限</li>
+                                        <li class="lf">月薪:不限</li>
+                                        <li class="lf">学历:不限</li>
+                                        <li class="lf">爱情观:不限</li>
+                                    </ul>
+                                </li>
+                                <li class="userDetail-data-li">
+                                    <div class="userDetail-data-li-type">
+                                        <label>个人资料</label>
+                                    </div>
+                                    <ul class="userDetail-data-li-ul">
+                                        <li class="lf">UI设计师</li>
+                                        <li class="lf">单身</li>
+                                        <li class="lf">22岁</li>
+                                        <li class="lf">167CM</li>
+                                        <li class="lf">汉族</li>
+                                        <li class="lf">狮子座</li>
+                                        <li class="lf">工作地:杭州江干区</li>
+                                        <li class="lf">籍贯:江西九江</li>
+                                        <li class="lf">月薪:9000</li>
+                                        <li class="lf">租房</li>
+                                        <li class="lf">学历:本科</li>
+                                        <li class="lf">未购车</li>
+                                    </ul>
+                                </li>
+                                <li class="userDetail-data-li">
+                                    <div class="userDetail-data-li-type">
+                                        <label>兴趣爱好</label>
+                                    </div>
+                                    <ul class="userDetail-data-li-ul">
+                                        <li class="lf">唱歌</li>
+                                        <li class="lf">跑步</li>
+                                        <li class="lf">练瑜伽</li>
+                                        <li class="lf">旅行</li>
+                                        <li class="lf">看书</li>
+                                        <li class="lf">钓鱼</li>
+                                        <li class="lf">自驾游</li>
+                                        <li class="lf">烧烤</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <div class="userDetail-monologue">
+                                <div class="userDetail-title">
+                                    <div class="userDetail-title-main">
+                                        <span class="userDetail-title-text">内心独白</span>
+                                        <div class="userDetail-title-line"></div>
+                                    </div>
+                                </div>
+                                <ul class="userDetail-monologue-lit">
+                                    <li>
+                                        <h3>
+                                            <label>内心想对自己说的一句话</label>
+                                        </h3>
+                                        <p>绝对是开发会计师的看法跨世纪的副科级上岛咖啡看的规范的设计费加多少发货的好时机返回的手机号富家大室福建省的</p>
+                                    </li>
+                                    <li>
+                                        <h3>
+                                            <label>想对Ta说的一句话</label>
+                                        </h3>
+                                        <p>绝对是开发会计师的看法跨世纪的副科级上岛咖啡看的规范的设计费加多少发货的好时机返回的手机号富家大室福建省的</p>
+                                    </li>
+                                    <li>
+                                        <h3>
+                                            <label>我的理想</label>
+                                        </h3>
+                                        <p>绝对是开发会计师的看法跨世纪的副科级上岛咖啡看的规范的设计费加多少发货的好时机返回的手机号富家大室福建省的</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div id="dynamicPart" style="display: none;">
+                            <ul class="list">
+                                <li v-for="(dynamicLi,index) in items" class="index-dynamic-li">
+                                    <div class="index-dynamic-li-content">
+                                        <div>
+                                            <div class="lf index-dynamic-li-avatar-div">
+                                                <img v-bind:src="dynamicLi.avatar" class="index-dynamic-li-avatar" alt="" />
+                                            </div>
+                                            <div class="lf index-dynamic-li-name-and">
+                                                <span v-html="dynamicLi.name" class="index-dynamic-li-name"></span>
+                                                <p v-html="dynamicLi.time" class="index-dynamic-li-time"></p>
+                                            </div>
+                                            <div @click.stop="operateDynamic(dynamicLi.id)" class="rf index-dynamic-li-operate">
+                                                <img src="../../img/down.png" alt="" />
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                        <p v-html="dynamicLi.text" class="index-dynamic-li-publishTxt"></p>
+                                        <ul class="index-dynamic-li-publishImg-ul">
+                                            <li v-for='image in dynamicLi.images' class="lf">
+                                                <img v-bind:src="image" v-bind:data-preview-group="index" data-preview-src="" alt="" />
+                                            </li>
+                                        </ul>
+                                        <ul class="index-dynamic-li-like-and">
+                                            <li class="rf transpond">
+                                                <img @click.stop="transpond(dynamicLi.id)" src="../../img/index/transpond.png" alt="" />
+                                            </li>
+                                            <li class="rf comment">
+                                                <img @click.stop="comment(dynamicLi.id)" src="../../img/index/comment.png" alt="" />
+                                            </li>
+                                            <li @click.stop="like(index)" class="rf like">
+                                                <img v-bind:src="likeHandle(dynamicLi.isLiked)" alt="" />
+                                                <span v-html="dynamicLi.like"></span>
+                                            </li>
+                                        </ul>
+                                        <ul class="index-dynamic-li-comments">
+                                            <li v-for="comment in dynamicLi.comments">
+                                                <a @click.stop="toUserDetail(comment.fromId)" class="from" v-html="comment.fromName"></a>
+                                                回复
+                                                <a @click.stop="toUserDetail(comment.toId)" class="to" v-html="comment.toName"></a>：
+                                                <span v-html="comment.content"></span>
+                                            </li>
+                                        </ul>
+                                        <div class="index-dynamic-li-toComment">
+                                            评论
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="common-bottom chat-giftDetail-btn">
+            <div class="common-content-padded">
+                <div class="chat-appointmcentDetail-confirmBtn userDetail-bottom-content">
+                    <ul>
+                        <li @click="sendGift" class="lf">
+                            <img src="../../img/userDetail/gift.png" alt="" />
+                            <label>赠送礼物</label>
+                        </li>
+                        <li @click="chat" class="lf">
+                            <img src="../../img/userDetail/chat.png" alt="" />
+                            <label>聊天</label>
+                        </li>
+                        <li class="lf">
+                            <img src="../../img/userDetail/love.png" alt="" />
+                            <label>约Ta</label>
+                        </li>
+                        <li class="lf">
+                            <img src="../../img/userDetail/attention.png" alt="" />
+                            <label>关注</label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../mui/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../mui/js/mui.zoom.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../mui/js/mui.previewimage.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/param.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/system.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jly.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        var currWebviewId = null;
+
+        var vm = new Vue({
+            el: "#myApp",
+            data: {
+                items: [{
+                    "id": 1001,
+                    "userId": 3006,
+                    "avatar": "../../img/avatar.jpg",
+                    "name": "小明",
+                    "time": "03月30日01:34",
+                    "text": "肯定是符合福建省地方就是打呼风华绝代生活费多少级方式",
+                    "like": 546,
+                    "isLiked": false,
+                    "images": [
+                        "../../img/avatar.jpg",
+                        "../../img/avatar.jpg"
+                    ],
+                    "comments": [{
+                            "fromName": "阿花",
+                            "fromId": 3001,
+                            "toName": "老王",
+                            "toId": 3005,
+                            "content": "等级是不福建省的附近很多事金凤凰倒计时返回收到货福建省的"
+                        },
+                        {
+                            "fromName": "任婧",
+                            "fromId": 3014,
+                            "toName": "杰克",
+                            "toId": 3065,
+                            "content": "翻江倒海解放后的"
+                        }
+                    ]
+                }, {
+                    "id": 1002,
+                    "userId": 3006,
+                    "avatar": "../../img/avatar.jpg",
+                    "name": "小明",
+                    "time": "03月30日01:34",
+                    "text": "肯定是符合福建省地方就是打呼风华绝代生活费多少级方式",
+                    "like": 546,
+                    "isLiked": false,
+                    "images": [
+                        "../../img/avatar.jpg",
+                        "../../img/avatar.jpg"
+                    ],
+                    "comments": [{
+                            "fromName": "阿花",
+                            "fromId": 3001,
+                            "toName": "老王",
+                            "toId": 3005,
+                            "content": "等级是不福建省的附近很多事金凤凰倒计时返回收到货福建省的"
+                        },
+                        {
+                            "fromName": "任婧",
+                            "fromId": 3014,
+                            "toName": "杰克",
+                            "toId": 3065,
+                            "content": "翻江倒海解放后的"
+                        }
+                    ]
+                }]
+            },
+            methods: {
+                chat: function () {
+                    publicToChat();
+                },
+                //返回
+                back: function () {
+                    Webview.hide({
+                        id: currWebviewId
+                    });
+                },
+                //是否点赞显示
+                likeHandle: function (type) {
+                    if (type) {
+                        return '../../img/index/liked.png';
+                    } else {
+                        return '../../img/index/like.png';
+                    }
+                },
+                //点赞
+                like: function (index) {
+                    if (vm.items[index].isLiked) {
+                        vm.items[index].isLiked = false;
+                        vm.items[index].like -= 1;
+                    } else {
+                        vm.items[index].isLiked = true;
+                        vm.items[index].like += 1;
+                    }
+                },
+                //跳转到用户详情
+                toUserDetail: function (id) {
+                    publicToUser();
+                },
+                //操作动态
+                operateDynamic: function (id) {
+                    plus.nativeUI.toast('你要操作' + id + '的动态');
+                },
+                //转发动态
+                transpond: function (id) {
+                    plus.nativeUI.toast('你要转发' + id + '的动态');
+                },
+                //查看某动态的所有评论
+                comment: function (id) {
+                    plus.nativeUI.toast('跳转到' + id + '动态的所有评论页');
+                },
+                //赠送礼物
+                sendGift: function () {
+
+                }
+            }
+        })
+
+        mui.init({
+            pullRefresh: {
+                container: '.common-content',
+                down: {
+                    style: 'circle',
+                    callback: pulldownRefresh
+                },
+                up: {
+                    callback: pullupLoadmore
+                }
+            },
+            gestureConfig: {
+                longtap: true
+            }
+        });
+        mui.plusReady(function () {
+            currWebviewId = plus.webview.currentWebview().id;
+
+            mui.back = function () {
+                var previewImage = mui.isFunction(mui.getPreviewImage) && mui.getPreviewImage();
+                if (previewImage && previewImage.isShown()) { //图片预览
+                    previewImage.close();
+                } else {
+                    Webview.hide({
+                        id: currWebviewId
+                    })
+                }
+            }
+
+            mui('.mui-scroll-wrapper').scroll({
+                scrollX: true,
+                scrollY: false,
+                indicators: false
+            })
+        })
+
+        //禁用
+        setTimeout(function () {
+            mui('.common-content').pullRefresh().disablePulldownToRefresh();
+            mui('.common-content').pullRefresh().disablePullupToRefresh();
+        }, 500)
+
+        //图片预览
+        mui.previewImage();
+
+        mui('#__MUI_PREVIEWIMAGE').on('longtap', '.mui-zoom', function () {
+            saveImage(this.getAttribute('src'));
+        })
+
+        var immersed = publicStatusbar();
+        document.querySelector('.common-content').style.marginTop = '0';
+        document.querySelector('.userDetail-basicInfo').style.paddingTop = immersed + 'px';
+        document.querySelector('#tabsFixed').style.marginTop = immersed + 'px';
+
+        //使标签固定需要滚动的距离
+        var basicInfoH = document.querySelector('.userDetail-basicInfo').offsetHeight;
+        var albumH = document.querySelector('.userDetail-album').offsetHeight;
+        var headerH = document.querySelector('.common-header').offsetHeight;
+
+        document.querySelector("#myApp").addEventListener('touchmove', function (e) {
+            scrollFunc(e);
+        });
+
+        window.onscroll = function (e) {
+            scrollFunc(e);
+        }
+
+        function scrollFunc() {
+            if (window.scrollY > 50) {
+                document.querySelector('.common-header-content').style.background =
+                    'linear-gradient(to right ,#7C08F2,#9401FB)';
+                document.querySelector('.common-header-content').style.opacity = '0.1';
+
+                if (window.scrollY <= 140) {
+                    document.querySelector('.common-header-content').style.opacity = 0.1 + Math.floor((window.scrollY -
+                        50) / 10) * 0.1;
+                } else {
+                    document.querySelector('.common-header-content').style.opacity = '1';
+                }
+            } else {
+                document.querySelector('.common-header-content').style.background = 'none';
+                document.querySelector('.common-header-content').style.opacity = '1';
+            }
+
+            if (window.scrollY > (basicInfoH + albumH - headerH)) {
+                document.querySelector('#tabs').style.display = 'none';
+                document.querySelector('#tabsFixed').style.display = 'block';
+                document.querySelector('#userDetailMain').style.marginTop = document.querySelector('#tabsFixed').offsetHeight +
+                    'px';
+            } else {
+                document.querySelector('#tabs').style.display = 'block';
+                document.querySelector('#tabsFixed').style.display = 'none';
+                document.querySelector('#userDetailMain').style.marginTop = '0';
+            }
+        }
+
+        mui('#tabs').on('tap', 'span', function () {
+            for (var i = 0; i < document.querySelectorAll('#tabs span').length; i++) {
+                document.querySelectorAll('#tabs span')[i].classList.remove('active');
+            }
+            for (var i = 0; i < document.querySelectorAll('#tabsFixed span').length; i++) {
+                document.querySelectorAll('#tabsFixed span')[i].classList.remove('active');
+            }
+            this.classList.add('active');
+
+
+            if (this.innerText === '资料') {
+                mui('.common-content').pullRefresh().disablePulldownToRefresh();
+                mui('.common-content').pullRefresh().disablePullupToRefresh();
+
+                document.querySelector('#dataPart').style.display = 'block';
+                document.querySelector('#dynamicPart').style.display = 'none';
+                document.querySelectorAll('#tabsFixed span')[0].classList.add('active');
+            }
+            if (this.innerText === '动态') {
+                mui('.common-content').pullRefresh().enablePulldownToRefresh();
+                mui('.common-content').pullRefresh().enablePullupToRefresh();
+
+                document.querySelector('#dynamicPart').style.display = 'block';
+                document.querySelector('#dataPart').style.display = 'none';
+                document.querySelectorAll('#tabsFixed span')[1].classList.add('active');
+            }
+        })
+        mui('#tabsFixed').on('tap', 'span', function () {
+            for (var i = 0; i < document.querySelectorAll('#tabs span').length; i++) {
+                document.querySelectorAll('#tabs span')[i].classList.remove('active');
+            }
+            for (var i = 0; i < document.querySelectorAll('#tabsFixed span').length; i++) {
+                document.querySelectorAll('#tabsFixed span')[i].classList.remove('active');
+            }
+            this.classList.add('active');
+
+            if (this.innerText === '资料') {
+                mui('.common-content').pullRefresh().disablePulldownToRefresh();
+                mui('.common-content').pullRefresh().disablePullupToRefresh();
+
+                document.querySelector('#dataPart').style.display = 'block';
+                document.querySelector('#dynamicPart').style.display = 'none';
+                document.querySelectorAll('#tabs span')[0].classList.add('active');
+            }
+            if (this.innerText === '动态') {
+                mui('.common-content').pullRefresh().enablePulldownToRefresh();
+                mui('.common-content').pullRefresh().enablePullupToRefresh();
+
+                document.querySelector('#dynamicPart').style.display = 'block';
+                document.querySelector('#dataPart').style.display = 'none';
+                document.querySelectorAll('#tabs span')[1].classList.add('active');
+            }
+        })
+
+        function pulldownRefresh() {
+            setTimeout(function () {
+                mui('.common-content').pullRefresh().endPulldown();
+            }, 500)
+        }
+
+        function pullupLoadmore() {
+            setTimeout(function () {
+                mui('.common-content').pullRefresh().endPullup();
+            }, 500)
+        }
+    </script>
+</body>
+
+</html>

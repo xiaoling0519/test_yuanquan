@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>圈购首页</title>
+		<link rel="stylesheet" href="../../mui/css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/reset.css" />
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/jly.css" />
+		<script src="../../js/rem.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../plugin/js/fastclick.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div id="myApp">
+			<header class="common-header">
+				<div class="common-header-content">
+					<a class="lf common-header-leftA">
+						<img class="common-header-leftImg" src="../../img/back.png" alt="" />
+					</a>
+					<h1 class="common-header-h1">
+					圈购
+				</h1>
+					<div class="clear"></div>
+				</div>
+			</header>
+			<div class="common-content">
+				<div class="common-content-padded circleShoppingIndex-content-padded">
+					<div class="circleShoppingIndex-search-bg">
+						<div class="circleShoppingIndex-search-main">
+							<div @click="search" class="circleShoppingIndex-search-container">
+								<span>请输入内容搜索</span>
+							</div>
+						</div>
+					</div>
+					<div class="circleShoppingIndex-type">
+						<ul class="circleShoppingIndex-type-list">
+							<li class="circleShoppingIndex-type-li">
+								<h2 class="circleShoppingIndex-type-big">服装鞋包</h2>
+								<ul class="circleShoppingIndex-someType-ul">
+									<li class="lf">
+										<span class="lf">女装</span>
+										<img class="rf" src="../../img/circleShoppingIndex/category1.png" alt="" />
+										<div class="clear"></div>
+									</li>
+									<li class="lf">
+										<span class="lf">女装</span>
+										<img class="rf" src="../../img/circleShoppingIndex/category1.png" alt="" />
+										<div class="clear"></div>
+									</li>
+									<li class="lf">
+										<span class="lf">女装</span>
+										<img class="rf" src="../../img/circleShoppingIndex/category1.png" alt="" />
+										<div class="clear"></div>
+									</li>
+								</ul>
+							</li>
+							<li class="circleShoppingIndex-type-li">
+								<h2 class="circleShoppingIndex-type-big">服装鞋包</h2>
+								<ul class="circleShoppingIndex-someType-ul">
+									<li class="lf">
+										<span class="lf">女装</span>
+										<img class="rf" src="../../img/circleShoppingIndex/category1.png" alt="" />
+										<div class="clear"></div>
+									</li>
+									<li class="lf">
+										<span class="lf">女装</span>
+										<img class="rf" src="../../img/circleShoppingIndex/category1.png" alt="" />
+										<div class="clear"></div>
+									</li>
+									<li class="lf">
+										<span class="lf">女装</span>
+										<img class="rf" src="../../img/circleShoppingIndex/category1.png" alt="" />
+										<div class="clear"></div>
+									</li>
+								</ul>
+							</li>
+							<li class="circleShoppingIndex-type-li">
+								<h2 class="circleShoppingIndex-type-big">服装鞋包</h2>
+								<ul class="circleShoppingIndex-someType-ul">
+									<li class="lf">
+										<span class="lf">女装</span>
+										<img class="rf" src="../../img/circleShoppingIndex/category1.png" alt="" />
+										<div class="clear"></div>
+									</li>
+									<li class="lf">
+										<span class="lf">女装</span>
+										<img class="rf" src="../../img/circleShoppingIndex/category1.png" alt="" />
+										<div class="clear"></div>
+									</li>
+									<li class="lf">
+										<span class="lf">女装</span>
+										<img class="rf" src="../../img/circleShoppingIndex/category1.png" alt="" />
+										<div class="clear"></div>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="../../vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../mui/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/param.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/system.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jly.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el: "#myApp",
+				data: {
+					
+				},
+				methods: {
+					search: function() {
+						publicWebviewShow({
+							id: '/doc/circleShopping/searchHistory.html'
+						})
+					}
+				}
+			})
+
+			mui.init();
+			mui.plusReady(function() {
+				publicBack();
+			})
+
+			publicStatusbar();
+
+			for(var i = 0; i < document.querySelectorAll('.circleShoppingIndex-someType-ul li').length; i++) {
+				document.querySelectorAll('.circleShoppingIndex-someType-ul li')[i].onclick = function() {
+					publicWebviewShow({
+						id: '/doc/circleShopping/goodsList.html'
+					})
+				}
+			}
+		</script>
+	</body>
+
+</html>

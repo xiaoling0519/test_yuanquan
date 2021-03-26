@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>意见反馈</title>
+    <link rel="stylesheet" href="../../mui/css/mui.min.css" />
+    <link rel="stylesheet" href="../../mui/css/previewImage.css">
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/common.css" />
+    <link rel="stylesheet" href="../../css/jly.css" />
+    <script src="../../js/rem.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../plugin/js/fastclick.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+    <div id="myApp">
+        <header class="common-header">
+            <div class="common-header-content">
+                <a @click="back()" class="lf common-header-leftA">
+                    <img class="common-header-leftImg" src="../../img/back.png" alt="" />
+                </a>
+                <h1 class="common-header-h1">
+                    意见反馈
+                </h1>
+                <div class="clear"></div>
+            </div>
+        </header>
+
+        <div class="common-content">
+            <div class="common-content-padded feedback-padded">
+                <div class="publishDynamic-main">
+                    <textarea v-model="textarea" rows="6" placeholder="请输入您的宝贵意见及反馈信息..."></textarea>
+                    <ul class="empty">
+                        <li onclick="selectImage()" class="lf publishDynamic-camera-li">
+                            <div class="publishDynamic-camera-main">
+                                <img src="../../img/publishDynamic/camera.png" alt="" />
+                                <div class="font28">照片</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="feedback-submitBtn">
+                    <div @click="confirmSubmit()" class="myWallet-rechargeBtn">
+                        确认提交
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--确认框组件-->
+        <div v-show="confirmShow" class="common-popup common-confirm">
+            <h3>温馨提示</h3>
+            <div class="common-confirm-tipTxt">
+                确定不上传此图片？
+            </div>
+            <div class="common-confirm-btns">
+                <span @click="cancelDelete()" class='lf common-confirm-cancel'>取消</span>
+                <span class='lf common-confirm-yes'>确定</span>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/templete" id="waitUploadImage">
+        <li class="lf publishDynamic-image-li">
+            <div class="publishDynamic-image-container">
+                <img data-preview-src="" data-preview-group="1" class="publishDynamic-image" src="{{image}}" alt="" />
+            </div>
+            <img class="publishDynamic-delete" src="../../img/publishDynamic/delete.svg" alt="" />
+        </li>
+    </script>
+
+    <script src="../../vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../mui/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../mui/js/mui.zoom.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../mui/js/mui.previewimage.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/param.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/system.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jly.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        var currWebviewId = null;
+        var willDelete = null;
+        var mask = mui.createMask();
+
+        var vm = new Vue({
+            el: "#myApp",
+            data: {
+                textarea: '',
+                confirmShow: false
+            },
+            methods: {
+                //取消删除
+                cancelDelete: function () {
+                    this.confirmShow = false;
+                    mask.close();
+                },
+                back: function () {
+                    Webview.close({
+                        id: currWebviewId
+                    });
+                },
+                //提交
+                confirmSubmit: function () {
+                    if (vm.textarea === '' && document.querySelectorAll(
+                            '.publishDynamic-image-li')
+                        .length === 0) {
+                        plus.nativeUI.toast('内容为空不可提交');
+                    } else {
+                        plus.nativeUI.toast('提交成功');
+                    }
+                },
+            }
+        })
+
+        mui.init({
+            gestureConfig: {
+                longtap: true
+            }
+        });
+        mui.plusReady(function () {
+            currWebviewId = plus.webview.currentWebview().id;
+
+            mui.back = function () {
+                var previewImage = mui.isFunction(mui.getPreviewImage) && mui.getPreviewImage();
+                if (previewImage && previewImage.isShown()) { //图片预览
+                    previewImage.close();
+                } else if (vm.confirmShow) {
+                    vm.confirmShow = false;
+                    mask.close();
+                } else {
+                    Webview.close({
+                        id: currWebviewId
+                    })
+                }
+            }
+        })
+        publicStatusbar();
+
+        //长按图片
+        mui('.publishDynamic-main ul').on('longtap', '.publishDynamic-image-li', function () {
+            if (this.children[1].style.display !== 'inline-block') {
+                plus.device.vibrate(500);
+                for (var i = 0; i < document.querySelectorAll('.publishDynamic-delete').length; i++) {
+                    document.querySelectorAll('.publishDynamic-delete')[i].style.display = 'inline-block';
+                }
+            }
+        })
+
+        //图片预览
+        mui.previewImage();
+
+        //删除
+        mui('.publishDynamic-main ul').on('click', '.publishDynamic-delete', function () {
+            willDelete = this.parentElement;
+            mask.show();
+
+            vm.confirmShow = true;
+
+            document.querySelector('.common-confirm-yes').addEventListener('click', function () {
+                willDelete.remove();
+                vm.confirmShow = false;
+                mask.close();
+            })
+
+            document.querySelector('.mui-backdrop').addEventListener('click', function () {
+                vm.confirmShow = false;
+            })
+        })
+
+        //选择图片
+        function selectImage() {
+            selectImgs(function (arr) {
+				if(arr.hasOwnProperty('files')){
+					 for (var i = 0; i < arr.files.length; i++) {
+						var waitUploadImage = document.querySelector('#waitUploadImage').innerHTML.replace(
+							'{{image}}',
+							arr.files[i]);
+						document.querySelector('.publishDynamic-main ul').innerHTML += waitUploadImage;
+					}
+					imageShow(arr.files.length);
+				}else{
+					var waitUploadImage = document.querySelector('#waitUploadImage').innerHTML.replace(
+						'{{image}}',
+						arr);
+					document.querySelector('.publishDynamic-main ul').innerHTML += waitUploadImage;
+					imageShow(1);
+				}
+            })
+        }
+
+        //图片显示处理
+        function imageShow(len) {
+            var containers = document.querySelectorAll('.publishDynamic-image-li');
+            var length = containers.length;
+            for (var j = length - 1; j >= length - len; j--) {
+                showImgCenter(containers[j], document.querySelectorAll('.publishDynamic-image')[j]);
+            }
+        }
+    </script>
+</body>
+
+</html>

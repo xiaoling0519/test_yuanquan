@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>我的订单</title>
+		<link rel="stylesheet" href="../../mui/css/mui.min.css" />
+		<link rel="stylesheet" href="../../mui/css/pull.css">
+		<link rel="stylesheet" href="../../css/reset.css" />
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/jly.css" />
+		<script src="../../js/rem.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../plugin/js/fastclick.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div id="myApp">
+			<header class="common-header">
+				<div class="common-header-content">
+					<a @click="back()" class="lf common-header-leftA">
+						<img class="common-header-leftImg" src="../../img/back.png" alt="" />
+					</a>
+					<h1 class="common-header-h1">
+                    我的订单
+                </h1>
+					<div class="clear"></div>
+				</div>
+			</header>
+			<div class="common-content order-content">
+				<div class="common-content-padded" style="padding: 0;">
+					<div class="mui-slider">
+						<div class="mui-slider-group">
+							<div class="mui-slider-item">
+								<div class="mui-scroll-wrapper">
+									<div class="mui-scroll">
+										<ul class="order-ul">
+											<li v-bind:data-id="allItem.id" v-for="allItem in all" class="order-li">
+												<div>
+													<div class="lf order-li-imageContainer">
+														<img v-bind:src="allItem.image" alt="">
+													</div>
+													<div class="order-li-right">
+														<p v-html="allItem.intro" class="overflowTwoEllipsis order-li-productIntro"></p>
+														<div>
+															<span class="lf order-li-price">￥
+                                                            <label v-html="allItem.price"></label>
+                                                        </span>
+															<span v-html="allItem.time" class="rf order-li-giveOrderTime"></span>
+															<div class="clear"></div>
+														</div>
+													</div>
+													<div class="clear"></div>
+												</div>
+												<div class="order-li-operate">
+													<a v-html="allItem.status" class="rf myCertification-li-btn order-li-btn order-li-btnColor"></a>
+													<a v-show="allItem.cancelShow" v-html="allItem.cancelTxt" class="rf myCertification-li-btn order-li-btn order-li-btn-cancel"></a>
+													<div class="clear"></div>
+												</div>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="mui-slider-item">
+								<div class="mui-scroll-wrapper">
+									<div class="mui-scroll">
+										<ul class="order-ul">
+											<li v-bind:data-id="waitPayItem.id" v-for="waitPayItem in waitPay" class="order-li">
+												<div>
+													<div class="lf order-li-imageContainer">
+														<img v-bind:src="waitPayItem.image" alt="">
+													</div>
+													<div class="order-li-right">
+														<p v-html="waitPayItem.intro" class="overflowTwoEllipsis order-li-productIntro"></p>
+														<div>
+															<span class="lf order-li-price">￥
+                                                            <label v-html="waitPayItem.price"></label>
+                                                        </span>
+															<span v-html="waitPayItem.time" class="rf order-li-giveOrderTime"></span>
+															<div class="clear"></div>
+														</div>
+													</div>
+													<div class="clear"></div>
+												</div>
+												<div class="order-li-operate">
+													<a v-html="waitPayItem.status" class="rf myCertification-li-btn order-li-btn order-li-btnColor"></a>
+													<a v-html="waitPayItem.cancelTxt" class="rf myCertification-li-btn order-li-btn order-li-btn-cancel"></a>
+													<div class="clear"></div>
+												</div>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="mui-slider-item">
+								<div class="mui-scroll-wrapper">
+									<div class="mui-scroll">
+										<ul class="order-ul">
+											<li v-bind:data-id="waitReceiveItem.id" v-for="waitReceiveItem in waitReceive" class="order-li">
+												<div>
+													<div class="lf order-li-imageContainer">
+														<img v-bind:src="waitReceiveItem.image" alt="">
+													</div>
+													<div class="order-li-right">
+														<p v-html="waitReceiveItem.intro" class="overflowTwoEllipsis order-li-productIntro"></p>
+														<div>
+															<span class="lf order-li-price">￥
+                                                            <label v-html="waitReceiveItem.price"></label>
+                                                        </span>
+															<span v-html="waitReceiveItem.time" class="rf order-li-giveOrderTime"></span>
+															<div class="clear"></div>
+														</div>
+													</div>
+													<div class="clear"></div>
+												</div>
+												<div class="order-li-operate">
+													<a v-html="waitReceiveItem.status" class="rf myCertification-li-btn order-li-btn order-li-btnColor"></a>
+													<a v-html="waitReceiveItem.cancelTxt" class="rf myCertification-li-btn order-li-btn order-li-btn-cancel"></a>
+													<div class="clear"></div>
+												</div>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="mui-slider-item">
+								<div class="mui-scroll-wrapper">
+									<div class="mui-scroll">
+										<ul class="order-ul">
+											<li v-bind:data-id="completedItem.id" v-for="completedItem in completed" class="order-li">
+												<div>
+													<div class="lf order-li-imageContainer">
+														<img v-bind:src="completedItem.image" alt="">
+													</div>
+													<div class="order-li-right">
+														<p v-html="completedItem.intro" class="overflowTwoEllipsis order-li-productIntro"></p>
+														<div>
+															<span class="lf order-li-price">￥
+                                                            <label v-html="completedItem.price"></label>
+                                                        </span>
+															<span v-html="completedItem.time" class="rf order-li-giveOrderTime"></span>
+															<div class="clear"></div>
+														</div>
+													</div>
+													<div class="clear"></div>
+												</div>
+												<div class="order-li-operate">
+													<a v-html="completedItem.status" class="rf myCertification-li-btn order-li-btn order-li-btnColor"></a>
+													<a v-show="completedItem.cancelShow" v-html="completedItem.cancelTxt" class="rf myCertification-li-btn order-li-btn order-li-btn-cancel"></a>
+													<div class="clear"></div>
+												</div>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="order-tabs">
+				<div class="common-content-padded">
+					<ul>
+						<li class="active">
+							全部
+							<li>
+								待发货
+								<li>
+									待收货
+									<li>
+										待评价
+									</li>
+					</ul>
+				</div>
+			</div>
+
+			<div v-show="confirmShow" class="common-popup common-confirm">
+				<h3>温馨提示</h3>
+				<div v-html="confirmText" class="common-confirm-tipTxt"></div>
+				<div class="common-confirm-btns">
+					<span @click="cancel()" class='lf common-confirm-cancel'>取消</span>
+					<span @click="confirm()" class='lf common-confirm-yes'>确定</span>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+
+		<script src="../../vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../mui/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../mui/js/mui.pullToRefresh.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../mui/js/mui.pullToRefresh.material.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/param.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/system.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jly.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var currWebviewId = null;
+			var mask = mui.createMask();
+
+			var allData = [{
+					id: 1001,
+					image: '../../img/avatar.jpg',
+					intro: '六点十分开个考虑到付款了广泛的理科高考发电量sdkjfkdsjbfkjbdskfbk空间的保时捷开发商贷款',
+					price: '99',
+					time: '2018-05-08 18:40',
+					status: '提醒发货',
+					orderNum: '',
+					orderNumShow: false,
+					cancelTxt: '申请退款',
+					cancelShow: true
+				},
+				{
+					id: 1004,
+					image: '../../img/avatar.jpg',
+					intro: '六点十分开个考虑到付款了广泛的理科高考发电量sdkjfkdsjbfkjbdskfbk空间的保时捷开发商贷款',
+					price: '99',
+					time: '2018-05-08 18:40',
+					status: '确认收货',
+					orderNum: '545454545454545454',
+					orderNumShow: true,
+					cancelTxt: '查看物流',
+					cancelShow: true
+				},
+				{
+					id: 1009,
+					image: '../../img/avatar.jpg',
+					intro: '六点十分开个考虑到付款了广泛的理科高考发电量sdkjfkdsjbfkjbdskfbk空间的保时捷开发商贷款',
+					price: '99',
+					time: '2018-05-08 18:40',
+					status: '立即评价',
+					orderNum: '545454545454545454',
+					orderNumShow: true,
+					cancelTxt: '删除订单',
+					cancelShow: true
+				},
+			];
+
+			var waitPayData = [{
+				id: 1001,
+				image: '../../img/avatar.jpg',
+				intro: '六点十分开个考虑到付款了广泛的理科高考发电量sdkjfkdsjbfkjbdskfbk空间的保时捷开发商贷款',
+				price: '99',
+				time: '2018-05-08 18:40',
+				status: '提醒发货',
+				orderNum: '',
+				orderNumShow: false,
+				cancelTxt: '申请退款',
+				cancelShow: true
+			}];
+
+			var waitReceiveData = [{
+				id: 1004,
+				image: '../../img/avatar.jpg',
+				intro: '六点十分开个考虑到付款了广泛的理科高考发电量sdkjfkdsjbfkjbdskfbk空间的保时捷开发商贷款',
+				price: '99',
+				time: '2018-05-08 18:40',
+				status: '确认收货',
+				orderNum: '545454545454545454',
+				orderNumShow: true,
+				cancelTxt: '查看物流',
+				cancelShow: true
+			}];
+
+			var completedData = [{
+				id: 1009,
+				image: '../../img/avatar.jpg',
+				intro: '六点十分开个考虑到付款了广泛的理科高考发电量sdkjfkdsjbfkjbdskfbk空间的保时捷开发商贷款',
+				price: '99',
+				time: '2018-05-08 18:40',
+				status: '立即评价',
+				orderNum: '545454545454545454',
+				orderNumShow: true,
+				cancelTxt: '删除订单',
+				cancelShow: true
+			}];
+
+			var vm = new Vue({
+				el: "#myApp",
+				data: {
+					all: null,
+					waitPay: null,
+					waitReceive: null,
+					completed: null,
+
+					confirmShow: false,
+					confirmText: '',
+					willDelete: null,
+				},
+				methods: {
+					//取消
+					cancel: function() {
+						mask.close();
+						this.confirmShow = false;
+					},
+					//确定
+					confirm: function() {
+						mask.close();
+						this.confirmShow = false;
+
+						plus.nativeUI.toast('已删除');
+					},
+					//删除已完成订单
+					deleteOrder: function() {
+						this.confirmText = '你确定要删除此订单吗？';
+						mask.show();
+						this.confirmShow = true;
+					},
+					back: function() {
+						Webview.close({
+							id: currWebviewId
+						});
+					}
+				}
+			})
+
+			mui.init();
+
+			(function($) {
+				//阻尼系数
+				var deceleration = mui.os.ios ? 0.003 : 0.0009;
+				$('.mui-scroll-wrapper').scroll({
+					bounce: false,
+					indicators: false, //是否显示滚动条
+					deceleration: deceleration
+				});
+				$.ready(function() {
+					//循环初始化所有下拉刷新，上拉加载。
+					$.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function(index,
+						pullRefreshEl) {
+						$(pullRefreshEl).pullToRefresh({
+							down: {
+								callback: function() {
+									var self = this;
+									setTimeout(function() {
+										self.endPullDownToRefresh();
+									}, 500);
+								}
+							},
+							up: {
+								auto: true,
+								callback: function() {
+									var self = this;
+									setTimeout(function() {
+										self.endPullUpToRefresh();
+										vm.all = allData;
+									}, 500);
+								}
+							}
+						});
+					});
+				});
+			})(mui);
+
+			mui.plusReady(function() {
+				currWebviewId = plus.webview.currentWebview().id;
+
+				mui.back = function() {
+					if(vm.confirmShow) {
+						vm.confirmShow = false;
+						mask.close();
+					} else {
+						Webview.close({
+							id: currWebviewId
+						})
+					}
+				}
+			})
+
+			//阻止页面滚动
+			document.querySelector('.common-confirm').addEventListener('touchmove', function(e) {
+				e.preventDefault();
+			})
+
+			//滑动切换
+			document.querySelector('.mui-slider').addEventListener('slide', function(e) {
+				var i = e.detail.slideNumber;
+
+				document.querySelector('.order-tabs li.active').classList.remove("active");
+				document.querySelector('.order-tabs li:nth-child(' + (i + 1) + ')').classList.add("active");
+
+				if(i === 1) {
+					vm.waitPay = waitPayData;
+				}
+				if(i === 2) {
+					vm.waitReceive = waitReceiveData;
+				}
+				if(i === 3) {
+					vm.completed = completedData;
+				}
+			})
+
+			//点击切换
+			mui(".order-tabs").on('click', 'li', function(e) {
+				if(this.classList.contains('active')) {
+					return;
+				}
+
+				document.querySelector('.order-tabs li.active').classList.remove("active");
+				this.classList.add("active");
+
+				var index;
+				if(this.innerText === '全部') {
+					index = 0;
+				}
+				if(this.innerText === '待发货') {
+					index = 1;
+				}
+				if(this.innerText === '待收货') {
+					index = 2;
+				}
+				if(this.innerText === '待评价') {
+					index = 3;
+				}
+
+				mui('.mui-slider').slider().gotoItem(index, 0);
+			})
+
+			//查看详情
+			mui(document).on('tap', '.order-li', function() {
+				plus.nativeUI.toast('跳转到' + this.getAttribute('data-id') + '的订单详情');
+			})
+
+			//取消
+			mui(document).on('tap', '.order-li-btn-cancel', function(e) {
+				e.stopPropagation();
+
+				if(this.innerText === '申请退款') {
+					plus.nativeUI.toast('已申请退款');
+				}
+				if(this.innerText === '查看物流') {
+					plus.nativeUI.toast('跳转到查看物流页');
+				}
+				if(this.innerText === '删除订单') {
+					vm.willCancelOrDelete = 'delete';
+					vm.willDelete = this.closest('.order-li').getAttribute('data-id');
+					vm.deleteOrder();
+
+					document.querySelector('.mui-backdrop').addEventListener('click', function() {
+						vm.confirmShow = false;
+					})
+				}
+			})
+
+			//提醒发货/确认收货/删除订单
+			mui(document).on('tap', '.order-li-btnColor', function(e) {
+				e.stopPropagation();
+
+				var text = this.innerText;
+				switch(text) {
+					case '提醒发货':
+						plus.nativeUI.toast('已提醒对方发货');
+						break;
+					case '确认收货':
+						plus.nativeUI.toast('已确认收货');
+						break;
+					case '立即评价':
+						plus.nativeUI.toast('跳到评价页');
+						break;
+					default:
+						break;
+				}
+			})
+
+			var immersed = publicStatusbar();
+			document.querySelector('.order-tabs').style.marginTop = immersed + 'px';
+
+			var bodyH = getBodyH();
+			//设置滑动的最小高度
+			for(var i = 0; i < document.querySelectorAll('.mui-slider-item').length; i++) {
+				document.querySelector('.mui-slider-item:nth-child(' + (i + 1) + ')')
+					.style
+					.minHeight = bodyH + 'px';
+			}
+
+			function getBodyH() {
+				var windowH = document.documentElement.clientHeight;
+				var topH = document.querySelector('.common-header-content').offsetHeight;
+				var tabH = document.querySelector('.order-tabs').offsetHeight;
+				return windowH - topH - tabH;
+			}
+		</script>
+	</body>
+
+</html>

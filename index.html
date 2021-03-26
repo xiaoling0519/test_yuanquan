@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>首页</title>
+    <link rel="stylesheet" href="mui/css/mui.min.css" />
+    <link rel="stylesheet" href="mui/css/pull.css">
+    <link rel="stylesheet" href="mui/css/previewImage.css">
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/jly.css" />
+    <style type="text/css">
+        .chat-popover {
+            position: absolute;
+        }
+
+        .chat-popover li {
+            background: none;
+        }
+
+        .mui-slider .mui-slider-group .mui-slider-item img {
+            width: initial;
+        }
+
+        #__MUI_PREVIEWIMAGE .mui-slider-group .mui-slider-item img {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .mui-slider .mui-slider-group .mui-slider-item img.index-message-list-avatar {
+            width: 100%;
+        }
+
+        .mui-slider .mui-slider-group .mui-slider-item img.index-dynamic-li-topImg {
+            width: 100%;
+        }
+
+        .mui-slider .mui-slider-group .mui-slider-item img.index-banner {
+            width: 100%;
+        }
+
+        .mui-slider .mui-slider-group .mui-slider-item .index-userAvatar-div img {
+            width: 100%;
+        }
+
+        .mui-slider .mui-slider-group .mui-slider-item .index-myPart-myInfo img {
+            width: 1.44rem;
+        }
+
+        #myAvatar img {
+            width: .68rem;
+            height: .68rem;
+            margin-top: .1rem;
+            border-radius: 50%;
+        }
+
+        #screening img {
+            width: .32rem;
+            height: .34rem;
+            margin-top: .27rem;
+        }
+
+        #publishDynamic img {
+            width: .37rem;
+            height: .37rem;
+            margin-top: .25rem;
+        }
+
+        .common-popup {
+            display: none;
+        }
+    </style>
+    <script src="js/rem.js" type="text/javascript" charset="utf-8"></script>
+    <script src="plugin/js/fastclick.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+    <div id="myApp">
+        <header class="common-header">
+            <div id="headerContent" class="common-header-content">
+                <a id="myAvatar" class="lf common-header-leftA">
+                    <img class="common-header-leftImg" src="img/avatar.jpg" alt="" />
+                </a>
+                <a id="screening" class="rf common-header-rightA displayNone">
+                    <img class="photoList-header-rightImg" src="img/index/screening.png" alt="" />
+                </a>
+                <h1 class="common-header-h1 index-top-tabs">
+                    <a>消息
+                        <a class="active">缘圈
+                            <a>发现
+                                <a>我的</a>
+                </h1>
+                <div class="clear"></div>
+            </div>
+
+        </header>
+        <div id="commonContent" class="common-content index-content">
+            <div class="mui-slider mui-slider-main">
+                <div class="mui-slider-group">
+                    <div id="messagePart" class="mui-slider-item">
+                        <div class="mui-scroll-wrapper" style="top:.88rem;">
+                            <div class="mui-scroll">
+                                <div class="common-content-padded index-message-content-padded">
+                                    <div class="index-message-items-div">
+                                        <div class="common-content-padded index-message-items-padded">
+                                            <ul class="index-message-itemUl overflowHidden backgroundWhite">
+                                                <li id="myAttention" class="lf">
+                                                    <dl>
+                                                        <dt>
+                                                            <img src="img/index/myAttention.png" alt="">
+                                                        </dt>
+                                                        <dd>我的关注</dd>
+                                                    </dl>
+                                                </li>
+                                                <li id="myHelp" class="lf">
+                                                    <dl>
+                                                        <dt>
+                                                            <img src="img/index/help.png" alt="">
+                                                        </dt>
+                                                        <dd>我的求助</dd>
+                                                    </dl>
+                                                </li>
+                                                <li id="myCircle" class="lf">
+                                                    <dl>
+                                                        <dt>
+                                                            <img src="img/index/myCircle.png" alt="">
+                                                        </dt>
+                                                        <dd>我的圈子</dd>
+                                                    </dl>
+                                                </li>
+                                                <li id="myAppointment" class="lf">
+                                                    <dl>
+                                                        <dt>
+                                                            <img src="img/index/myAppointment.png" alt="">
+                                                        </dt>
+                                                        <dd>我的约会</dd>
+                                                    </dl>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <ul class="index-message-list list">
+                                        <li v-for="chatLi in chatList">
+                                            <div class="index-message-li-container">
+                                                <div class="lf index-message-list-avatar-div">
+                                                    <img v-bind:src="chatLi.avatar" class="index-message-list-avatar" alt="">
+                                                </div>
+                                                <div class="lf index-message-list-main">
+                                                    <span v-html="chatLi.name"></span>
+                                                    <p v-html="chatLi.text" class="overflowEllipsis"></p>
+                                                </div>
+                                                <span v-html="chatLi.time" class="rf index-message-list-date"></span>
+                                                <div class="clear"></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="circlePart" class="mui-slider-item mui-active">
+                        <div class="mui-scroll-wrapper" style="top: .88rem;">
+                            <div class="mui-scroll">
+                                <div class="common-content-padded index-circle-padded backgroundWhite">
+                                    <div id="bannerSlider" class="mui-slider">
+                                        <div class="mui-slider-group mui-slider-loop">
+                                            <!--最后一张-->
+                                            <div class="mui-slider-item mui-slider-item-duplicate">
+                                                <a class="index-banner-a">
+                                                    <img class="index-banner" src="img/avatar.jpg" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="mui-slider-item">
+                                                <a class="index-banner-a">
+                                                    <img class="index-banner" src="img/avatar.jpg" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="mui-slider-item">
+                                                <a class="index-banner-a">
+                                                    <img class="index-banner" src="img/avatar.jpg" alt="">
+                                                </a>
+                                            </div>
+                                            <!--第一张-->
+                                            <div class="mui-slider-item mui-slider-item-duplicate">
+                                                <a class="index-banner-a">
+                                                    <img class="index-banner" src="img/avatar.jpg" alt="">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="index-appointment-and">
+                                        <a class="index-appointment-a index-appointment-and-a lf">
+                                            <label>共享约会</label>
+                                            <p>一边约会一边赚钱</p>
+                                        </a>
+                                        <a class="index-introduce-a index-appointment-and-a rf">
+                                            <label>视频介绍</label>
+                                            <p>认识你从自我介绍开始</p>
+                                        </a>
+                                        <div class="clear"></div>
+                                    </div>
+                                </div>
+                                <div class="common-content-padded">
+                                    <div class="index-classification backgroundWhite">
+                                        <a class="notMore overflowEllipsis">#旅游代收款放假时代峻峰时点击萨达是考虑到粉水兰空
+                                            <a class="notMore overflowEllipsis">#程序员
+                                                <a class="notMore overflowEllipsis">#旅游
+                                                    <a class="notMore overflowEllipsis">#旅游
+                                                        <a class="notMore overflowEllipsis">#旅游
+                                                            <a class="notMore overflowEllipsis">#旅游
+                                                                <a class="notMore overflowEllipsis">#旅游
+                                                                    <a class="notMore overflowEllipsis">#旅游dfdgfdgfgfd
+                                                                        <a id="more">#更多</a>
+                                    </div>
+
+                                    <ul class="index-userInfo-list list">
+                                        <li v-for="(circleLi,index) in circleList">
+                                            <div class="lf index-userAvatar-div">
+                                                <img v-bind:src="circleLi.avatar" alt="">
+                                            </div>
+                                            <div class="index-userInfo-main lf">
+                                                <div class="index-userNickname-and">
+                                                    <span v-html="circleLi.name" class="index-userNickname"></span>
+                                                    <img class="index-userInfo-logo" src="img/avatar.jpg" alt="">
+                                                    <img class="index-userInfo-logo" src="img/avatar.jpg" alt="">
+                                                </div>
+                                                <div class="index-item-address-and">
+                                                    <span v-html="circleLi.currArea"></span>
+                                                    <span v-html="circleLi.age"></span>
+                                                    <span v-html="circleLi.education"></span>
+                                                </div>
+                                                <div class="index-item-income-and">
+                                                    <span v-html="circleLi.profession" class="overflowEllipsis"></span>
+                                                    <span v-html="circleLi.height" class="overflowEllipsis"></span>
+                                                    <span v-html="circleLi.income" class="overflowEllipsis"></span>
+                                                </div>
+                                                <ul class="index-item-album">
+                                                    <li v-bind:style="{backgroundImage:'url('+circleImage+')'}" v-for="(circleImage,index2) in (circleLi.images.length>4?circleLi.images.slice(0,4):circleLi.images)">
+                                                        <span v-html="'+'+(circleLi.images.length-4)"></span>
+                                                    </li>
+                                                </ul>
+                                                <div v-show="circleLi.images.length===0?true:false" class="index-item-album index-item-album-empty">
+                                                    <div class="index-item-album-empty-smallCirclePoint">
+                                                        <span></span>
+                                                    </div>
+                                                    <span class="index-item-album-empty-instruction">她没有更多照片了</span>
+                                                </div>
+                                            </div>
+                                            <div class="clear"></div>
+                                            <div class="index-item-signature">
+                                                <img class="lf" src="img/index/signature.png" alt="">
+                                                <p v-html="circleLi.instructions"></p>
+                                                <div class="clear"></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="discoverPart" class="mui-slider-item">
+                        <div class="index-discover-content common-content-padded">
+                            <div class="index-discover-content-main">
+                                <ul>
+                                    <li @click="toSingleCircle">
+                                        单身圈
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li @click="toNearSingle" class="nearSingle">
+                                        附近单身
+                                    </li>
+                                    <li @click="toLoveWatch" class="loveWatch">
+                                        爱看点
+                                    </li>
+                                    <li @click="toPhotos" class="photos">
+                                        照片
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li @click="help" class="help">
+                                        求助
+                                    </li>
+                                    <li @click="toCircleShopping" class="circleShopping">
+                                        圈购
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="myPart" class="mui-slider-item">
+                        <div class="index-myPart-content common-content-padded">
+                            <div class="index-myPart-myInfo">
+                                <img class="index-myPart-myInfo-avatar" src="img/avatar.jpg" alt="">
+                                <p class="index-myPart-myInfo-nickname overflowEllipsis">都来看看积</p>
+                                <p class="index-myPart-myInfo-signature overflowEllipsis">的水井坊的手机壳不家个</p>
+                            </div>
+                            <div class="index-discover-content-main">
+                                <ul>
+                                    <li @click="toMyWallet" class="myWallet">
+                                        我的钱包
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li @click="toMyService" class="myService">
+                                        我的服务
+                                    </li>
+                                    <li @click="toMyOrder" class="myOrder">
+                                        我的订单
+                                    </li>
+                                    <li @click="toMyCertification" class="myCertification">
+                                        我的认证
+                                    </li>
+                                    <li @click="toShare" class="share">
+                                        分享一下
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li @click="toSet" class="set">
+                                        设置
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="index-screeningDetail">
+            <div class="common-content-padded">
+                <ul>
+                    <li @click="selectArea('currArea')">
+                        <label class="lf">现居地</label>
+                        <span v-html="screeningInfo.currArea" class="rf"></span>
+                        <div class="clear"></div>
+                    </li>
+                    <li @click="selectArea('hometown')">
+                        <label class="lf">籍贯</label>
+                        <span v-html="screeningInfo.hometown" class="rf"></span>
+                        <div class="clear"></div>
+                    </li>
+                    <li @click="selectAge()">
+                        <label class="lf">年龄</label>
+                        <span v-html="screeningInfo.age" class="rf"></span>
+                        <div class="clear"></div>
+                    </li>
+                    <li id="heightLi">
+                        <label class="lf">身高</label>
+                        <span class="rf">
+                            不限
+                        </span>
+                        <div class="clear"></div>
+                    </li>
+                    <li @click="selectEducation()">
+                        <label class="lf">学历</label>
+                        <span v-html="screeningInfo.education" class="rf"></span>
+                        <div class="clear"></div>
+                    </li>
+                    <li @click="selectIncome()">
+                        <label class="lf">月收入</label>
+                        <span v-html="screeningInfo.income" class="rf"></span>
+                        <div class="clear"></div>
+                    </li>
+                    <li @click="selectIndustry()">
+                        <label class="lf">行业</label>
+                        <span v-html="screeningInfo.industry" class="rf"></span>
+                        <div class="clear"></div>
+                    </li>
+                    <li @click="selectNation()">
+                        <label class="lf">民族</label>
+                        <span v-html="screeningInfo.nation" class="rf"></span>
+                        <div class="clear"></div>
+                    </li>
+                    <li @click="selectConstellation()">
+                        <label class="lf">星座</label>
+                        <span v-html="screeningInfo.constellation" class="rf"></span>
+                        <div class="clear"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="bodyCover" class="common-bodyCover"></div>
+
+        <div id="heightScreening" class="common-popup index-heightScreening">
+            <h3 v-html="rangeTypeTxt" class="index-heightScreening-title"></h3>
+            <div class="index-heightScreening-main">
+                <div class="index-heightScreening-grid">
+                    <div class="index-heightScreening-row"></div>
+                    <div class="index-heightScreening-row"></div>
+                    <div class="index-heightScreening-row"></div>
+                </div>
+                <ul id="minHeight" class="index-heightScreening-ul lf">
+                    <li class="placeholder">占位</li>
+                    <li class="active">不限</li>
+                    <li v-html="rangeArr[index]" v-for="(rangeItem,index) in rangeArr"></li>
+                    <li class="placeholder">占位</li>
+                </ul>
+                <ul id="maxHeight" class="index-heightScreening-ul textRight rf">
+                    <li class="placeholder">占位</li>
+                    <li class="active">不限</li>
+                    <li v-html="rangeArr[index]" v-for="(rangeItem,index) in rangeArr"></li>
+                    <li class="placeholder">占位</li>
+                </ul>
+                <div class="clear"></div>
+            </div>
+            <div class="index-heightScreening-btns">
+                <span class="lf index-heightScreening-cancel">取消</span>
+                <span class="rf index-heightScreening-confirm">确定</span>
+                <div class="clear"></div>
+            </div>
+        </div>
+
+        <div v-show="isShowArea" class="shippingAddress-selectDetail">
+            <div class="shippingAddress-selectDetail-header">
+                <div class="lf">
+                    <span v-html="province" id="province" class="shippingAddress-selectDetail-level overflowEllipsis active"></span>
+                    <span v-html="city" id="city" style="display: none;" class="shippingAddress-selectDetail-level overflowEllipsis"></span>
+                    <span v-html="county" id="county" style="display: none;" class="shippingAddress-selectDetail-level overflowEllipsis"></span>
+                </div>
+                <span @click="cancelArea()" class="rf shippingAddress-selectDetail-cancel">取消</span>
+                <span @click="comfirmArea()" class="rf shippingAddress-selectDetail-confirm">确定</span>
+                <div class="clear"></div>
+            </div>
+            <ul class="shippingAddress-selectDetail-ul" id="areaList">
+
+            </ul>
+        </div>
+
+        <div id="popover" class="mui-popover chat-popover">
+            <div class="mui-popover-arrow"></div>
+            <ul>
+                <li id="toTop">置顶</li>
+                <li id="deleteMessage">删除记录</li>
+            </ul>
+        </div>
+    </div>
+
+    <script type="text/templete" id="areaLi">
+        <li onclick="selectAreaDetail(this)" class="shippingAddress-selectDetail-li">
+            <label data-code="{{value}}">{{area}}</label>
+        </li>
+    </script>
+
+    <script src="vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="mui/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="mui/js/mui.pullToRefresh.js" type="text/javascript" charset="utf-8"></script>
+    <script src="mui/js/mui.pullToRefresh.material.js" type="text/javascript" charset="utf-8"></script>
+    <script src="mui/js/mui.zoom.js" type="text/javascript" charset="utf-8"></script>
+    <script src="mui/js/mui.previewimage.js" type="text/javascript" charset="utf-8"></script>
+    <script src="mui/js/city.data-3.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/param.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/system.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/jly.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        var firstTapTime = null;
+        var mask = mui.createMask();
+
+        var page1 = 1,
+            page2 = 1;
+
+        var pullUpObj1 = null,
+            pullUpObj2 = null;
+
+        var heightArr = [];
+        for (var i = 140; i <= 190; i++) {
+            heightArr.push(i + 'CM');
+        }
+
+        var ageArr = [];
+        for (var i = 18; i <= 60; i++) {
+            ageArr.push(i);
+        }
+
+        var vm = new Vue({
+            el: "#myApp",
+            data: {
+                areaType: '', //居住地/老家在
+                rangeType: '', //身高/年龄
+                rangeTypeTxt: '',
+                isShowArea: false,
+
+                province: "请选择",
+                city: "请选择",
+                county: "请选择",
+                provinceCode: 0,
+                cityCode: 0,
+                countyCode: 0,
+
+                screeningInfo: {
+                    currArea: '不限',
+                    hometown: '不限',
+                    age: '不限',
+                    education: '不限',
+                    income: '不限',
+                    industry: '不限',
+                    nation: '不限',
+                    constellation: '不限',
+                    marriage: '不限'
+                },
+
+                rangeArr: null,
+                showWhich: 1,
+                messageHadLoaded: false,
+
+                chatList: [],
+                circleList: [],
+            },
+            methods: {
+                //选中地区
+                selectArea: function (type) {
+                    this.areaType = type;
+                    this.isShowArea = true;
+                    document.querySelector('.index-screeningDetail').style.zIndex = '9';
+                },
+                //确定现居地
+                comfirmArea: function () {
+                    if (this.areaType === 'currArea') {
+                        if (vm.province === '请选择') {
+                            vm.screeningInfo.currArea = '不限';
+                            plus.nativeUI.toast('无地区代码');
+                        } else if (vm.city === '请选择') {
+                            vm.screeningInfo.currArea = vm.province;
+                            plus.nativeUI.toast('地区代码：' + vm.provinceCode);
+                        } else if (vm.county === '请选择') {
+                            vm.screeningInfo.currArea = vm.province + vm.city;
+                            plus.nativeUI.toast('地区代码:' + vm.cityCode);
+                        } else {
+                            vm.screeningInfo.currArea = vm.province + vm.city + vm.county;
+                            plus.nativeUI.toast('地区代码:' + vm.countyCode);
+                        }
+                    }
+                    if (this.areaType === 'hometown') {
+                        if (vm.province === '请选择') {
+                            vm.screeningInfo.hometown = '不限';
+                            plus.nativeUI.toast('无地区代码');
+                        } else if (vm.city === '请选择') {
+                            vm.screeningInfo.hometown = vm.province;
+                            plus.nativeUI.toast('地区代码：' + vm.provinceCode);
+                        } else if (vm.county === '请选择') {
+                            vm.screeningInfo.hometown = vm.province + vm.city;
+                            plus.nativeUI.toast('地区代码:' + vm.cityCode);
+                        } else {
+                            vm.screeningInfo.hometown = vm.province + vm.city + vm.county;
+                            plus.nativeUI.toast('地区代码:' + vm.countyCode);
+                        }
+                    }
+
+                    vm.isShowArea = false;
+                    document.querySelector('.index-screeningDetail').style.zIndex = '9999';
+                },
+                //取消现居地
+                cancelArea: function () {
+                    this.isShowArea = false;
+                    document.querySelector('.index-screeningDetail').style.zIndex = '9999';
+                },
+                //年龄
+                selectAge: function () {
+                    this.rangeArr = ageArr;
+                    this.rangeType = 'age';
+                    this.rangeTypeTxt = '年龄';
+
+                    document.querySelector('.index-screeningDetail').style.zIndex = '9';
+                    document.getElementById('heightScreening').style.display = 'block';
+                },
+                //学历
+                selectEducation: function () {
+                    var arr = [
+                        '不限',
+                        '中专及以下',
+                        '高中',
+                        '大专',
+                        '本科',
+                        '硕士',
+                        '博士'
+                    ]
+                    selectUseActionsheet(arr, '选择学历', function (i) {
+                        vm.screeningInfo.education = arr[i - 1];
+                    })
+                },
+                //月收入
+                selectIncome: function () {
+                    var arr = [
+                        '不限',
+                        '3k以下',
+                        '3-5k',
+                        '5-10k',
+                        '10-20k',
+                        '20-50k',
+                        '50k以上'
+                    ]
+                    selectUseActionsheet(arr, '选择月收入', function (i) {
+                        vm.screeningInfo.income = arr[i - 1];
+                    })
+                },
+                //行业
+                selectIndustry: function () {
+                    var arr = [
+                        '不限',
+                        '互联网/IT/电子/通信',
+                        '广告/传媒/文化/体育',
+                        '金融',
+                        '教育培训',
+                        '制药/医疗',
+                        '交通/物流/贸易/零售',
+                        '专业服务',
+                        '房地产/建筑',
+                        '汽车',
+                        '机械/制造',
+                        '消费品',
+                        '服务业',
+                        '能源/化工/环保',
+                        '政府/非盈利机构/其他',
+                    ]
+                    selectUseActionsheet(arr, '选择行业', function (i) {
+                        vm.screeningInfo.industry = arr[i - 1];
+                    })
+                },
+                //民族
+                selectNation: function () {
+                    var arr = [
+                        '不限',
+                        '汉族',
+                        '蒙古族',
+                        '回族',
+                        '藏族',
+                        '维吾尔族',
+                        '苗族',
+                        '彝族',
+                        '壮族',
+                        '布依族',
+                        '朝鲜族',
+                        '满族',
+                        '侗族',
+                        '瑶族',
+                        '白族',
+                        '土家族',
+                        '哈尼族',
+                        '哈萨克族',
+                        '傣族',
+                        '黎族',
+                        '僳僳族',
+                        '佤族',
+                        '畲族',
+                        '高山族',
+                        '拉祜族',
+                        '水族',
+                        '东乡族',
+                        '纳西族',
+                        '景颇族',
+                        '柯尔克孜族',
+                        '土族',
+                        '达斡尔族',
+                        '仫佬族',
+                        '羌族',
+                        '布朗族',
+                        '撒拉族',
+                        '毛南族',
+                        '仡佬族',
+                        '锡伯族',
+                        '阿昌族',
+                        '普米族',
+                        '塔吉克族',
+                        '怒族',
+                        '乌孜别克族',
+                        '俄罗斯族',
+                        '鄂温克族',
+                        '德昂族',
+                        '保安族',
+                        '裕固族',
+                        '京族',
+                        '塔塔尔族',
+                        '独龙族',
+                        '鄂伦春族',
+                        '赫哲族',
+                        '门巴族',
+                        '珞巴族',
+                        '基诺族'
+                    ]
+                    selectUseActionsheet(arr, '选择民族', function (i) {
+                        vm.screeningInfo.nation = arr[i - 1];
+                    })
+                },
+                //星座
+                selectConstellation: function () {
+                    var arr = [
+                        '不限',
+                        '白羊座',
+                        '金牛座',
+                        '双子座',
+                        '巨蟹座',
+                        '狮子座',
+                        '处女座',
+                        '天秤座',
+                        '天蝎座',
+                        '射手座',
+                        '摩羯座',
+                        '水瓶座',
+                        '双鱼座'
+                    ]
+                    selectUseActionsheet(arr, '选择星座', function (i) {
+                        vm.screeningInfo.constellation = arr[i - 1];
+                    })
+                },
+                //单身圈
+                toSingleCircle: function () {
+                    publicWebviewShow({
+                        id: '/doc/dynamic/singleCircle.html'
+                    })
+                },
+                //附近单身
+                toNearSingle: function () {
+                    publicWebviewShow({
+                        id: '/doc/dynamic/nearSingle.html'
+                    })
+                },
+                //爱看点
+                toLoveWatch: function () {
+                    publicWebviewShow({
+                        id: '/doc/dynamic/loveWatch.html'
+                    })
+                },
+                //照片
+                toPhotos: function () {
+                    publicWebviewShow({
+                        id: '/doc/dynamic/photoList.html'
+                    })
+                },
+                //求助
+                help: function () {
+                    publicWebviewShow({
+                        id: '/doc/help/helpIndex.html'
+                    })
+                },
+                //圈购
+                toCircleShopping: function () {
+                    publicWebviewShow({
+                        id: '/doc/circleShopping/circleShoppingIndex.html'
+                    })
+                },
+                //我的钱包
+                toMyWallet: function () {
+                    publicWebviewShow({
+                        id: '/doc/sideslip/myWallet.html'
+                    })
+                },
+                //我的服务
+                toMyService: function () {
+                    publicWebviewShow({
+                        id: '/doc/sideslip/services.html'
+                    })
+                },
+                //我的订单
+                toMyOrder: function () {
+                    publicWebviewShow({
+                        id: '/doc/giftOrder/order.html'
+                    })
+                },
+                //我的认证
+                toMyCertification: function () {
+                    publicWebviewShow({
+                        id: '/doc/sideslip/myCertification.html'
+                    })
+                },
+                //分享一下
+                toShare: function () {
+                    publicWebviewShow({
+                        id: '/doc/sideslip/share.html',
+                        styles: {
+                            statusbar: {
+                                background: "#FF0000"
+                            }
+                        }
+                    })
+                },
+                //设置
+                toSet: function () {
+                    publicWebviewShow({
+                        id: '/doc/sideslip/set.html'
+                    })
+                }
+            }
+        })
+
+        mui.init({
+            gestureConfig: {
+                longtap: true
+            }
+        });
+
+        insertProvince();
+
+        //插入省份
+        function insertProvince() {
+            document.querySelector('#areaList').innerHTML = '';
+            for (var i = 0; i < cityData3.length; i++) {
+                var areaLi = document.querySelector('#areaLi').innerHTML
+                    .replace('{{area}}', cityData3[i].text)
+                    .replace('{{value}}', cityData3[i].value)
+
+                document.querySelector('#areaList').innerHTML += areaLi;
+            }
+        }
+
+        //插入市
+        function insertCity(p) {
+            document.querySelector('#areaList').innerHTML = '';
+            for (var i = 0; i < cityData3.length; i++) {
+                if (p === cityData3[i].text) {
+                    for (var j = 0; j < cityData3[i].children.length; j++) {
+                        var areaLi = document.querySelector('#areaLi').innerHTML
+                            .replace('{{area}}', cityData3[i].children[j].text)
+                            .replace('{{value}}', cityData3[i].children[j].value)
+
+                        document.querySelector('#areaList').innerHTML += areaLi;
+                    }
+                    break;
+                }
+            }
+        }
+
+        //重新选择省
+        document.querySelector('#province').addEventListener('click', function () {
+            document.querySelector('.shippingAddress-selectDetail-level.active').classList.remove('active');
+            this.classList.add('active');
+
+            vm.province = '请选择';
+            vm.city = '请选择';
+            document.querySelector('#city').style.display = 'none';
+            vm.county = '请选择';
+            document.querySelector('#county').style.display = 'none';
+
+            insertProvince();
+        })
+
+        //重新选择市
+        document.querySelector('#city').addEventListener('click', function () {
+            document.querySelector('.shippingAddress-selectDetail-level.active').classList.remove('active');
+            this.classList.add('active');
+
+            vm.city = '请选择';
+            vm.county = '请选择';
+            document.querySelector('#county').style.display = 'none';
+
+            insertCity(vm.province);
+        })
+
+        //插入县
+        function insertCounty(c) {
+            for (var i = 0; i < cityData3.length; i++) {
+                if (vm.province === cityData3[i].text) {
+                    for (var j = 0; j < cityData3[i].children.length; j++) {
+                        if (c === cityData3[i].children[j].text) {
+                            if (cityData3[i].children[j].hasOwnProperty('children')) {
+                                document.querySelector('#areaList').innerHTML = '';
+                                for (var k = 0; k < cityData3[i].children[j].children.length; k++) {
+                                    var areaLi = document.querySelector('#areaLi').innerHTML
+                                        .replace('{{area}}', cityData3[i].children[j].children[k].text)
+                                        .replace('{{value}}', cityData3[i].children[j].children[k].value)
+
+                                    document.querySelector('#areaList').innerHTML += areaLi;
+                                }
+                                document.querySelector('#county').style.display = 'inline-block';
+                                document.querySelector('#county').classList.add('active');
+                                document.querySelector('#city').classList.remove('active');
+
+                                break;
+                            }
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+
+        //选中地区
+        function selectAreaDetail(e) {
+            //省
+            if (document.querySelector('#province').classList.contains('active')) {
+                document.querySelector('#city').style.display = 'inline-block';
+                document.querySelector('#city').classList.add('active');
+                document.querySelector('#province').classList.remove('active');
+
+                vm.province = e.children[0].innerText;
+                vm.provinceCode = e.children[0].getAttribute('data-code');
+
+                insertCity(vm.province);
+                return;
+            }
+            //市
+            if (document.querySelector('#city').classList.contains('active')) {
+                vm.city = e.children[0].innerText;
+                vm.cityCode = e.children[0].getAttribute('data-code');
+
+                insertCounty(vm.city);
+                return;
+            }
+
+            //县
+            if (document.querySelector('#county').classList.contains('active')) {
+                vm.county = e.children[0].innerText;
+                vm.countyCode = e.children[0].getAttribute('data-code');
+
+                return;
+            }
+        }
+
+        (function ($) {
+            //阻尼系数
+            var deceleration = mui.os.ios ? 0.003 : 0.0009;
+            $('.mui-scroll-wrapper').scroll({
+                bounce: false,
+                indicators: false, //是否显示滚动条
+                deceleration: deceleration
+            });
+            $.ready(function () {
+                //循环初始化所有下拉刷新，上拉加载。
+                $.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function (index,
+                    pullRefreshEl) {
+                    $(pullRefreshEl).pullToRefresh({
+                        down: {
+                            callback: function () {
+                                if (vm.showWhich === 0) {
+                                    page1 = 1;
+                                    vm.chatList = [];
+
+                                    if (pullUpObj1 !== null) {
+                                        pullUpObj1.refresh(true);
+                                    }
+                                }
+                                if (vm.showWhich === 1) {
+                                    page2 = 1;
+                                    vm.circleList = [];
+
+                                    if (pullUpObj2 !== null) {
+                                        pullUpObj2.refresh(true);
+                                    }
+                                }
+
+                                ajaxRequest('down', this);
+                            }
+                        },
+                        up: {
+                            callback: function () {
+                                if (vm.showWhich === 0) {
+                                    page1++;
+                                    pullUpObj1 = this;
+                                }
+                                if (vm.showWhich === 1) {
+                                    page2++;
+                                    pullUpObj2 = this;
+                                }
+
+                                ajaxRequest('up', this);
+                            }
+                        }
+                    });
+                });
+            });
+        })(mui);
+
+        mui.plusReady(function () {
+            versionUpdate();
+
+            //创建聊天页和用户信息页,加快打开速度
+            Webview.create({
+                id: '/doc/message/chat.html'
+            })
+            Webview.create({
+                id: '/doc/user/userDetail.html'
+            })
+
+            //安卓返回
+            mui.back = function () {
+                if (document.querySelector('.index-screeningDetail').style.display === 'block') {
+                    if (document.querySelector('#heightScreening').style.display === 'block') {
+                        document.querySelector('#heightScreening').style.display = 'none';
+                        document.querySelector('.index-screeningDetail').style.zIndex = '9999';
+                    } else if (vm.isShowArea) {
+                        vm.isShowArea = false;
+                        document.querySelector('.index-screeningDetail').style.zIndex = '9999';
+                    } else {
+                        document.querySelector('.index-screeningDetail').style.display = 'none';
+                        document.querySelector('#bodyCover').style.display = 'none';
+                    }
+                } else if (document.querySelector('#popover') !== null && document.querySelector(
+                        '#popover').style
+                    .display === 'block') {
+                    mui('#popover').popover('hide');
+                } else {
+                    outApp();
+                }
+            }
+
+            getLocation();
+        })
+
+        //沉浸式状态栏处理
+        function publicStatusbar() {
+            var immersed = 0;
+            var ms = (/Html5Plus\/.+\s\(.*(Immersed\/(\d+\.?\d*).*)\)/gi).exec(navigator.userAgent);
+            if (ms && ms.length >= 3) { // 当前环境为沉浸式状态栏模式
+                immersed = parseFloat(ms[2]); // 获取状态栏的高度
+            }
+            document.querySelector('.common-header-content').style.paddingTop = immersed + 'px';
+            return immersed;
+        }
+
+        var immersed = publicStatusbar();
+        document.querySelector('.index-screeningDetail').style.marginTop = immersed + 'px';
+
+        document.querySelector('.index-message-items-div').style.marginTop = immersed + 'px';
+        document.querySelector('#circlePart').style.marginTop = immersed + 'px';
+
+        document.querySelector('.index-discover-content').style.marginTop = immersed + 'px';
+
+        document.querySelector('.index-myPart-content').style.marginTop = immersed + 'px';
+
+        bannerSlide();
+
+        //设置滑动的最小高度
+        for (var i = 0; i < document.querySelectorAll('.mui-slider-main>.mui-slider-group>.mui-slider-item').length; i++) {
+            if (i === 2 || i === 0 || i === 3) {
+                document.querySelector('.mui-slider-main>.mui-slider-group>.mui-slider-item:nth-child(' + (i + 1) + ')')
+                    .style
+                    .minHeight = document.documentElement.clientHeight + 'px';
+            } else {
+                document.querySelector('.mui-slider-main>.mui-slider-group>.mui-slider-item:nth-child(2)')
+                    .style
+                    .minHeight = document.documentElement.clientHeight - immersed + 'px';
+            }
+        }
+
+        //滑动切换
+        document.querySelector('.mui-slider').addEventListener('slide', function (e) {
+            var i = e.detail.slideNumber;
+
+            document.querySelector('.index-top-tabs a.active').classList.remove("active");
+            document.querySelector('.index-top-tabs a:nth-child(' + (i + 1) + ')').classList.add("active");
+
+            if (i === 1) {
+                document.getElementById('screening').style.display = 'block';
+                vm.showWhich = 1;
+            } else if (i === 2) {
+                document.getElementById('screening').style.display = 'none';
+                vm.showWhich = 2;
+            } else if (i === 3) {
+                document.getElementById('screening').style.display = 'none';
+                vm.showWhich = 3;
+            } else {
+                document.getElementById('screening').style.display = 'none';
+                vm.showWhich = 0;
+
+                if (!vm.messageHadLoaded) {
+                    vm.messageHadLoaded = true;
+                    ajaxRequestFirst();
+                }
+            }
+        })
+
+        //点头像
+        document.getElementById('myAvatar').addEventListener('click', function (e) {
+            publicToUser();
+        })
+
+        //跳转到聊天
+        mui('.index-message-list').on('tap', 'li', function (e) {
+            publicToChat();
+        })
+
+        //聊天操作
+        mui('.index-message-list').on('longtap', 'li', function (e) {
+            mui('.mui-popover').popover('show');
+			
+			document.querySelector('#popover').style.top=e.detail.center.y+'px';
+        })
+
+        //置顶
+        document.querySelector('#toTop').addEventListener('tap', function (e) {
+            e.stopPropagation();
+            mui('#popover').popover('hide');
+            plus.nativeUI.toast('点了置顶');
+        })
+
+        //删除聊天记录
+        document.querySelector('#deleteMessage').addEventListener('tap', function (e) {
+            e.stopPropagation();
+            mui('#popover').popover('hide');
+            plus.nativeUI.toast('点了删除聊天记录');
+        })
+
+        //我的关注
+        document.getElementById('myAttention').addEventListener('tap', function (e) {
+            publicWebviewShow({
+                id: '/doc/message/myAttention.html'
+            })
+        })
+
+        //我的求助
+        document.getElementById('myHelp').addEventListener('tap', function (e) {
+            plus.nativeUI.toast('跳到我的求助页');
+        })
+
+        //我的圈子
+        document.getElementById('myCircle').addEventListener('tap', function (e) {
+            publicWebviewShow({
+                id: '/doc/message/myCircle.html'
+            })
+        })
+
+        //我的约会
+        document.getElementById('myAppointment').addEventListener('tap', function (e) {
+            publicWebviewShow({
+                id: '/doc/message/myAppointment.html'
+            })
+        })
+
+        //查看用户详情
+        mui('.index-userInfo-list').on('tap', ' li', function () {
+            publicToUser();
+        })
+
+        //共享约会
+        document.querySelector('.index-appointment-a').addEventListener('tap', function (e) {
+            publicWebviewShow({
+                id: '/doc/circle/appointmentList.html'
+            })
+        })
+
+        //视频介绍
+        document.querySelector('.index-introduce-a').addEventListener('tap', function (e) {
+            plus.nativeUI.toast('跳转到视频介绍');
+        })
+
+        //某一职业
+        mui('.index-classification').on('tap', '.notMore', function (e) {
+            var me = this;
+            publicWebviewShow({
+                id: '/doc/circle/suchProfessionUserList.html',
+                extras: {
+                    type: this.innerText
+                }
+            })
+        })
+
+        //更多职业
+        document.querySelector('#more').addEventListener('tap', function (e) {
+            publicWebviewShow({
+                id: '/doc/circle/moreProfession.html'
+            })
+        })
+
+        //点击切换
+        mui(".index-top-tabs").on('click', 'a', function (e) {
+            if (this.classList.contains('active')) {
+                return;
+            }
+
+            closeScreening();
+
+            document.querySelector('.index-top-tabs a.active').classList.remove("active");
+            this.classList.add("active");
+
+            document.querySelector('#commonContent .mui-slider-item.mui-active').classList.remove(
+                "mui-active");
+
+            var index;
+            if (this.innerText === '消息') {
+                document.getElementById('messagePart').classList.add('mui-active');
+                document.getElementById('screening').style.display = 'none';
+                index = 0;
+            }
+            if (this.innerText === '缘圈') {
+                document.getElementById('circlePart').classList.add('mui-active');
+                document.getElementById('screening').style.display = 'block';
+                index = 1;
+            }
+            if (this.innerText === '发现') {
+                document.getElementById('discoverPart').classList.add('mui-active');
+                document.getElementById('screening').style.display = 'none';
+                index = 2;
+            }
+            if (this.innerText === '我的') {
+                document.getElementById('myPart').classList.add('mui-active');
+                document.getElementById('screening').style.display = 'none';
+                index = 3;
+            }
+
+            mui('.mui-slider-main').slider().gotoItem(index, 0);
+        })
+
+        //筛选
+        document.getElementById('screening').addEventListener('click', function (e) {
+            if (document.querySelector('.index-screeningDetail').style.display === 'block') {
+                document.querySelector('.index-screeningDetail').style.display = 'none';
+                document.getElementById('bodyCover').style.display = 'none';
+            } else {
+                document.querySelector('.index-screeningDetail').style.display = 'block';
+                document.getElementById('bodyCover').style.display = 'block';
+            }
+        })
+
+        //点遮罩层关闭筛选
+        document.getElementById('bodyCover').addEventListener('click', function () {
+            if (document.querySelector('#heightScreening').style.display === 'block') {
+                document.querySelector('#heightScreening').style.display = 'none';
+                document.querySelector('.index-screeningDetail').style.zIndex = '9999';
+            } else if (vm.isShowArea) {
+                vm.isShowArea = false;
+                document.querySelector('.index-screeningDetail').style.zIndex = '9999';
+            } else {
+                document.querySelector('.index-screeningDetail').style.display = 'none';
+                this.style.display = 'none';
+            }
+        })
+
+        //图片预览
+        mui.previewImage();
+
+        mui('#__MUI_PREVIEWIMAGE').on('longtap', '.mui-zoom', function () {
+            saveImage(this.getAttribute('src'));
+        })
+
+        //banner轮播
+        function bannerSlide() {
+            mui("#bannerSlider").slider({
+                interval: 5000
+            });
+        }
+
+        //版本升级
+        function versionUpdate() {
+            //假设最新版本为10.0.1
+            var newVersion = "10.0.1";
+
+            var currVersion = plus.runtime.version;
+            if (currVersion !== newVersion) {
+                plus.nativeUI.toast('弹出版本升级弹框');
+            }
+        }
+
+        //关闭筛选
+        function closeScreening() {
+            if (document.querySelector('.index-screeningDetail').style.display === 'block') {
+                document.querySelector('.index-screeningDetail').style.display = 'none';
+                document.querySelector('#bodyCover').style.display = 'none';
+
+                if (document.querySelector('#heightScreening').style.display === 'block') {
+                    document.querySelector('#heightScreening').style.display = 'none';
+                    document.querySelector('.index-screeningDetail').style.zIndex = '9999';
+                }
+            }
+        }
+
+        //身高
+        document.getElementById('heightLi').addEventListener('click', function (e) {
+            vm.rangeArr = heightArr;
+            vm.rangeType = 'height';
+            vm.rangeTypeTxt = '身高';
+
+            document.querySelector('.index-screeningDetail').style.zIndex = '9';
+            document.getElementById('heightScreening').style.display = 'block';
+        })
+
+        //滚动身高筛选
+        var timer = null;
+        document.querySelector('#minHeight').onscroll = function (e) {
+            heightScreeningBack(this, e);
+        }
+        document.querySelector('#maxHeight').onscroll = function (e) {
+            heightScreeningBack(this, e);
+        }
+
+        //身高筛选取消
+        document.querySelector('.index-heightScreening-cancel').addEventListener('click', function (e) {
+            document.getElementById('heightScreening').style.display = 'none';
+            document.querySelector('.index-screeningDetail').style.zIndex = '9999';
+        })
+
+        //身高筛选确定
+        document.querySelector('.index-heightScreening-confirm').addEventListener('click', function (e) {
+            document.getElementById('heightScreening').style.display = 'none';
+            document.querySelector('.index-screeningDetail').style.zIndex = '9999';
+
+            var min = document.querySelector('#minHeight li.active').innerText;
+            var max = document.querySelector('#maxHeight li.active').innerText;
+
+            if (vm.rangeType === 'height') {
+                var minVal = min.substring(0, min.length - 2);
+                var maxVal = max.substring(0, max.length - 2);
+                if (min === '不限' || max === '不限') {
+                    document.querySelector('#heightLi span').innerText = '不限';
+                } else {
+                    if (minVal > maxVal) {
+                        plus.nativeUI.toast('选择不合法，请重新选择');
+                    } else {
+                        document.querySelector('#heightLi span').innerText = minVal + '-' + max;
+                    }
+                }
+            }
+            if (vm.rangeType === 'age') {
+                if (min === '不限' || max === '不限') {
+                    vm.screeningInfo.age = '不限';
+                } else {
+                    if (min > max) {
+                        plus.nativeUI.toast('选择不合法，请重新选择');
+                    } else {
+                        vm.screeningInfo.age = min + '-' + max;
+                    }
+                }
+            }
+
+        })
+
+        function heightScreeningBack(dom, e) {
+            var liH = document.querySelectorAll('#minHeight li')[0].offsetHeight;
+
+            clearTimeout(timer);
+
+            timer = setTimeout(function () {
+                var scrollH = e.srcElement.scrollTop;
+                var integer = parseInt(scrollH / liH);
+                var remainder = scrollH % liH;
+                if (remainder > (liH / 2)) {
+                    integer += 1;
+                }
+
+                for (var i = 0; i < dom.children.length; i++) {
+                    if (dom.children[i].classList.contains('active')) {
+                        dom.children[i].classList.remove('active');
+                        break;
+                    }
+                }
+                dom.children[integer + 1].classList.add('active');
+
+                var $dom = $(dom);
+                $dom.animate({
+                    scrollTop: integer * liH
+                }, 300)
+            }, 100)
+        }
+
+        //第一次加载数据
+        ajaxRequestFirst();
+
+        function ajaxRequestFirst() {
+            mui.getJSON('index.json', function (data) {
+                if (vm.showWhich === 0) {
+                    if (JSON.stringify(data).chat == "{}") {
+                        return;
+                    } else {
+                        for (var i in data.chat) {
+                            if (i == page1) {
+                                vm.chatList = vm.chatList.concat(data.chat[i]);
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (vm.showWhich === 1) {
+                    if (JSON.stringify(data).circle == "{}") {
+                        return;
+                    } else {
+                        for (var i in data.circle) {
+                            if (i == page2) {
+                                vm.circleList = vm.circleList.concat(data.circle[i]);
+                                break;
+                            }
+                        }
+                    }
+                }
+            })
+        }
+
+        function ajaxRequest(type, pullObj) {
+            mui.getJSON('index.json', function (data) {
+                if (vm.showWhich === 0) {
+                    if (JSON.stringify(data).chat == "{}") {
+                        if (type === 'down') {
+                            setTimeout(function () {
+                                pullObj.endPullDownToRefresh();
+                            }, 500)
+                        }
+                        if (type === 'up') {
+                            setTimeout(function () {
+                                pullObj.endPullUpToRefresh(true);
+                            }, 500)
+                        }
+                    } else {
+                        var count = 0;
+                        for (var i in data.chat) {
+                            if (i == page1) {
+                                count = 1;
+                                vm.chatList = vm.chatList.concat(data.chat[i]);
+
+                                if (type === 'down') {
+                                    setTimeout(function () {
+                                        pullObj.endPullDownToRefresh();
+                                    }, 500)
+                                }
+                                if (type === 'up') {
+                                    setTimeout(function () {
+                                        pullObj.endPullUpToRefresh();
+                                    }, 500)
+                                }
+                                break;
+                            }
+                        }
+                        if (count === 0) {
+                            if (type === 'down') {
+                                setTimeout(function () {
+                                    pullObj.endPullDownToRefresh();
+                                }, 500)
+                            }
+                            if (type === 'up') {
+                                setTimeout(function () {
+                                    pullObj.endPullUpToRefresh(true);
+                                }, 500)
+                            }
+                        }
+                    }
+                }
+
+                if (vm.showWhich === 1) {
+                    if (JSON.stringify(data).circle == "{}") {
+                        if (type === 'down') {
+                            setTimeout(function () {
+                                pullObj.endPullDownToRefresh();
+                            }, 500)
+                        }
+                        if (type === 'up') {
+                            setTimeout(function () {
+                                pullObj.endPullUpToRefresh(true);
+                            }, 500)
+                        }
+                    } else {
+                        var count = 0;
+                        for (var i in data.circle) {
+                            if (i == page2) {
+                                count = 1;
+                                vm.circleList = vm.circleList.concat(data.circle[i]);
+
+                                if (type === 'down') {
+                                    setTimeout(function () {
+                                        pullObj.endPullDownToRefresh();
+                                    }, 500)
+                                }
+                                if (type === 'up') {
+                                    setTimeout(function () {
+                                        pullObj.endPullUpToRefresh();
+                                    }, 500)
+                                }
+                                break;
+                            }
+                        }
+                        if (count === 0) {
+                            if (type === 'down') {
+                                setTimeout(function () {
+                                    pullObj.endPullDownToRefresh();
+                                }, 500)
+                            }
+                            if (type === 'up') {
+                                setTimeout(function () {
+                                    pullObj.endPullUpToRefresh(true);
+                                }, 500)
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>实名认证</title>
+		<link rel="stylesheet" href="../../mui/css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/reset.css" />
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/jly.css" />
+		<script src="../../js/rem.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../plugin/js/fastclick.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div id="myApp">
+			<header class="common-header">
+				<div class="common-header-content">
+					<a class="lf common-header-leftA">
+						<img class="common-header-leftImg" src="../../img/back.png" alt="" />
+					</a>
+					<h1 class="common-header-h1">
+					实名认证
+				</h1>
+					<div class="clear"></div>
+				</div>
+			</header>
+			<div class="common-content" style="padding-bottom: .2rem;">
+				<div class="common-content-padded" style="padding: 0;">
+					<ul class="realName-name-and">
+						<li>
+							<label class="lf">姓名：</label>
+							<input v-model="name" class="lf" placeholder="请输入真实姓名" type="text" />
+							<div class="clear"></div>
+						</li>
+						<li>
+							<label class="lf">证件号：</label>
+							<input v-model="idNum" class="lf" placeholder="请输入身份证号码" type="text" />
+							<div class="clear"></div>
+						</li>
+					</ul>
+					<div class="realName-upload-content">
+						<h3>证件上传</h3>
+						<ul class="realName-upload-main">
+							<li class="lf">
+								<div class="realName-upload-imgShow">
+									<img :src="front" alt="" />
+								</div>
+								<div class="realName-upload-text">身份证正面</div>
+								<a @click="uploadFront" class="realName-upload-btn myCertification-li-btn">上传</a>
+							</li>
+							<li class="lf">
+								<div class="realName-upload-imgShow">
+									<img :src="back" alt="" />
+								</div>
+								<div class="realName-upload-text">身份证背面</div>
+								<a @click="uploadBack" class="realName-upload-btn myCertification-li-btn">上传</a>
+							</li>
+							<li class="lf">
+								<div class="realName-upload-imgShow">
+									<img :src="hand" alt="" />
+								</div>
+								<div class="realName-upload-text">手持身份证</div>
+								<a @click="uploadHand" class="realName-upload-btn myCertification-li-btn">上传</a>
+							</li>
+						</ul>
+						<p class="realName-upload-tip">
+							<label>注：</label>1.身份证是看上岛咖啡就剑荡四方加多少房间的双击返回加多少积分收到就好返回等设计富家大室就简单说房价还不算大家父节点会使肌肤加多少积分时间段<br /> 2.djsf第三款减肥看技术框架复合大师就返回键收到货见风使舵
+						</p>
+					</div>
+				</div>
+				<div class="realName-confirm">
+					<div @click="confirm" class="myWallet-rechargeBtn">
+						确认提交
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="../../vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../mui/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/param.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/system.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jly.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el: "#myApp",
+				data: {
+					name:'',
+					idNum:'',
+					front:'../../img/avatar.jpg',
+					back:'../../img/avatar.jpg',
+					hand:'../../img/avatar.jpg',
+				},
+				methods: {
+					uploadFront:function(){
+						selectImg(function(p){
+							vm.front=p;
+						})
+					},
+					uploadBack:function(){
+						selectImg(function(p){
+							vm.back=p;
+						})
+					},
+					uploadHand:function(){
+						selectImg(function(p){
+							vm.hand=p;
+						})
+					},
+					confirm:function(){
+						if(this.name===''){
+							plus.nativeUI.toast('请输入姓名');
+							return;
+						}
+						if(this.idNum===''){
+							plus.nativeUI.toast('请输入身份证号');
+							return;
+						}
+						if(this.front==='../../img/avatar.jpg'){
+							plus.nativeUI.toast('请上传正面照');
+							return;
+						}
+						if(this.back==='../../img/avatar.jpg'){
+							plus.nativeUI.toast('请上传背面照');
+							return;
+						}
+						if(this.hand==='../../img/avatar.jpg'){
+							plus.nativeUI.toast('请上传手持照');
+							return;
+						}
+						
+						plus.nativeUI.toast('提交成功');
+					}
+				}
+			})
+
+			mui.init();
+			mui.plusReady(function() {
+				publicBack();
+			})
+
+			publicStatusbar();
+		</script>
+	</body>
+
+</html>

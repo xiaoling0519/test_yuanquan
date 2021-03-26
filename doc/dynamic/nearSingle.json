@@ -1,0 +1,22 @@
+{
+	"1": [
+		{
+
+
+			"id": 32,
+			"avatar": "../../img/avatar.jpg",
+			"nickname": "结婚的司法鉴定",
+			"sex": 1,
+			"distance": "100米以内"
+		},
+		{
+
+
+			"id": 324,
+			"avatar": "../../img/avatar.jpg",
+			"nickname": "结婚的司法鉴定",
+			"sex": 2,
+			"distance": "100米以内"
+		}
+	]
+}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>发布结果</title>
+		<link rel="stylesheet" href="../../mui/css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/reset.css" />
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/jly.css" />
+		<script src="../../js/rem.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../plugin/js/fastclick.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div id="myApp">
+			<header class="common-header">
+				<div class="common-header-content">
+					<a class="lf common-header-leftA">
+						<img class="common-header-leftImg" src="../../img/back.png" alt="" />
+					</a>
+					<a class="rf common-header-rightA common-header-rightA-text">
+						完成
+					</a>
+					<h1 class="common-header-h1">
+					发布结果
+				</h1>
+					<div class="clear"></div>
+				</div>
+			</header>
+			<div class="common-content">
+				<div class="common-content-padded publishResult-padded">
+					<div class="publishResult-success">
+						<img src="../../img/helpIndex/success.png" alt="" />
+						<p v-html="successTxt"></p>
+					</div>
+					<p class="publishResult-during">我们将在2-3个工作日内完成审核，请耐心等待！</p>
+				</div>
+			</div>
+		</div>
+
+		<script src="../../vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../mui/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/param.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/system.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jly.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el: "#myApp",
+				data: {
+					successTxt: ''
+				},
+				methods: {
+
+				}
+			})
+
+			mui.init();
+			mui.plusReady(function() {
+				publicBack();
+
+				var type = plus.webview.currentWebview().type;
+				if(type === 'help') {
+					vm.successTxt = "求助发布提交成功";
+				} else {
+					vm.successTxt = "服务发布提交成功";
+				}
+			})
+
+			publicStatusbar();
+		</script>
+	</body>
+
+</html>

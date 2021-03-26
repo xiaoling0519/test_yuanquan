@@ -1,0 +1,107 @@
+{
+    "myAtten": {
+        "1": [
+			{
+				"id": 1001,
+				"avatar": "../../img/avatar.jpg",
+				"name": "小白"
+			},
+			{
+				"id": 1002,
+				"avatar": "../../img/avatar.jpg",
+				"name": "小白"
+			},
+			{
+				"id": 1003,
+				"avatar": "../../img/avatar.jpg",
+				"name": "小白"
+			},
+			{
+				"id": 1004,
+				"avatar": "../../img/avatar.jpg",
+				"name": "小白"
+			},
+			{
+				"id": 1005,
+				"avatar": "../../img/avatar.jpg",
+				"name": "小白"
+			},
+			{
+				"id": 1006,
+				"avatar": "../../img/avatar.jpg",
+				"name": "小白"
+			},
+			{
+				"id": 1007,
+				"avatar": "../../img/avatar.jpg",
+				"name": "小白"
+			},
+			{
+				"id": 1008,
+				"avatar": "../../img/avatar.jpg",
+				"name": "小白"
+			},
+			{
+				"id": 1009,
+				"avatar": "../../img/avatar.jpg",
+				"name": "小白"
+			},
+			{
+				"id": 1010,
+				"avatar": "../../img/avatar.jpg",
+				"name": "小白"
+			}
+		],
+		"2":[
+			{
+				"id": 1011,
+				"avatar": "../../img/avatar.jpg",
+				"name": "小白"
+			},
+			{
+				"id": 1012,
+				"avatar": "../../img/avatar.jpg",
+				"name": "小白"
+			},
+			{
+				"id": 1013,
+				"avatar": "../../img/avatar.jpg",
+				"name": "小白"
+			},
+			{
+				"id": 1014,
+				"avatar": "../../img/avatar.jpg",
+				"name": "小白"
+			},
+			{
+				"id": 1015,
+				"avatar": "../../img/avatar.jpg",
+				"name": "小白"
+			},
+			{
+				"id": 1016,
+				"avatar": "../../img/avatar.jpg",
+				"name": "小白"
+			},
+			{
+				"id": 1017,
+				"avatar": "../../img/avatar.jpg",
+				"name": "小白"
+			}
+		]
+    },
+	"attenMe": {
+		"1": [
+			{
+				"id": 2001,
+				"avatar": "../../img/avatar.jpg",
+				"name": "小白"
+			},
+			{
+				"id": 2002,
+				"avatar": "../../img/avatar.jpg",
+				"name": "小白"
+			}
+		]
+	}
+}

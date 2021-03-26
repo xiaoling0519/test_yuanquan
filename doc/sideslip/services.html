@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>我的服务</title>
+    <link rel="stylesheet" href="../../mui/css/mui.min.css" />
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/common.css" />
+    <link rel="stylesheet" href="../../css/jly.css" />
+    <script src="../../js/rem.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../plugin/js/fastclick.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+    <div id="myApp">
+        <header class="common-header">
+            <div class="common-header-content">
+                <a class="lf common-header-leftA">
+                    <img class="common-header-leftImg" src="../../img/back.png" alt="" />
+                </a>
+                <h1 class="common-header-h1">
+                    我的服务
+                </h1>
+                <div class="clear"></div>
+            </div>
+        </header>
+        <div class="common-content">
+            <div class="common-content-padded services-content-padded">
+                <div class="services-myInfo">
+                    <img class="services-myInfo-avatar" src="../../img/avatar.jpg" alt="">
+                    <p class="services-myInfo-instruction">在线等你哦</p>
+                </div>
+                <ul class="services-ul">
+                    <li class="services-li">
+                        <h2 class="services-type">我的服务</h2>
+                        <ul class="services-type-ul">
+                            <li @click="toShowHappiness()" id="showHappiness" class="lf services-type-li">
+                                <dl>
+                                    <dt>
+                                        <img src="../../img/services/showHappiness.png" alt="">
+                                    </dt>
+                                    <dd>
+                                        撒狗粮
+                                    </dd>
+                                </dl>
+                            </li>
+                        </ul>
+                    </li>
+                    <li @click="toDidi()" class="services-li">
+                        <h2 class="services-type">第三方服务</h2>
+                        <ul class="services-type-ul">
+                            <li class="lf services-type-li">
+                                <dl>
+                                    <dt>
+                                        <img src="../../img/services/didi.png" alt="">
+                                    </dt>
+                                    <dd>
+                                        滴滴打车
+                                    </dd>
+                                </dl>
+                            </li>
+                            <li @click="toEleme()" class="lf services-type-li">
+                                <dl>
+                                    <dt>
+                                        <img src="../../img/services/eleme.png" alt="">
+                                    </dt>
+                                    <dd>
+                                        饿了么
+                                    </dd>
+                                </dl>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../mui/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/param.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/system.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jly.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: "#myApp",
+            data: {
+
+            },
+            methods: {
+                //晒幸福
+                toShowHappiness: function () {
+                    publicWebviewShow({
+                        id: '/doc/showHappiness/showHappiness.html'
+                    });
+                },
+                //滴滴打车
+                toDidi: function () {
+                    plus.nativeUI.toast('敬请期待');
+                },
+                //饿了么
+                toEleme: function () {
+                    plus.nativeUI.toast('敬请期待');
+                },
+            }
+        })
+
+
+        mui.init();
+        mui.plusReady(function () {
+            publicBack();
+        })
+        publicStatusbar();
+    </script>
+</body>
+
+</html>

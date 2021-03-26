@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>商品详情</title>
+		<link rel="stylesheet" href="../../mui/css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/reset.css" />
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/jly.css" />
+		<script src="../../js/rem.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../plugin/js/fastclick.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div id="myApp">
+			<header class="common-header">
+				<div class="common-header-content" style="background: none;">
+					<a @click="close" class="lf common-header-leftA">
+						<img class="common-header-leftImg" src="../../img/back.png" alt="" />
+					</a>
+					<a @click="share" class="rf common-header-rightA">
+						<img class="goodDetail-header-rightImg" src="../../img/goodsDetail/share.png" alt="" />
+					</a>
+					<h1 class="common-header-h1">
+					
+				</h1>
+					<div class="clear"></div>
+				</div>
+			</header>
+			<div class="common-content goodDetail-content">
+				<div class="common-content-padded goodDetail-padded">
+					<div class="goodDetail-mainImg">
+						<div class="mui-slider">
+							<div class="mui-slider-group mui-slider-loop">
+								<!--最后一张-->
+								<div class="mui-slider-item mui-slider-item-duplicate">
+									<img src="../../img/avatar.jpg" alt="">
+								</div>
+								<div class="mui-slider-item">
+									<img src="../../img/avatar.jpg" alt="">
+								</div>
+								<div class="mui-slider-item">
+									<img src="../../img/avatar.jpg" alt="">
+								</div>
+								<!--第一张-->
+								<div class="mui-slider-item mui-slider-item-duplicate">
+									<img src="../../img/avatar.jpg" alt="">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div>
+						<div class="goodDetail-basicInfo">
+							<div>
+								<span class="goodDetail-nowPrice">￥<label>186</label></span>
+								<s class="goodDetail-oldPrice">￥<span>200</span></s>
+							</div>
+							<p class="goodDetail-intro">都是看来福克斯收到货风景时代交话dfgkjdfjkgfdkj水金凤凰就收到货飞机上东</p>
+							<span class="goodDetail-saleNum">月销<label>5452</label>笔</span>
+						</div>
+						<div class="goodDetail-evaluation">
+							<div @click="allComments" class="goodDetail-evaluationNum">
+								<span>商品评价（<label>22</label>条，<label>98%</label>好评）</span>
+							</div>
+							<div class="goodDetail-evaluationDetail">
+								<div>
+									<div @click="toDetail" class="lf">
+										<img class="goodDetail-evaluation-avatar" src="../../img/avatar.jpg" />
+										<span class="goodDetail-evaluation-nickname">小鱼儿</span>
+									</div>
+									<span class="goodDetail-evaluation-date rf">2018-03-10</span>
+									<div class="clear"></div>
+								</div>
+								<p class="goodDetail-evaluation-txt">都是看来公开sdfkjgk咖啡店就赶快看得见顾客的房间顾客放得开发电机股份的科技</p>
+							</div>
+						</div>
+						<div class="goodDetail-img-txt">
+							<h3>商品图文详情</h3>
+							<img src="../../img/avatar.jpg" alt="" />
+							<img src="../../img/avatar.jpg" alt="" />
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="common-bottom goodDetail-bottom">
+				<div class="common-content-padded goodDetail-bottom-padded">
+					<div class="lf goodDetail-bottom-help-and">
+						<div @click="chat" class="lf goodDetail-bottom-help">
+							<img src="../../img/goodsDetail/help.png" alt="" />
+							<div>联系客服</div>
+						</div>
+						<div @click="collect" class="lf goodDetail-bottom-collect">
+							<img :src="collectImg" alt="" />
+							<div>收藏</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="rf goodDetail-bottom-buy">
+						立即购买
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+
+			<div v-show="showSpecification" id="selectSpecification" class="common-bottom goodDetail-specification">
+				<div class="common-content-padded">
+					<div class="goodDetail-specification-basicInfo">
+						<div class="lf goodDetail-specification-img-container">
+							<img src="../../img/avatar.jpg" alt="" />
+						</div>
+						<div class="goodDetail-specification-basicInfo-main">
+							<p class="overflowTwoEllipsis goodDetail-specification-basicInfo-intro">三大框架给快递费款第三方玲玲的房间开公开发的科技馆可减肥的开关即可发动机盖会计法的闪光点发动</p>
+							<div class="goodDetail-specification-basicInfo-price">￥<span>198</span></div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<ul class="goodDetail-specification-type-ul">
+						<li class="goodDetail-specification-type color">
+							<h3>颜色</h3>
+							<ul>
+								<li :class="{active:index===selectColorIndex}" @click="selectColor(index)" v-html="color" v-for="(color,index) in colors" class="lf"></li>
+							</ul>
+						</li>
+						<li class="goodDetail-specification-type size">
+							<h3>尺寸</h3>
+							<ul>
+								<li :class="{active:index===selectSizeIndex}" @click="selectSize(index)" v-html="size" v-for="(size,index) in sizes" class="lf"></li>
+							</ul>
+						</li>
+					</ul>
+					<div class="confirmOrder-buyNum">
+						<label class="confirmOrder-buyNum-label lf">请选择数量</label>
+						<div class="rf confirmOrder-buyNum-select">
+							<span @click="subtract" class="lf confirmOrder-buyNum-subtract">-</span>
+							<input v-model="num" class="lf confirmOrder-buyNum-input" type="number" />
+							<span @click="add" class="lf confirmOrder-buyNum-add">+</span>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div @click="confirm" class="chat-appointmcentDetail-confirmBtn">
+						<span>确</span>
+						<span class="last">定</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="../../vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../mui/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/param.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/system.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jly.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var mask = mui.createMask();
+			var currWebviewId = null;
+
+			var vm = new Vue({
+				el: "#myApp",
+				data: {
+					num: 1,
+					showSpecification: false,
+					collected: false,
+					collectImg: '../../img/goodsDetail/collect.png',
+					selectColorIndex: 0,
+					selectSizeIndex: 0,
+					colors: [
+						'黄色', '白色', '黑色', '褐色', '紫色'
+					],
+					sizes: [
+						29, 40, 42
+					]
+				},
+				methods: {
+					allComments: function() {
+						publicWebviewShow({
+							id: '/doc/circleShopping/comments.html'
+						})
+					},
+					confirm: function() {
+						publicWebviewShow({
+							id: '/doc/circleShopping/confirmOrder.html'
+						})
+					},
+					subtract: function() {
+						if(this.num > 1) {
+							this.num--;
+						}
+					},
+					add: function() {
+						this.num++;
+					},
+					share: function() {
+						plus.nativeUI.toast('点了分享');
+					},
+					chat: function() {
+						plus.nativeUI.toast('点了联系客服');
+					},
+					toDetail:function(){
+						publicToUser();
+					},
+					collect: function() {
+						if(this.collected) {
+							this.collectImg = '../../img/goodsDetail/collect.png';
+							this.collected = false;
+							return;
+						} else {
+							this.collectImg = '../../img/goodsDetail/collected.png';
+							this.collected = true;
+							return;
+						}
+					},
+					close: function() {
+						Webview.close({
+							id: currWebviewId
+						})
+					},
+					selectColor: function(i) {
+						this.selectColorIndex = i;
+					},
+					selectSize: function(i) {
+						this.selectSizeIndex = i;
+					}
+				}
+			})
+
+			mui.init();
+			mui.plusReady(function() {
+				currWebviewId = plus.webview.currentWebview().id;
+
+				mui.back = function() {
+					if(vm.showSpecification) {
+						vm.showSpecification = false;
+						mask.close();
+					} else {
+						Webview.close({
+							id: currWebviewId
+						})
+					}
+				}
+			})
+
+			var marginTop = publicStatusbar();
+			document.querySelector('.common-content').style.marginTop = -marginTop + 'px';
+
+			window.onscroll = function(e) {
+				if(window.scrollY > 50) {
+					document.querySelector('.common-header-content').style.background = 'linear-gradient(to right ,#7C08F2,#9401FB)';
+					document.querySelector('.common-header-content').style.opacity = '0.1';
+
+					if(window.scrollY <= 140) {
+						document.querySelector('.common-header-content').style.opacity = 0.1 + Math.floor((window.scrollY - 50) / 10) * 0.1;
+					} else {
+						document.querySelector('.common-header-content').style.opacity = '1';
+					}
+				} else {
+					document.querySelector('.common-header-content').style.background = 'none';
+					document.querySelector('.common-header-content').style.opacity = '1';
+				}
+			}
+
+			document.querySelector('.goodDetail-bottom-buy').onclick = function() {
+				vm.showSpecification = true;
+				mask.show();
+
+				document.querySelector('.mui-backdrop').addEventListener('click', function() {
+					vm.showSpecification = false;
+				})
+			}
+		</script>
+	</body>
+
+</html>

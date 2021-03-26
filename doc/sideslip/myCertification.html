@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>我的认证</title>
+    <link rel="stylesheet" href="../../mui/css/mui.min.css" />
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/common.css" />
+    <link rel="stylesheet" href="../../css/jly.css" />
+    <script src="../../js/rem.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../plugin/js/fastclick.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+    <div id="myApp">
+        <header class="common-header">
+            <div class="common-header-content">
+                <a class="lf common-header-leftA">
+                    <img class="common-header-leftImg" src="../../img/back.png" alt="" />
+                </a>
+                <h1 class="common-header-h1">
+                    我的认证
+                </h1>
+                <div class="clear"></div>
+            </div>
+        </header>
+        <div class="common-content" style="padding-bottom: .2rem;">
+            <div class="common-content-padded myCertification-content-padded">
+                <ul>
+                    <li class="myCertification-li">
+                        <div class="myCertification-h2-div">
+                            <h2>实名认证</h2>
+                        </div>
+                        <div class="myCertification-li-main">
+                            <div class="lf myCertification-li-instruction">
+                                <label>实名认证</label>
+                                <p>认识更多真实用户</p>
+                            </div>
+                            <a @click="certification('realName',info.realName)" v-html="info.realName" class="rf myCertification-li-btn"></a>
+                            <div class="clear"></div>
+                        </div>
+                    </li>
+                    <li class="myCertification-li">
+                        <div class="myCertification-h2-div myCertification-h2-div-education">
+                            <h2>学历认证</h2>
+                        </div>
+                        <div class="myCertification-li-main">
+                            <div class="lf myCertification-li-instruction">
+                                <label>学历认证</label>
+                                <p>让你在人群中脱颖而出</p>
+                            </div>
+                            <a @click="certification('education',info.education)" v-html="info.education" class="rf myCertification-li-btn"></a>
+                            <div class="clear"></div>
+                        </div>
+                    </li>
+                    <li class="myCertification-li">
+                        <div class="myCertification-h2-div myCertification-h2-div-profession">
+                            <h2>职业认证</h2>
+                        </div>
+                        <div class="myCertification-li-main">
+                            <div class="lf myCertification-li-instruction">
+                                <label>职场认证</label>
+                                <p>让你职场 情场双丰收</p>
+                            </div>
+                            <a @click="certification('profession',info.profession)" v-html="info.profession" class="rf myCertification-li-btn"></a>
+                            <div class="clear"></div>
+                        </div>
+                    </li>
+                    <li class="myCertification-li">
+                        <div class="myCertification-h2-div myCertification-h2-div-sesame">
+                            <h2>芝麻认证</h2>
+                        </div>
+                        <div class="myCertification-li-main">
+                            <div class="lf myCertification-li-instruction">
+                                <label>芝麻认证</label>
+                                <p>更安全 所以更放心</p>
+                            </div>
+                            <a @click="certification('sesame',info.sesame)" v-html="info.sesame" class="rf myCertification-li-btn"></a>
+                            <div class="clear"></div>
+                        </div>
+                    </li>
+                </ul>
+                <p class="myCertification-serviceHotline">认证遇到问题？请拨打客服热线:
+                    <a>400-008-8761</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../mui/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/param.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/system.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jly.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: "#myApp",
+            data: {
+                info: {
+                    realName: "",
+                    education: "",
+                    profession: "",
+                    sesame: ""
+                }
+            },
+            methods: {
+                certification: function (type, status) {
+                    switch (status) {
+                        case "立即认证":
+                            if (type === 'realName') {
+								publicWebviewShow({
+									id:"/doc/sideslip/realNameCertification.html"
+								})
+                            }
+                            if (type === 'education') {
+								plus.nativeUI.toast('跳转到学历认证页');
+                            }
+                            if (type === 'profession') {
+								plus.nativeUI.toast('跳转到职业认证页');
+                            }
+                            if (type === 'sesame') {
+								plus.nativeUI.toast('跳转到芝麻认证页');
+                            }
+                            break;
+                        case "已认证":
+							plus.nativeUI.toast('已认证');
+                            break;
+                        case "被拒绝":
+							plus.nativeUI.toast('你的认证请求被拒绝，请重新认证');
+                            if (type === 'realName') {
+                            	plus.nativeUI.toast('跳转到实名认证页');
+                            }
+                            if (type === 'education') {
+                            	plus.nativeUI.toast('跳转到学历认证页');
+                            }
+                            if (type === 'profession') {
+                            	plus.nativeUI.toast('跳转到职业认证页');
+                            }
+                            if (type === 'sesame') {
+                            	plus.nativeUI.toast('跳转到芝麻认证页');
+                            }
+                            break;
+                        case "审核中":
+							plus.nativeUI.toast('我们将在1-3个工作日内审核你的信息，请耐心等待');
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        })
+
+        mui.init();
+        mui.plusReady(function () {
+            publicBack();
+        })
+        publicStatusbar();
+
+        ajaxRequest();
+
+        function ajaxRequest() {
+            mui.getJSON('myCertification.json', function (data) {
+                if (JSON.stringify(data) !== "{}") {
+                    for (var i in data) {
+                        if (data[i] == 0) {
+                            data[i] = '立即认证';
+                        }
+                        if (data[i] == 1) {
+                            data[i] = '已认证';
+                        }
+                        if (data[i] == 2) {
+                            data[i] = '被拒绝';
+                        }
+                        if (data[i] == 3) {
+                            data[i] = '审核中';
+                        }
+
+                        vm.info[i] = data[i];
+                    }
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>

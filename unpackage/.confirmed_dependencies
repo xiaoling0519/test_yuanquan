@@ -1,0 +1,209 @@
+{
+	"index.html": {
+		"refer": [
+			"sideslip.html",
+			"doc/circle/moreProfession.html",
+			"doc/circle/appointmentList.html",
+			"doc/message/chat.html",
+			"doc/message/officialNews.html",
+			"doc/message/userList.html",
+			"doc/message/myAppointment.html",
+			"doc/circle/suchProfessionUserList.html",
+			"doc/dynamic/publishDynamic.html",
+			"doc/dynamic/loveWatch.html",
+			"doc/dynamic/photoList.html",
+			"doc/dynamic/myDynamic.html",
+			"doc/dynamic/singleCircle.html",
+			"doc/sideslip/myWallet.html",
+			"doc/message/myCircle.html",
+			"doc/sideslip/services.html",
+			"doc/sideslip/myCertification.html",
+			"doc/giftOrder/order.html",
+			"doc/sideslip/set.html",
+			"doc/dynamic/nearSingle.html",
+			"doc/circleShopping/circleShoppingIndex.html",
+			"doc/sideslip/share.html",
+			"doc/help/helpIndex.html",
+			"doc/user/userDetail.html",
+			"doc/message/myAttention.html"
+		],
+		"resources": [
+			"img/index/myCircle.png",
+			"img/index/help.png",
+			"img/index/screening.png",
+			"img/index/myAttention.png",
+			"css/common.css",
+			"img/index/signature.png",
+			"img/index/myAppointment.png",
+			"css/jly.css",
+			"css/reset.css"
+		]
+	},
+	"sideslip.html": {
+		"refer": [
+			"doc/sideslip/myCertification.html",
+			"doc/sideslip/set.html",
+			"doc/sideslip/services.html",
+			"doc/sideslip/myWallet.html"
+		]
+	},
+	"doc/circle/moreProfession.html": {
+		"refer": [
+			"doc/circle/suchProfessionUserList.html"
+		]
+	},
+	"doc/message/myAppointment.html": {
+		"refer": [
+			"doc/message/appointmentInfo.html"
+		]
+	},
+	"doc/dynamic/loveWatch.html": {
+		"refer": [
+			"doc/dynamic/loveWatchDetail.html"
+		]
+	},
+	"doc/sideslip/myWallet.html": {
+		"refer": [
+			"doc/sideslip/historyBill.html",
+			"doc/asset/withdraw.html"
+		]
+	},
+	"doc/sideslip/set.html": {
+		"refer": [
+			"doc/set/feedback.html",
+			"doc/set/shippingAddress.html",
+			"doc/set/about.html",
+			"doc/set/blackPerson.html"
+		]
+	},
+	"doc/sideslip/services.html": {
+		"refer": [
+			"doc/showHappiness/showHappiness.html",
+			"doc/giftOrder/order.html"
+		]
+	},
+	"doc/showHappiness/showHappiness.html": {
+		"refer": [
+			"doc/showHappiness/publishHappiness.html"
+		]
+	},
+	"doc/message/appointmentInfo.html": {
+		"refer": [
+			"doc/message/chat.html"
+		]
+	},
+	"doc/dynamic/singleCircle.html": {
+		"refer": [
+			"doc/dynamic/publishDynamic.html",
+			"doc/dynamic/myDynamic.html",
+			"doc/user/userDetail.html"
+		]
+	},
+	"doc/dynamic/photoList.html": {
+		"refer": [
+			"doc/dynamic/myPhotos.html"
+		]
+	},
+	"doc/circleShopping/circleShoppingIndex.html": {
+		"refer": [
+			"doc/circleShopping/searchHistory.html",
+			"doc/circleShopping/goodList.html",
+			"doc/circleShopping/goodsList.html"
+		]
+	},
+	"doc/circleShopping/searchHistory.html": {
+		"refer": [
+			"doc/circleShopping/searchList.html"
+		]
+	},
+	"doc/circleShopping/goodsList.html": {
+		"refer": [
+			"doc/circleShopping/goodsDetail.html"
+		]
+	},
+	"doc/asset/withdraw.html": {
+		"refer": [
+			"doc/asset/addAlipayAsset.html",
+			"doc/asset/manageAlipay.html"
+		]
+	},
+	"doc/circleShopping/goodsDetail.html": {
+		"refer": [
+			"doc/circleShopping/comments.html",
+			"doc/circleShopping/confirmOrder.html",
+			"doc/user/userDetail.html"
+		]
+	},
+	"doc/circleShopping/searchList.html": {
+		"refer": [
+			"doc/circleShopping/goodsDetail.html"
+		]
+	},
+	"doc/circleShopping/comments.html": {
+		"refer": [
+			"doc/circleShopping/confirmOrder.html",
+			"doc/user/userDetail.html"
+		]
+	},
+	"doc/help/helpIndex.html": {
+		"refer": [
+			"doc/help/serviceList.html",
+			"doc/help/publishService.html",
+			"doc/help/publishHelp.html",
+			"doc/address/switchCity.html"
+		]
+	},
+	"doc/help/publishHelp.html": {
+		"refer": [
+			"doc/help/publishResult.html"
+		]
+	},
+	"doc/circleShopping/confirmOrder.html": {
+		"refer": [
+			"doc/set/shippingAddress.html"
+		]
+	},
+	"doc/message/userList.html": {
+		"refer": [
+			"doc/user/userDetail.html",
+			"doc/message/chat.html"
+		]
+	},
+	"doc/message/chat.html": {
+		"refer": [
+			"doc/user/userDetail.html"
+		]
+	},
+	"doc/circle/appointmentList.html": {
+		"refer": [
+			"doc/message/appointmentInfo.html",
+			"doc/address/switchCity.html"
+		]
+	},
+	"doc/circle/suchProfessionUserList.html": {
+		"refer": [
+			"doc/user/userDetail.html"
+		]
+	},
+	"doc/dynamic/myDynamic.html": {
+		"refer": [
+			"doc/user/userDetail.html"
+		]
+	},
+	"doc/dynamic/nearSingle.html": {
+		"refer": [
+			"doc/user/userDetail.html"
+		]
+	},
+	"doc/user/userDetail.html": {
+		"refer": [
+			"doc/message/chat.html",
+			"doc/user/new_file.html"
+		]
+	},
+	"doc/sideslip/myCertification.html": {
+		"refer": [
+			"doc/sideslip/realNameCertification.html"
+		]
+	}
+}

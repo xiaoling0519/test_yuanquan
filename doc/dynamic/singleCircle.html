@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>单身圈</title>
+    <link rel="stylesheet" href="../../mui/css/mui.min.css" />
+    <link rel="stylesheet" href="../../mui/css/previewImage.css">
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/common.css" />
+    <link rel="stylesheet" href="../../css/jly.css" />
+    <script src="../../js/rem.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../plugin/js/fastclick.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+    <div id="myApp">
+        <header class="common-header">
+            <div class="common-header-content">
+                <a @click="back()" class="lf common-header-leftA">
+                    <img class="common-header-leftImg" src="../../img/back.png" alt="" />
+                </a>
+                <a @click="publishDynamic" class="rf common-header-rightA">
+                    <img class="singleCircle-header-rightImg" src="../../img/index/publishDynamic.png"
+                        alt="" />
+                </a>
+                <h1 class="common-header-h1">
+                    单身圈
+                </h1>
+                <div class="clear"></div>
+            </div>
+        </header>
+        <div class="common-content">
+            <div class="common-content-padded index-dynamic-padded">
+                <div class="index-dynamic-top relative">
+                    <div class="index-dynamic-myAvatar absolute">
+                        <img @click="toMyDynamic" src="../../img/avatar.jpg" alt="" />
+                    </div>
+                    <div class="index-dynamic-top-type absolute overflowEllipsis">
+                        放得开了顾发过火
+                    </div>
+                </div>
+                <ul class="list">
+                    <li v-for="(dynamicLi,index) in items" class="index-dynamic-li">
+                        <img class="index-dynamic-li-topImg" src="../../img/index/dynamicTop.jpeg" alt="" />
+                        <div class="index-dynamic-li-content">
+                            <div>
+                                <div @click.stop="toUserDetail(dynamicLi.userId)" class="lf index-dynamic-li-avatar-div">
+                                    <img v-bind:src="dynamicLi.avatar" class="index-dynamic-li-avatar" alt="" />
+                                </div>
+                                <div class="lf index-dynamic-li-name-and">
+                                    <span v-html="dynamicLi.name" class="index-dynamic-li-name"></span>
+                                    <p v-html="dynamicLi.time" class="index-dynamic-li-time"></p>
+                                </div>
+                                <div @click.stop="operateDynamic(dynamicLi.id)" class="rf index-dynamic-li-operate">
+                                    <img src="../../img/down.png" alt="" />
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <p v-html="dynamicLi.text" class="index-dynamic-li-publishTxt"></p>
+                            <ul class="index-dynamic-li-publishImg-ul">
+                                <li v-for='image in dynamicLi.images' class="lf">
+                                    <img v-bind:src="image" v-bind:data-preview-group="index" data-preview-src="" alt="" />
+                                </li>
+                            </ul>
+                            <ul class="index-dynamic-li-like-and">
+                                <li class="rf transpond">
+                                    <img @click.stop="transpond(dynamicLi.id)" src="../../img/index/transpond.png" alt="" />
+                                </li>
+                                <li class="rf comment">
+                                    <img @click.stop="comment(dynamicLi.id)" src="../../img/index/comment.png" alt="" />
+                                </li>
+                                <li @click.stop="like(index)" class="rf like">
+                                    <img v-bind:src="likeHandle(dynamicLi.isLiked)" alt="" />
+                                    <span v-html="dynamicLi.like"></span>
+                                </li>
+                            </ul>
+                            <ul class="index-dynamic-li-comments">
+                                <li v-for="comment in dynamicLi.comments">
+                                    <a @click.stop="toUserDetail(comment.fromId)" class="from" v-html="comment.fromName"></a>
+                                    回复
+                                    <a @click.stop="toUserDetail(comment.toId)" class="to" v-html="comment.toName"></a>：
+                                    <span v-html="comment.content"></span>
+                                </li>
+                            </ul>
+                            <div class="index-dynamic-li-toComment">
+                                评论
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../mui/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../mui/js/mui.zoom.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../mui/js/mui.previewimage.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/param.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/system.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jly.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        var currWebviewId = null;
+		var page = 1;
+
+        var vm = new Vue({
+            el: "#myApp",
+            data: {
+                items: []
+            },
+            methods: {
+                //返回
+                back: function () {
+                    Webview.close({
+                        id: currWebviewId
+                    });
+                },
+                //发布动态
+                publishDynamic: function () {
+                    publicWebviewShow({
+                        id: '/doc/dynamic/publishDynamic.html'
+                    })
+                },
+                //是否点赞显示
+                likeHandle: function (type) {
+                    if (type) {
+                        return '../../img/index/liked.png';
+                    } else {
+                        return '../../img/index/like.png';
+                    }
+                },
+                //点赞
+                like: function (index) {
+                    if (vm.items[index].isLiked) {
+                        vm.items[index].isLiked = false;
+                        vm.items[index].like -= 1;
+                    } else {
+                        vm.items[index].isLiked = true;
+                        vm.items[index].like += 1;
+                    }
+                },
+                //跳转到用户详情
+                toUserDetail: function (id) {
+                    publicToUser();
+                },
+                //操作动态
+                operateDynamic: function (id) {
+                    plus.nativeUI.toast('你要操作' + id + '的动态');
+                },
+                //转发动态
+                transpond: function (id) {
+                    plus.nativeUI.toast('你要转发' + id + '的动态');
+                },
+                //查看某动态的所有评论
+                comment: function (id) {
+                    plus.nativeUI.toast('跳转到' + id + '动态的所有评论页');
+                },
+                //我的动态
+                toMyDynamic:function(){
+                	 publicWebviewShow({
+                        id: '/doc/dynamic/myDynamic.html'
+                    })
+                }
+            }
+        })
+
+        mui.init({
+            pullRefresh: {
+                container: '.common-content',
+                down: {
+                    style: 'circle',
+                    auto: true,
+                    callback: pulldownRefresh
+                },
+                up: {
+                    callback: pullupLoadmore
+                }
+            },
+			gestureConfig: {
+				longtap: true
+			}
+        });
+        mui.plusReady(function () {
+            currWebviewId = plus.webview.currentWebview().id;
+
+            mui.back = function () {
+                var previewImage = mui.isFunction(mui.getPreviewImage) && mui.getPreviewImage();
+                if (previewImage && previewImage.isShown()) { //图片预览
+                    previewImage.close();
+                } else {
+                    Webview.close({
+                        id: currWebviewId
+                    })
+                }
+            }
+        })
+
+        publicStatusbar();
+
+        //图片预览
+        mui.previewImage();
+
+        mui('#__MUI_PREVIEWIMAGE').on('longtap', '.mui-zoom', function () {
+            saveImage(this.getAttribute('src'));
+        })
+
+        function pulldownRefresh() {
+            page = 1;
+            vm.items = [];
+            ajaxRequest('down');
+
+            mui('.common-content').pullRefresh().enablePullupToRefresh();
+        }
+
+        function pullupLoadmore() {
+            page++;
+            ajaxRequest('up');
+        }
+
+        function ajaxRequest(type) {
+            mui.getJSON('singleCircle.json', function (data) {
+                if (JSON.stringify(data) == "{}") {
+                    if (type === 'down') {
+                        setTimeout(function () {
+                            mui('.common-content').pullRefresh().endPulldown();
+                        }, 500);
+                    }
+                    if (type === 'up') {
+                        setTimeout(function () {
+                            mui('.common-content').pullRefresh().endPullup(true);
+                        }, 500);
+                    }
+                } else {
+                    var count = 0;
+                    for (var i in data) {
+                        if (i == page) {
+                            count = 1;
+                            vm.items = vm.items.concat(data[i]);
+
+                            if (type === 'down') {
+                                setTimeout(function () {
+                                    mui('.common-content').pullRefresh().endPulldown();
+                                }, 500);
+                            }
+                            if (type === 'up') {
+                                setTimeout(function () {
+                                    mui('.common-content').pullRefresh().endPullup();
+                                }, 500);
+                            }
+                            break;
+                        }
+                    }
+                    if (count === 0) {
+                        if (type === 'down') {
+                            setTimeout(function () {
+                                mui('.common-content').pullRefresh().endPulldown();
+                            }, 500);
+                        }
+                        if (type === 'up') {
+                            setTimeout(function () {
+                                mui('.common-content').pullRefresh().endPullup(true);
+                            }, 500);
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

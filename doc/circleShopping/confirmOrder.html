@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>确认订单</title>
+		<link rel="stylesheet" href="../../mui/css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/reset.css" />
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/jly.css" />
+		<script src="../../js/rem.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../plugin/js/fastclick.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div id="myApp">
+			<header class="common-header">
+				<div class="common-header-content">
+					<a class="lf common-header-leftA">
+						<img class="common-header-leftImg" src="../../img/back.png" alt="" />
+					</a>
+					<h1 class="common-header-h1">
+					确认订单
+				</h1>
+					<div class="clear"></div>
+				</div>
+			</header>
+			<div class="common-content" style="padding-bottom: .98rem;">
+				<div class="common-content-padded confirmOrder-padded">
+					<div @click="toSelectAddress" class="confirmOrder-myInfo">
+						<div class="confirmOrder-myInfo-main">
+							<p class="confirmOrder-name">收货人 <span>张先生</span></p>
+							<p class="confirmOrder-tel">电话 <span>18070509865</span></p>
+							<p class="overflowEllipsis confirmOrder-address">收货地址 <span>浙江省杭州市滨江区浦沿街道联庄一区288号</span></p>
+							<img class="confirmOrder-arrowRight" src="../../img/confirmOrder/right.png" alt="" />
+						</div>
+						<img class="confirmOrder-address-divideImg" src="../../img/confirmOrder/address.png" alt="" />
+					</div>
+					<div class="confirmOrder-goodsInfo">
+						<label class="confirmOrder-goodsType">女装</label>
+						<div class="confirmOrder-goodsInfo-main">
+							<div class="lf confirmOrder-goodsInfo-img">
+								<img src="../../img/avatar.jpg" alt="" />
+							</div>
+							<div class="confirmOrder-goodsInfo-intro-and">
+								<p class="overflowTwoEllipsis confirmOrder-goodsInfo-intro">分类贷款弗兰克的看法看得见疯狂贷款减肥空间的会计法看得见副科级打开副科级打开减肥的框架副科级打开减肥的框架风科技的</p>
+								<span class="confirmOrder-goodsInfo-price">￥<label>178</label></span>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="confirmOrder-buyNum">
+						<label class="confirmOrder-buyNum-label lf">购买数量</label>
+						<div class="rf confirmOrder-buyNum-select">
+							<span @click="subtract" class="lf confirmOrder-buyNum-subtract">-</span>
+							<input v-model="num" class="lf confirmOrder-buyNum-input" type="number" />
+							<span @click="add" class="lf confirmOrder-buyNum-add">+</span>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="confirmOrder-payWay">
+						<ul>
+							<li class="confirmOrder-payWay-alipay active">
+								<span class="lf">支付宝支付</span>
+								<img class="rf" src="../../img/confirmOrder/selected.png" alt="" />
+								<div class="clear"></div>
+							</li>
+							<li class="confirmOrder-payWay-weixin">
+								<span class="lf">微信支付</span>
+								<img class="rf" src="../../img/confirmOrder/selected.png" alt="" />
+								<div class="clear"></div>
+							</li>
+							<li class="confirmOrder-payWay-wallet">
+								<span class="lf">钱包支付</span>
+								<img class="rf" src="../../img/confirmOrder/selected.png" alt="" />
+								<div class="clear"></div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+			<div class="common-bottom goodDetail-bottom">
+	            <div class="common-content-padded goodDetail-bottom-padded">
+	               	<div class="lf confirmOrder-bottom-left">
+	               		<span class="lf confirmOrder-bottom-left-tipTxt">实付款:</span>
+	               		<span class="lf confirmOrder-bottom-left-price">￥<label>194</label></span>
+	               	</div>
+	               	<div class="rf goodDetail-bottom-buy confirmOrder-bottom-buy">
+	               		立即支付
+	               	</div>
+	               	<div class="clear"></div>
+	            </div>
+	        </div>
+		</div>
+
+		<script src="../../vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../mui/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/param.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/system.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jly.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el: "#myApp",
+				data: {
+					num:1
+				},
+				methods: {
+					subtract:function(){
+						if(this.num>1){
+							this.num--;
+						}
+					},
+					add:function(){
+						this.num++;
+					},
+					toSelectAddress:function(){
+						publicWebviewShow({
+							id: '/doc/set/shippingAddress.html'
+						})
+					}
+				}
+			})
+
+			mui.init();
+			mui.plusReady(function() {
+				publicBack();
+			})
+
+			publicStatusbar();
+			
+			mui('.confirmOrder-payWay').on('tap','li',function(){
+				for(var i=0;i<document.querySelectorAll('.confirmOrder-payWay li').length;i++){
+					document.querySelectorAll('.confirmOrder-payWay li')[i].classList.remove('active');
+				}
+				this.classList.add('active');
+			})
+		</script>
+	</body>
+
+</html>

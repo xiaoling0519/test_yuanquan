@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>某职业用户列表</title>
+    <link rel="stylesheet" href="../../mui/css/mui.min.css" />
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/common.css" />
+    <link rel="stylesheet" href="../../css/jly.css" />
+    <script src="../../js/rem.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../plugin/js/fastclick.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+    <div id="myApp">
+        <header class="common-header">
+            <div class="common-header-content">
+                <a @click="back()" class="lf common-header-leftA">
+                    <img class="common-header-leftImg" src="../../img/back.png" alt="" />
+                </a>
+                <h1 v-html="type" class="common-header-h1"></h1>
+                <div class="clear"></div>
+            </div>
+
+            <div class="common-header-content suchProfessionUserList-screening">
+                <ul>
+                    <li @click="selectAge()" class="lf">
+                        <span v-html="age" class="overflowEllipsis"></span>
+                        <img src="../../img/suchProfissionUserList/select.png" alt="" />
+                    </li>
+                    <li @click="selectArea()" class="lf">
+                        <span class="overflowEllipsis" v-html="currArea"></span>
+                        <img src="../../img/suchProfissionUserList/select.png" alt="" />
+                    </li>
+                    <li @click="selectHeight()" class="lf">
+                        <span class="overflowEllipsis" v-html="height"></span>
+                        <img src="../../img/suchProfissionUserList/select.png" alt="" />
+                    </li>
+                </ul>
+            </div>
+        </header>
+
+        <div class="common-content suchProfissionUserList-content">
+            <div class="common-content-padded suchProfissionUserList-padded">
+                <ul class="suchProfissionUserList-list">
+                    <li @click="toUserDetail(item.id)" v-for="item in items" class="lf">
+                        <img v-bind:src="item.showImage" class="suchProfissionUserList-showImage" alt="" />
+                        <div class="suchProfissionUserList-mainInfo">
+                            <div class="suchProfissionUserList-avatar-and">
+                                <img v-bind:src="item.avatar" alt="" />
+                                <span v-html="item.name" class="overflowEllipsis"></span>
+                            </div>
+                            <div class="suchProfissionUserList-labels">
+                                <span v-html="item.age" class="overflowEllipsis"></span>
+                                <span style="max-width: 1.3rem;" v-html="item.address" class="overflowEllipsis"></span>
+                                <span v-html="item.height" class="overflowEllipsis"></span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div v-show="rangeShow" id="heightScreening" class="common-popup index-heightScreening">
+            <h3 v-html="rangeTypeTxt" class="index-heightScreening-title"></h3>
+            <div class="index-heightScreening-main">
+                <div class="index-heightScreening-grid">
+                    <div class="index-heightScreening-row"></div>
+                    <div class="index-heightScreening-row"></div>
+                    <div class="index-heightScreening-row"></div>
+                </div>
+                <ul id="minHeight" class="index-heightScreening-ul lf">
+                    <li class="placeholder">占位</li>
+                    <li class="active">不限</li>
+                    <li v-html="rangeArr[index]" v-for="(rangeItem,index) in rangeArr"></li>
+                    <li class="placeholder">占位</li>
+                </ul>
+                <ul id="maxHeight" class="index-heightScreening-ul textRight rf">
+                    <li class="placeholder">占位</li>
+                    <li class="active">不限</li>
+                    <li v-html="rangeArr[index]" v-for="(rangeItem,index) in rangeArr"></li>
+                    <li class="placeholder">占位</li>
+                </ul>
+                <div class="clear"></div>
+            </div>
+            <div class="index-heightScreening-btns">
+                <span class="lf index-heightScreening-cancel">取消</span>
+                <span class="rf index-heightScreening-confirm">确定</span>
+                <div class="clear"></div>
+            </div>
+        </div>
+
+        <div v-show="isShowArea" class="shippingAddress-selectDetail">
+            <div class="shippingAddress-selectDetail-header">
+                <div class="lf">
+                    <span v-html="province" id="province" class="shippingAddress-selectDetail-level overflowEllipsis active"></span>
+                    <span v-html="city" id="city" style="display: none;" class="shippingAddress-selectDetail-level overflowEllipsis"></span>
+                    <span v-html="county" id="county" style="display: none;" class="shippingAddress-selectDetail-level overflowEllipsis"></span>
+                </div>
+                <span @click="cancelArea()" class="rf shippingAddress-selectDetail-cancel">取消</span>
+                <span @click="comfirmArea()" class="rf shippingAddress-selectDetail-confirm">确定</span>
+                <div class="clear"></div>
+            </div>
+            <ul class="shippingAddress-selectDetail-ul" id="areaList">
+
+            </ul>
+        </div>
+    </div>
+
+    <script type="text/templete" id="areaLi">
+        <li onclick="selectAreaDetail(this)" class="shippingAddress-selectDetail-li">
+            <label data-code="{{value}}">{{area}}</label>
+        </li>
+    </script>
+
+    <script src="../../vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="../../mui/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../mui/js/city.data-3.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/param.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/system.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jly.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        var page = 0;
+        var currWebviewId = null;
+        var mask = mui.createMask();
+
+        //身高数据
+        var heightArr = [];
+        for (var i = 140; i <= 190; i++) {
+            heightArr.push(i + 'CM');
+        }
+
+        //年龄数据
+        var ageArr = [];
+        for (var i = 18; i <= 60; i++) {
+            ageArr.push(i);
+        }
+
+        var vm = new Vue({
+            el: "#myApp",
+            data: {
+                type: '',
+                items: [],
+
+                isShowArea: false,
+                province: "请选择",
+                city: "请选择",
+                county: "请选择",
+
+                provinceCode: 0,
+                cityCode: 0,
+                countyCode: 0,
+
+                rangeShow: false,
+                age: "年龄",
+                currArea: '现居',
+                height: '身高',
+
+                rangeType: '',
+                rangeTypeTxt: '',
+                rangeArr: null,
+            },
+            updated: function () {
+                var listH = document.querySelector('.common-content').offsetHeight;
+                if (listH < h) {
+                    mui('.common-content').pullRefresh().disablePullupToRefresh();
+                } else {
+                    mui('.common-content').pullRefresh().enablePullupToRefresh();
+                }
+            },
+            methods: {
+                //顶部返回
+                back: function () {
+                    Webview.close({
+                        id: currWebviewId
+                    });
+                },
+                //现居
+                selectArea: function () {
+                    mui('.common-content').pullRefresh().disablePulldownToRefresh();
+
+                    this.isShowArea = true;
+                    mask.show();
+
+                    document.querySelector('.mui-backdrop').addEventListener('click', function () {
+                        vm.isShowArea = false;
+                        mask.close();
+                        mui('.common-content').pullRefresh().enablePulldownToRefresh();
+                    })
+                },
+                //确定现居地
+                comfirmArea: function () {
+                    if (vm.province === '请选择') {
+                        vm.currArea = '不限';
+                        plus.nativeUI.toast('未选择地址');
+                    } else if (vm.city === '请选择') {
+                        vm.currArea = vm.province;
+                        plus.nativeUI.toast('地区代码：' + vm.provinceCode);
+                    } else if (vm.county === '请选择') {
+                        vm.currArea = vm.city;
+                        plus.nativeUI.toast('地区代码：' + vm.cityCode);
+                    } else {
+                        vm.currArea = vm.county;
+                        plus.nativeUI.toast('地区代码：' + vm.countyCode);
+                    }
+
+                    vm.isShowArea = false;
+                    mask.close();
+                    mui('.common-content').pullRefresh().enablePulldownToRefresh();
+                },
+                //取消现居地
+                cancelArea: function () {
+                    this.isShowArea = false;
+                    mask.close();
+                    mui('.common-content').pullRefresh().enablePulldownToRefresh();
+                },
+                //年龄
+                selectAge: function () {
+                    cantScroll();
+
+                    mui('.common-content').pullRefresh().disablePulldownToRefresh();
+                    mask.show();
+                    this.rangeArr = ageArr;
+                    this.rangeType = 'age';
+                    this.rangeTypeTxt = "年龄";
+
+                    this.rangeShow = true;
+
+                    document.querySelector('.mui-backdrop').addEventListener('click', function () {
+                        vm.rangeShow = false;
+                        mask.close();
+                        mui('.common-content').pullRefresh().enablePulldownToRefresh();
+
+                        resetScroll();
+                    })
+                },
+                //身高
+                selectHeight: function () {
+                    cantScroll();
+
+                    mui('.common-content').pullRefresh().disablePulldownToRefresh();
+                    mask.show();
+                    this.rangeArr = heightArr;
+                    this.rangeType = 'height';
+                    this.rangeTypeTxt = "身高";
+
+                    this.rangeShow = true;
+
+                    document.querySelector('.mui-backdrop').addEventListener('click', function () {
+                        vm.rangeShow = false;
+                        mask.close();
+                        mui('.common-content').pullRefresh().enablePulldownToRefresh();
+
+                        resetScroll();
+                    })
+                },
+                //查看用户详情
+                toUserDetail: function (id) {
+                    publicToUser();
+                }
+            }
+        })
+
+        mui.init({
+            pullRefresh: {
+                container: '.common-content',
+                down: {
+                    style: 'circle',
+                    auto: true,
+                    callback: pulldownRefresh
+                },
+                up: {
+                    callback: pullupLoadmore
+                }
+            }
+        });
+        mui.plusReady(function () {
+            currWebviewId = plus.webview.currentWebview().id;
+
+            mui.back = function () {
+                resetScroll();
+
+                mui('.common-content').pullRefresh().enablePulldownToRefresh();
+                if (vm.isShowArea) {
+                    vm.isShowArea = false;
+                    mask.close();
+                } else if (vm.rangeShow) {
+                    vm.rangeShow = false;
+                    mask.close();
+                } else {
+                    Webview.close({
+                        id: currWebviewId
+                    })
+                }
+            }
+
+            vm.type = plus.webview.currentWebview().type;
+
+        })
+        publicStatusbar();
+
+        insertProvince();
+
+        //插入省份
+        function insertProvince() {
+            document.querySelector('#areaList').innerHTML = '';
+            for (var i = 0; i < cityData3.length; i++) {
+                var areaLi = document.querySelector('#areaLi').innerHTML
+                    .replace('{{area}}', cityData3[i].text)
+                    .replace('{{value}}', cityData3[i].value)
+
+                document.querySelector('#areaList').innerHTML += areaLi;
+            }
+        }
+
+        //插入市
+        function insertCity(p) {
+            document.querySelector('#areaList').innerHTML = '';
+            for (var i = 0; i < cityData3.length; i++) {
+                if (p === cityData3[i].text) {
+                    for (var j = 0; j < cityData3[i].children.length; j++) {
+                        var areaLi = document.querySelector('#areaLi').innerHTML
+                            .replace('{{area}}', cityData3[i].children[j].text)
+                            .replace('{{value}}', cityData3[i].children[j].value)
+
+                        document.querySelector('#areaList').innerHTML += areaLi;
+                    }
+                    break;
+                }
+            }
+        }
+
+        //重新选择省
+        document.querySelector('#province').addEventListener('click', function () {
+            document.querySelector('.shippingAddress-selectDetail-level.active').classList.remove('active');
+            this.classList.add('active');
+
+            vm.province = '请选择';
+            vm.city = '请选择';
+            document.querySelector('#city').style.display = 'none';
+            vm.county = '请选择';
+            document.querySelector('#county').style.display = 'none';
+
+            insertProvince();
+        })
+
+        //重新选择市
+        document.querySelector('#city').addEventListener('click', function () {
+            document.querySelector('.shippingAddress-selectDetail-level.active').classList.remove('active');
+            this.classList.add('active');
+
+            vm.city = '请选择';
+            vm.county = '请选择';
+            document.querySelector('#county').style.display = 'none';
+
+            insertCity(vm.province);
+        })
+
+        //插入县
+        function insertCounty(c) {
+            for (var i = 0; i < cityData3.length; i++) {
+                if (vm.province === cityData3[i].text) {
+                    for (var j = 0; j < cityData3[i].children.length; j++) {
+                        if (c === cityData3[i].children[j].text) {
+                            if (cityData3[i].children[j].hasOwnProperty('children')) {
+                                document.querySelector('#areaList').innerHTML = '';
+                                for (var k = 0; k < cityData3[i].children[j].children.length; k++) {
+                                    var areaLi = document.querySelector('#areaLi').innerHTML
+                                        .replace('{{area}}', cityData3[i].children[j].children[k].text)
+                                        .replace('{{value}}', cityData3[i].children[j].children[k].value)
+
+                                    document.querySelector('#areaList').innerHTML += areaLi;
+                                }
+                                document.querySelector('#county').style.display = 'inline-block';
+                                document.querySelector('#county').classList.add('active');
+                                document.querySelector('#city').classList.remove('active');
+
+                                break;
+                            } else {
+
+                            }
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+
+        //选中地区
+        function selectAreaDetail(e) {
+            //省
+            if (document.querySelector('#province').classList.contains('active')) {
+                document.querySelector('#city').style.display = 'inline-block';
+                document.querySelector('#city').classList.add('active');
+                document.querySelector('#province').classList.remove('active');
+
+                vm.province = e.children[0].innerText;
+                vm.provinceCode = e.children[0].getAttribute('data-code');
+
+                insertCity(vm.province);
+                return;
+            }
+            //市
+            if (document.querySelector('#city').classList.contains('active')) {
+                vm.city = e.children[0].innerText;
+                vm.cityCode = e.children[0].getAttribute('data-code');
+
+                insertCounty(vm.city);
+                return;
+            }
+
+            //县
+            if (document.querySelector('#county').classList.contains('active')) {
+                vm.county = e.children[0].innerText;
+                vm.countyCode = e.children[0].getAttribute('data-code');
+
+                return;
+            }
+        }
+
+        //获取主体高度
+        var h = getBodyH();
+
+        function getBodyH() {
+            var windowH = document.documentElement.clientHeight;
+            var topH = document.querySelector('.common-header').offsetHeight;
+            return windowH - topH;
+        }
+
+        //滚动身高筛选
+        var timer = null;
+        document.querySelector('#minHeight').onscroll = function (e) {
+            heightScreeningBack(this, e);
+        }
+        document.querySelector('#maxHeight').onscroll = function (e) {
+            heightScreeningBack(this, e);
+        }
+
+        //身高筛选取消
+        document.querySelector('.index-heightScreening-cancel').addEventListener('click', function (e) {
+            vm.rangeShow = false;
+            mask.close();
+            mui('.common-content').pullRefresh().enablePulldownToRefresh();
+
+            resetScroll();
+        })
+
+        //身高筛选确定
+        document.querySelector('.index-heightScreening-confirm').addEventListener('click', function (e) {
+            resetScroll();
+
+            mui('.common-content').pullRefresh().enablePulldownToRefresh();
+            vm.rangeShow = false;
+            mask.close();
+
+            var min = document.querySelector('#minHeight li.active').innerText;
+            var max = document.querySelector('#maxHeight li.active').innerText;
+
+            if (vm.rangeType === 'height') {
+                var minVal = min.substring(0, min.length - 2);
+                var maxVal = max.substring(0, max.length - 2);
+                if (min === '不限' || max === '不限') {
+                    vm.height = '不限';
+                } else {
+                    if (minVal > maxVal) {
+                        plus.nativeUI.toast('选择不合法，请重新选择');
+                    } else {
+                        vm.height = minVal + '-' + max;
+                    }
+                }
+            }
+            if (vm.rangeType === 'age') {
+                if (min === '不限' || max === '不限') {
+                    vm.age = '不限';
+                } else {
+                    if (min > max) {
+                        plus.nativeUI.toast('选择不合法，请重新选择');
+                    } else {
+                        vm.age = min + '-' + max;
+                    }
+                }
+            }
+
+        })
+
+        //身高筛选滚动处理
+        function heightScreeningBack(dom, e) {
+            var liH = document.querySelectorAll('#minHeight li')[0].offsetHeight;
+            clearTimeout(timer);
+            timer = setTimeout(function () {
+                var scrollH = e.srcElement.scrollTop;
+                var integer = parseInt(scrollH / liH);
+                var remainder = scrollH % liH;
+                if (remainder > (liH / 2)) {
+                    integer += 1;
+                }
+
+                for (var i = 0; i < dom.children.length; i++) {
+                    if (dom.children[i].classList.contains('active')) {
+                        dom.children[i].classList.remove('active');
+                        break;
+                    }
+                }
+                dom.children[integer + 1].classList.add('active');
+
+                var $dom = $(dom);
+                $dom.animate({
+                    scrollTop: integer * liH
+                }, 300)
+            }, 100)
+        }
+
+        //设置不可滚动
+        function cantScroll() {
+            document.querySelector('.suchProfissionUserList-padded').classList.add('overflowHidden');
+            document.querySelector('.suchProfissionUserList-padded').style.height = getBodyH() +
+                'px';
+            mui('.common-content').pullRefresh().disablePullupToRefresh();
+        }
+
+        //重置滚动
+        function resetScroll() {
+            document.querySelector('.suchProfissionUserList-padded').classList.remove('overflowHidden');
+            document.querySelector('.suchProfissionUserList-padded').style.height = 'auto';
+            mui('.common-content').pullRefresh().enablePullupToRefresh();
+        }
+
+        function getBodyH() {
+            var windowH = document.documentElement.clientHeight;
+            var topH = document.querySelector('.common-header').offsetHeight;
+            return windowH - topH;
+        }
+
+        //下拉
+        function pulldownRefresh() {
+            page = 1;
+            vm.items = [];
+            ajaxRequest('down');
+
+            mui('.common-content').pullRefresh().enablePullupToRefresh();
+        }
+
+        //上拉
+        function pullupLoadmore() {
+            page++;
+            ajaxRequest('up');
+        }
+
+        //请求数据
+        function ajaxRequest(type) {
+            mui.getJSON('suchProfessionUserList.json', function (data) {
+                if (JSON.stringify(data) == "{}") {
+                    if (type === 'down') {
+                        setTimeout(function () {
+                            mui('.common-content').pullRefresh().endPulldown();
+                        }, 500);
+                    }
+                    if (type === 'up') {
+                        setTimeout(function () {
+                            mui('.common-content').pullRefresh().endPullup(true);
+                        }, 500);
+                    }
+                } else {
+                    var count = 0;
+                    for (var i in data) {
+                        if (i == page) {
+                            count = 1;
+                            vm.items = vm.items.concat(data[i]);
+
+                            if (type === 'down') {
+                                setTimeout(function () {
+                                    mui('.common-content').pullRefresh().endPulldown();
+                                }, 500);
+                            }
+                            if (type === 'up') {
+                                setTimeout(function () {
+                                    mui('.common-content').pullRefresh().endPullup();
+                                }, 500);
+                            }
+                            break;
+                        }
+                    }
+                    if (count === 0) {
+                        if (type === 'down') {
+                            setTimeout(function () {
+                                mui('.common-content').pullRefresh().endPulldown();
+                            }, 500);
+                        }
+                        if (type === 'up') {
+                            setTimeout(function () {
+                                mui('.common-content').pullRefresh().endPullup(true);
+                            }, 500);
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

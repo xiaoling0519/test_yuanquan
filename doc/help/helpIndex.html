@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>求助首页</title>
+		<link rel="stylesheet" href="../../mui/css/mui.min.css" />
+		<link rel="stylesheet" href="../../mui/css/pull.css" />
+		<link rel="stylesheet" href="../../css/reset.css" />
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/jly.css" />
+		<style type="text/css">
+			.mui-slider .mui-slider-group .mui-slider-item img {
+				width: initial;
+			}
+			
+			.mui-slider .mui-slider-group .mui-slider-item .helpIndex-showImg-container img {
+				width: 100%;
+			}
+			.mui-slider .mui-slider-group .mui-slider-item .helpIndex-help-li-avatar{
+				width: .54rem;
+			}
+			
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+				color: #7D24FA;
+			}
+			
+			.mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item {
+				border: none;
+			}
+			
+			#slider .mui-slider-group {
+				top: .88rem;
+			}
+		</style>
+		<script src="../../js/rem.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../plugin/js/fastclick.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div id="myApp">
+			<header class="common-header">
+				<div class="common-header-content">
+					<a @click="close" class="lf common-header-leftA">
+						<img class="common-header-leftImg" src="../../img/back.png" alt="" />
+					</a>
+					<a @click="switchCity" class="rf common-header-rightA common-header-rightA-text overflowEllipsis">
+						鄂尔多斯市
+					</a>
+					<h1 class="common-header-h1 index-top-tabs">
+                    <a class="active">服务
+                                <a>求助</a>
+                </h1>
+					<div class="clear"></div>
+				</div>
+			</header>
+			<div id="commonContent" class="common-content">
+				<div class="common-content-padded" style="padding: 0;">
+					<ul id="screeningfixed" class="helpIndex-screening tabfixed">
+						<li class="lf active">综合</li>
+						<li class="lf">服务最多</li>
+						<li class="lf">服务最好</li>
+						<li class="lf">价格</li>
+					</ul>
+					<div id="outSlider" class="mui-slider">
+						<div class="mui-slider-group">
+							<div class="mui-slider-item">
+								<div class="mui-scroll-wrapper">
+									<div class="mui-scroll">
+										<div id="servicePart" style="padding: 0 .15rem;">
+											<div class="helpIndex-search-and">
+												<div class="circleShoppingIndex-search-container helpIndex-search">
+													<span>请输入内容搜索</span>
+												</div>
+												<ul class="helpIndex-itemSort">
+													<li class="lf">
+														<img src="../../img/helpIndex/teach.png" alt="" />
+														<div>教学辅导</div>
+													</li>
+													<li class="lf">
+														<img src="../../img/helpIndex/travel.png" alt="" />
+														<div style=";">旅游定制</div>
+													</li>
+													<li class="lf">
+														<img src="../../img/helpIndex/renting.png" alt="" />
+														<div>租房</div>
+													</li>
+													<li class="lf">
+														<img src="../../img/helpIndex/develop.png" alt="" />
+														<div>招聘</div>
+													</li>
+													<li class="lf">
+														<img src="../../img/helpIndex/maintenance.png" alt="" />
+														<div>维修</div>
+													</li>
+													<li class="lf">
+														<img src="../../img/helpIndex/exercise.png" alt="" />
+														<div>运动健身</div>
+													</li>
+													<li class="lf">
+														<img src="../../img/helpIndex/design.png" alt="" />
+														<div>设计</div>
+													</li>
+													<li class="lf">
+														<img src="../../img/helpIndex/commission.png" alt="" />
+														<div>代办</div>
+													</li>
+													<li class="lf">
+														<img src="../../img/helpIndex/consult.png" alt="" />
+														<div>咨询</div>
+													</li>
+													<li class="lf">
+														<img src="../../img/helpIndex/other.png" alt="" />
+														<div>其他</div>
+													</li>
+												</ul>
+											</div>
+											<ul id="screening" class="helpIndex-screening">
+												<li class="lf active">综合</li>
+												<li class="lf">服务最多</li>
+												<li class="lf">服务最好</li>
+												<li class="lf">价格</li>
+											</ul>
+											<ul class="helpIndex-list">
+												<li class="lf">
+													<div class="helpIndex-showImg-container">
+														<img src="../../img/avatar.jpg" alt="" />
+													</div>
+													<div class="helpIndex-li-main">
+														<p class="overflowTwoEllipsis helpIndex-li-type-and">
+															<span class="helpIndex-li-type">会大幅度</span>
+															<span class="helpIndex-li-intro">会计师的反馈水电费肯定是副科级电视剧看房间看电视讲课费可视对讲反馈绝对是看副科级供货商飞近段时间范德萨</span>
+														</p>
+														<div class="helpIndex-price-and">
+															<span class="lf helpIndex-price"><label>19</label>元/小时</span>
+															<span class="rf helpIndex-num">已服务<label>330</label>人</span>
+															<div class="clear"></div>
+														</div>
+													</div>
+												</li>
+												<li class="lf">
+													<div class="helpIndex-showImg-container">
+														<img src="../../img/avatar.jpg" alt="" />
+													</div>
+													<div class="helpIndex-li-main">
+														<p class="overflowTwoEllipsis helpIndex-li-type-and">
+															<span class="helpIndex-li-type">会大幅度</span>
+															<span class="helpIndex-li-intro">会计师的反馈水电费肯定是副科级电视剧看房间看电视讲课费可视对讲反馈绝对是看副科级供货商飞近段时间范德萨</span>
+														</p>
+														<div class="helpIndex-price-and">
+															<span class="lf helpIndex-price"><label>19</label>元/小时</span>
+															<span class="rf helpIndex-num">已服务<label>330</label>人</span>
+															<div class="clear"></div>
+														</div>
+													</div>
+												</li>
+												<li class="lf">
+													<div class="helpIndex-showImg-container">
+														<img src="../../img/avatar.jpg" alt="" />
+													</div>
+													<div class="helpIndex-li-main">
+														<p class="overflowTwoEllipsis helpIndex-li-type-and">
+															<span class="helpIndex-li-type">会大幅度</span>
+															<span class="helpIndex-li-intro">会计师的反馈水电费肯定是副科级电视剧看房间看电视讲课费可视对讲反馈绝对是看副科级供货商飞近段时间范德萨</span>
+														</p>
+														<div class="helpIndex-price-and">
+															<span class="lf helpIndex-price"><label>19</label>元/小时</span>
+															<span class="rf helpIndex-num">已服务<label>330</label>人</span>
+															<div class="clear"></div>
+														</div>
+													</div>
+												</li>
+												<li class="lf">
+													<div class="helpIndex-showImg-container">
+														<img src="../../img/avatar.jpg" alt="" />
+													</div>
+													<div class="helpIndex-li-main">
+														<p class="overflowTwoEllipsis helpIndex-li-type-and">
+															<span class="helpIndex-li-type">会大幅度</span>
+															<span class="helpIndex-li-intro">会计师的反馈水电费肯定是副科级电视剧看房间看电视讲课费可视对讲反馈绝对是看副科级供货商飞近段时间范德萨</span>
+														</p>
+														<div class="helpIndex-price-and">
+															<span class="lf helpIndex-price"><label>19</label>元/小时</span>
+															<span class="rf helpIndex-num">已服务<label>330</label>人</span>
+															<div class="clear"></div>
+														</div>
+													</div>
+												</li>
+												<li class="lf">
+													<div class="helpIndex-showImg-container">
+														<img src="../../img/avatar.jpg" alt="" />
+													</div>
+													<div class="helpIndex-li-main">
+														<p class="overflowTwoEllipsis helpIndex-li-type-and">
+															<span class="helpIndex-li-type">会大幅度</span>
+															<span class="helpIndex-li-intro">会计师的反馈水电费肯定是副科级电视剧看房间看电视讲课费可视对讲反馈绝对是看副科级供货商飞近段时间范德萨</span>
+														</p>
+														<div class="helpIndex-price-and">
+															<span class="lf helpIndex-price"><label>19</label>元/小时</span>
+															<span class="rf helpIndex-num">已服务<label>330</label>人</span>
+															<div class="clear"></div>
+														</div>
+													</div>
+												</li>
+												<li class="lf">
+													<div class="helpIndex-showImg-container">
+														<img src="../../img/avatar.jpg" alt="" />
+													</div>
+													<div class="helpIndex-li-main">
+														<p class="overflowTwoEllipsis helpIndex-li-type-and">
+															<span class="helpIndex-li-type">会大幅度</span>
+															<span class="helpIndex-li-intro">会计师的反馈水电费肯定是副科级电视剧看房间看电视讲课费可视对讲反馈绝对是看副科级供货商飞近段时间范德萨</span>
+														</p>
+														<div class="helpIndex-price-and">
+															<span class="lf helpIndex-price"><label>19</label>元/小时</span>
+															<span class="rf helpIndex-num">已服务<label>330</label>人</span>
+															<div class="clear"></div>
+														</div>
+													</div>
+												</li>
+												<li class="lf">
+													<div class="helpIndex-showImg-container">
+														<img src="../../img/avatar.jpg" alt="" />
+													</div>
+													<div class="helpIndex-li-main">
+														<p class="overflowTwoEllipsis helpIndex-li-type-and">
+															<span class="helpIndex-li-type">会大幅度</span>
+															<span class="helpIndex-li-intro">会计师的反馈水电费肯定是副科级电视剧看房间看电视讲课费可视对讲反馈绝对是看副科级供货商飞近段时间范德萨</span>
+														</p>
+														<div class="helpIndex-price-and">
+															<span class="lf helpIndex-price"><label>19</label>元/小时</span>
+															<span class="rf helpIndex-num">已服务<label>330</label>人</span>
+															<div class="clear"></div>
+														</div>
+													</div>
+												</li>
+												<li class="lf">
+													<div class="helpIndex-showImg-container">
+														<img src="../../img/avatar.jpg" alt="" />
+													</div>
+													<div class="helpIndex-li-main">
+														<p class="overflowTwoEllipsis helpIndex-li-type-and">
+															<span class="helpIndex-li-type">会大幅度</span>
+															<span class="helpIndex-li-intro">会计师的反馈水电费肯定是副科级电视剧看房间看电视讲课费可视对讲反馈绝对是看副科级供货商飞近段时间范德萨</span>
+														</p>
+														<div class="helpIndex-price-and">
+															<span class="lf helpIndex-price"><label>19</label>元/小时</span>
+															<span class="rf helpIndex-num">已服务<label>330</label>人</span>
+															<div class="clear"></div>
+														</div>
+													</div>
+												</li>
+												<li class="lf">
+													<div class="helpIndex-showImg-container">
+														<img src="../../img/avatar.jpg" alt="" />
+													</div>
+													<div class="helpIndex-li-main">
+														<p class="overflowTwoEllipsis helpIndex-li-type-and">
+															<span class="helpIndex-li-type">会大幅度</span>
+															<span class="helpIndex-li-intro">会计师的反馈水电费肯定是副科级电视剧看房间看电视讲课费可视对讲反馈绝对是看副科级供货商飞近段时间范德萨</span>
+														</p>
+														<div class="helpIndex-price-and">
+															<span class="lf helpIndex-price"><label>19</label>元/小时</span>
+															<span class="rf helpIndex-num">已服务<label>330</label>人</span>
+															<div class="clear"></div>
+														</div>
+													</div>
+												</li>
+												<li class="lf">
+													<div class="helpIndex-showImg-container">
+														<img src="../../img/avatar.jpg" alt="" />
+													</div>
+													<div class="helpIndex-li-main">
+														<p class="overflowTwoEllipsis helpIndex-li-type-and">
+															<span class="helpIndex-li-type">会大幅度</span>
+															<span class="helpIndex-li-intro">会计师的反馈水电费肯定是副科级电视剧看房间看电视讲课费可视对讲反馈绝对是看副科级供货商飞近段时间范德萨</span>
+														</p>
+														<div class="helpIndex-price-and">
+															<span class="lf helpIndex-price"><label>19</label>元/小时</span>
+															<span class="rf helpIndex-num">已服务<label>330</label>人</span>
+															<div class="clear"></div>
+														</div>
+													</div>
+												</li>
+												<li class="lf">
+													<div class="helpIndex-showImg-container">
+														<img src="../../img/avatar.jpg" alt="" />
+													</div>
+													<div class="helpIndex-li-main">
+														<p class="overflowTwoEllipsis helpIndex-li-type-and">
+															<span class="helpIndex-li-type">会大幅度</span>
+															<span class="helpIndex-li-intro">会计师的反馈水电费肯定是副科级电视剧看房间看电视讲课费可视对讲反馈绝对是看副科级供货商飞近段时间范德萨</span>
+														</p>
+														<div class="helpIndex-price-and">
+															<span class="lf helpIndex-price"><label>19</label>元/小时</span>
+															<span class="rf helpIndex-num">已服务<label>330</label>人</span>
+															<div class="clear"></div>
+														</div>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="mui-slider-item">
+								<div id="slider" class="mui-slider mui-fullscreen" style="height: auto;">
+									<div class="helpIndex-tabs mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+										<div class="mui-scroll">
+											<a href="#item1mobile" class="mui-control-item mui-active">
+												全部
+											</a>
+											<a href="#item2mobile" class="mui-control-item">
+												寻人
+											</a>
+											<a href="#item3mobile" class="mui-control-item">
+												跑腿
+											</a>
+											<a href="#item4mobile" class="mui-control-item">
+												问问路
+											</a>
+											<a href="#item5mobile" class="mui-control-item">
+												带路
+											</a>
+											<a href="#item6mobile" class="mui-control-item">
+												求工作
+											</a>
+											<a href="#item7mobile" class="mui-control-item">
+												XXX
+											</a>
+											<a href="#item8mobile" class="mui-control-item">
+												XX
+											</a>
+										</div>
+									</div>
+									<div class="mui-slider-group" style="height: auto;">
+										<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+											<div class="mui-scroll-wrapper">
+												<div class="mui-scroll">
+													<div class="helpIndex-help-search-div">
+														<div class="circleShoppingIndex-search-container helpIndex-search helpIndex-help-search"><span>请输入内容搜索</span></div>
+													</div>
+													<ul class="helpIndex-help-list">
+														<li>
+															<div class="helpIndex-help-li-top">
+																<div class="lf">
+																	<img class="helpIndex-help-li-avatar" src="../../img/avatar.jpg" alt="" />
+																	<span class="helpIndex-help-li-nickname">你的益达</span>
+																</div>
+																<span class="rf helpIndex-help-li-distance">4.6km</span>
+																<div class="clear"></div>
+															</div>
+															<div class="helpIndex-help-li-main">
+																<h2>帮忙取快递</h2>
+																<p class="helpIndex-help-li-text">打发时间跨境电商风格的脚后跟惊魂甫定几个号东方红国际化发动机号国际化发动机和国际法的好几个接电话发给甲方的紧固件发动机</p>
+																<p class="helpIndex-help-li-money">赏金<span>12元</span></p>
+															</div>
+														</li>
+														<li>
+															<div class="helpIndex-help-li-top">
+																<div class="lf">
+																	<img class="helpIndex-help-li-avatar" src="../../img/avatar.jpg" alt="" />
+																	<span class="helpIndex-help-li-nickname">你的益达</span>
+																</div>
+																<span class="rf helpIndex-help-li-distance">4.6km</span>
+																<div class="clear"></div>
+															</div>
+															<div class="helpIndex-help-li-main">
+																<h2>帮忙取快递</h2>
+																<p class="helpIndex-help-li-text">打发时间跨境电商风格的脚后跟惊魂甫定几个号东方红国际化发动机号国际化发动机和国际法的好几个接电话发给甲方的紧固件发动机</p>
+																<p class="helpIndex-help-li-money">赏金<span>12元</span></p>
+															</div>
+														</li>
+														<li>
+															<div class="helpIndex-help-li-top">
+																<div class="lf">
+																	<img class="helpIndex-help-li-avatar" src="../../img/avatar.jpg" alt="" />
+																	<span class="helpIndex-help-li-nickname">你的益达</span>
+																</div>
+																<span class="rf helpIndex-help-li-distance">4.6km</span>
+																<div class="clear"></div>
+															</div>
+															<div class="helpIndex-help-li-main">
+																<h2>帮忙取快递</h2>
+																<p class="helpIndex-help-li-text">打发时间跨境电商风格的脚后跟惊魂甫定几个号东方红国际化发动机号国际化发动机和国际法的好几个接电话发给甲方的紧固件发动机</p>
+																<p class="helpIndex-help-li-money">赏金<span>12元</span></p>
+															</div>
+														</li>
+														<li>
+															<div class="helpIndex-help-li-top">
+																<div class="lf">
+																	<img class="helpIndex-help-li-avatar" src="../../img/avatar.jpg" alt="" />
+																	<span class="helpIndex-help-li-nickname">你的益达</span>
+																</div>
+																<span class="rf helpIndex-help-li-distance">4.6km</span>
+																<div class="clear"></div>
+															</div>
+															<div class="helpIndex-help-li-main">
+																<h2>帮忙取快递</h2>
+																<p class="helpIndex-help-li-text">打发时间跨境电商风格的脚后跟惊魂甫定几个号东方红国际化发动机号国际化发动机和国际法的好几个接电话发给甲方的紧固件发动机</p>
+																<p class="helpIndex-help-li-money">赏金<span>12元</span></p>
+															</div>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+										<div id="item2mobile" class="mui-slider-item mui-control-content">
+											<div class="mui-scroll-wrapper">
+												<div class="mui-scroll">
+													<ul class="helpIndex-help-list">
+														<li>
+															<div class="helpIndex-help-li-top">
+																<div class="lf">
+																	<img class="helpIndex-help-li-avatar" src="../../img/avatar.jpg" alt="" />
+																	<span class="helpIndex-help-li-nickname">你的益达</span>
+																</div>
+																<span class="rf helpIndex-help-li-distance">4.6km</span>
+																<div class="clear"></div>
+															</div>
+															<div class="helpIndex-help-li-main">
+																<h2>帮忙取快递</h2>
+																<p class="helpIndex-help-li-text">打发时间跨境电商风格的脚后跟惊魂甫定几个号东方红国际化发动机号国际化发动机和国际法的好几个接电话发给甲方的紧固件发动机</p>
+																<p class="helpIndex-help-li-money">赏金<span>12元</span></p>
+															</div>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+										<div id="item3mobile" class="mui-slider-item mui-control-content">
+											<div class="mui-scroll-wrapper">
+												<div class="mui-scroll">
+													<ul class="helpIndex-help-list">
+														<li>
+															<div class="helpIndex-help-li-top">
+																<div class="lf">
+																	<img class="helpIndex-help-li-avatar" src="../../img/avatar.jpg" alt="" />
+																	<span class="helpIndex-help-li-nickname">你的益达</span>
+																</div>
+																<span class="rf helpIndex-help-li-distance">4.6km</span>
+																<div class="clear"></div>
+															</div>
+															<div class="helpIndex-help-li-main">
+																<h2>帮忙取快递</h2>
+																<p class="helpIndex-help-li-text">打发时间跨境电商风格的脚后跟惊魂甫定几个号东方红国际化发动机号国际化发动机和国际法的好几个接电话发给甲方的紧固件发动机</p>
+																<p class="helpIndex-help-li-money">赏金<span>12元</span></p>
+															</div>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+										<div id="item4mobile" class="mui-slider-item mui-control-content">
+											<div class="mui-scroll-wrapper">
+												<div class="mui-scroll">
+													<ul class="helpIndex-help-list">
+														<li>
+															<div class="helpIndex-help-li-top">
+																<div class="lf">
+																	<img class="helpIndex-help-li-avatar" src="../../img/avatar.jpg" alt="" />
+																	<span class="helpIndex-help-li-nickname">你的益达</span>
+																</div>
+																<span class="rf helpIndex-help-li-distance">4.6km</span>
+																<div class="clear"></div>
+															</div>
+															<div class="helpIndex-help-li-main">
+																<h2>帮忙取快递</h2>
+																<p class="helpIndex-help-li-text">打发时间跨境电商风格的脚后跟惊魂甫定几个号东方红国际化发动机号国际化发动机和国际法的好几个接电话发给甲方的紧固件发动机</p>
+																<p class="helpIndex-help-li-money">赏金<span>12元</span></p>
+															</div>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+										<div id="item5mobile" class="mui-slider-item mui-control-content">
+											<div class="mui-scroll-wrapper">
+												<div class="mui-scroll">
+													<ul class="helpIndex-help-list">
+														<li>
+															<div class="helpIndex-help-li-top">
+																<div class="lf">
+																	<img class="helpIndex-help-li-avatar" src="../../img/avatar.jpg" alt="" />
+																	<span class="helpIndex-help-li-nickname">你的益达</span>
+																</div>
+																<span class="rf helpIndex-help-li-distance">4.6km</span>
+																<div class="clear"></div>
+															</div>
+															<div class="helpIndex-help-li-main">
+																<h2>帮忙取快递</h2>
+																<p class="helpIndex-help-li-text">打发时间跨境电商风格的脚后跟惊魂甫定几个号东方红国际化发动机号国际化发动机和国际法的好几个接电话发给甲方的紧固件发动机</p>
+																<p class="helpIndex-help-li-money">赏金<span>12元</span></p>
+															</div>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+										<div id="item6mobile" class="mui-slider-item mui-control-content">
+											<div class="mui-scroll-wrapper">
+												<div class="mui-scroll">
+													<ul class="helpIndex-help-list">
+														<li>
+															<div class="helpIndex-help-li-top">
+																<div class="lf">
+																	<img class="helpIndex-help-li-avatar" src="../../img/avatar.jpg" alt="" />
+																	<span class="helpIndex-help-li-nickname">你的益达</span>
+																</div>
+																<span class="rf helpIndex-help-li-distance">4.6km</span>
+																<div class="clear"></div>
+															</div>
+															<div class="helpIndex-help-li-main">
+																<h2>帮忙取快递</h2>
+																<p class="helpIndex-help-li-text">打发时间跨境电商风格的脚后跟惊魂甫定几个号东方红国际化发动机号国际化发动机和国际法的好几个接电话发给甲方的紧固件发动机</p>
+																<p class="helpIndex-help-li-money">赏金<span>12元</span></p>
+															</div>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+										<div id="item7mobile" class="mui-slider-item mui-control-content">
+											<div class="mui-scroll-wrapper">
+												<div class="mui-scroll">
+													<ul class="helpIndex-help-list">
+														<li>
+															<div class="helpIndex-help-li-top">
+																<div class="lf">
+																	<img class="helpIndex-help-li-avatar" src="../../img/avatar.jpg" alt="" />
+																	<span class="helpIndex-help-li-nickname">你的益达</span>
+																</div>
+																<span class="rf helpIndex-help-li-distance">4.6km</span>
+																<div class="clear"></div>
+															</div>
+															<div class="helpIndex-help-li-main">
+																<h2>帮忙取快递</h2>
+																<p class="helpIndex-help-li-text">打发时间跨境电商风格的脚后跟惊魂甫定几个号东方红国际化发动机号国际化发动机和国际法的好几个接电话发给甲方的紧固件发动机</p>
+																<p class="helpIndex-help-li-money">赏金<span>12元</span></p>
+															</div>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+										<div id="item8mobile" class="mui-slider-item mui-control-content">
+											<div class="mui-scroll-wrapper">
+												<div class="mui-scroll">
+													<ul class="helpIndex-help-list">
+														<li>
+															<div class="helpIndex-help-li-top">
+																<div class="lf">
+																	<img class="helpIndex-help-li-avatar" src="../../img/avatar.jpg" alt="" />
+																	<span class="helpIndex-help-li-nickname">你的益达</span>
+																</div>
+																<span class="rf helpIndex-help-li-distance">4.6km</span>
+																<div class="clear"></div>
+															</div>
+															<div class="helpIndex-help-li-main">
+																<h2>帮忙取快递</h2>
+																<p class="helpIndex-help-li-text">打发时间跨境电商风格的脚后跟惊魂甫定几个号东方红国际化发动机号国际化发动机和国际法的好几个接电话发给甲方的紧固件发动机</p>
+																<p class="helpIndex-help-li-money">赏金<span>12元</span></p>
+															</div>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div v-show="popShow" class="helpIndex-publish-pop">
+						<div class="common-content-padded">
+							<ul class="helpIndex-publish-pop-text">
+								<li>
+									<h2>发布求助</h2>
+									<p>交水电费科技非公开看得见飞哥掉进韩国锦湖发动机看风景的广阔的咖啡店给</p>
+								</li>
+								<li>
+									<h2>发布服务</h2>
+									<p>交水电费科技非公开看得见飞哥掉进韩国锦湖发动机看风景的广阔的咖啡店给</p>
+								</li>
+							</ul>
+							<div class="helpIndex-publish-pop-select">
+								<ul>
+									<li @click="publishHelp('service')" class="lf">
+										<img src="../../img/helpIndex/publishService.png" alt="" />
+										<div>发布服务</div>
+									</li>
+									<li @click="publishHelp('help')" class="lf">
+										<img src="../../img/helpIndex/publishHelp.png" alt="" />
+										<div>发布求助</div>
+									</li>
+								</ul>
+								<div class="helpIndex-publish-pop-close">
+									<img @click="closePublish" src="../../img/helpIndex/close.png" alt="" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<img @click="publish" class="helpIndex-publishIcon" src="../../img/helpIndex/publish.png" alt="" />
+		</div>
+		<script src="../../vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../mui/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../mui/js/mui.pullToRefresh.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../mui/js/mui.pullToRefresh.material.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/param.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/system.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jly.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var currWebviewId = null;
+
+			var vm = new Vue({
+				el: "#myApp",
+				data: {
+					popShow: false,
+					showWhich: 0,
+					tabIndex: 0
+				},
+				methods: {
+					publish: function() {
+						this.popShow = true;
+					},
+					closePublish: function() {
+						this.popShow = false;
+					},
+					close: function() {
+						Webview.close({
+							id: currWebviewId
+						})
+					},
+					publishHelp: function(type) {
+						publicWebviewShow({
+							id: '/doc/help/publishHelp.html',
+							extras:{
+								type:type
+							}
+						})
+					},
+					switchCity:function(){
+						publicWebviewShow({
+							id:'/doc/address/switchCity.html'
+						})
+					}
+				}
+			})
+
+			mui.init();
+			mui.plusReady(function() {
+				currWebviewId = plus.webview.currentWebview().id;
+
+				mui.back = function() {
+					if(vm.popShow) {
+						vm.popShow = false;
+					} else {
+						Webview.close({
+							id: currWebviewId
+						})
+					}
+				}
+			})
+
+			var immersed = publicStatusbar();
+
+			(function($) {
+				//阻尼系数
+				var deceleration = mui.os.ios ? 0.003 : 0.0009;
+				$('.mui-scroll-wrapper').scroll({
+					bounce: false,
+					indicators: true, //是否显示滚动条
+					deceleration: deceleration
+				});
+				$.ready(function() {
+					//循环初始化所有下拉刷新，上拉加载。
+					$.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function(index, pullRefreshEl) {
+						$(pullRefreshEl).pullToRefresh({
+							down: {
+								callback: function() {
+									var self = this;
+									setTimeout(function() {
+										self.endPullDownToRefresh();
+									}, 1000);
+								}
+							},
+							up: {
+								callback: function() {
+									var self = this;
+									setTimeout(function() {
+										self.endPullUpToRefresh();
+									}, 1000);
+								}
+							}
+						});
+					});
+				});
+			})(mui);
+
+			//点击切换
+			mui(".index-top-tabs").on('click', 'a', function(e) {
+				if(this.classList.contains('active')) {
+					return;
+				}
+
+				document.querySelector('.index-top-tabs a.active').classList.remove("active");
+				this.classList.add("active");
+
+				if(vm.showWhich === 0) {
+					vm.showWhich = 1;
+				} else {
+					vm.showWhich = 0;
+				}
+
+				mui('#outSlider').slider().gotoItem(vm.showWhich, 300);
+			})
+
+			//吸附效果
+			document.querySelector('#screeningfixed').style.marginTop = immersed + 'px';
+			var scrollH = document.querySelector('.helpIndex-search-and').offsetHeight + 10;
+			window.onscroll = function(e) {
+				if(scrollH <= -e.detail.y && vm.showWhich === 0) {
+					document.querySelector('#screening').style.display = 'none';
+					document.querySelector('#screeningfixed').style.display = 'block';
+
+					var h = document.querySelector('#screeningfixed').offsetHeight;
+					document.querySelector('.helpIndex-list').style.paddingTop = h + 'px';
+				} else {
+					document.querySelector('#screening').style.display = 'block';
+					document.querySelector('#screeningfixed').style.display = 'none';
+
+					document.querySelector('.helpIndex-list').style.paddingTop = '0';
+				}
+			}
+
+			var h = getBodyH();
+
+			//设置滑动的最小高度
+			for(var i = 0; i < document.querySelectorAll('.mui-slider-item').length; i++) {
+				document.querySelectorAll('.mui-slider-item')[i]
+					.style
+					.minHeight = h + 'px';
+			}
+			for(var i = 0; i < document.querySelectorAll('#slider .mui-slider-item').length; i++) {
+				document.querySelectorAll('#slider .mui-slider-item')[i]
+					.style
+					.minHeight = h - 2 * document.querySelector('.common-header-content').offsetHeight + immersed + 'px';
+			}
+
+			//处理外层滑动影响内层
+			document.querySelector('#outSlider').addEventListener('slide', function(e) {
+				if(e.detail.slideNumber === 1) {
+					vm.showWhich = 1;
+					document.querySelectorAll('.index-top-tabs a')[0].classList.remove("active");
+					document.querySelectorAll('.index-top-tabs a')[1].classList.add("active");
+
+					setTimeout(function() {
+						document.querySelector('.mui-control-item.mui-active').classList.remove('mui-active');
+						document.querySelectorAll('.mui-control-item')[vm.tabIndex].classList.add('mui-active');
+					}, 0)
+				} else {
+					vm.showWhich = 0;
+					document.querySelectorAll('.index-top-tabs a')[0].classList.add("active");
+					document.querySelectorAll('.index-top-tabs a')[1].classList.remove("active");
+				}
+			})
+
+			//点击标签
+			mui('#slider').on('tap', '.mui-control-item', function(e) {
+				for(var i = 0; i < document.querySelectorAll('.mui-control-item').length; i++) {
+					if(document.querySelectorAll('.mui-control-item')[i] == this) {
+						vm.tabIndex = i;
+						break;
+					}
+				}
+			})
+
+			//内层滑动
+			document.querySelector('#slider').addEventListener('slide', function(e) {
+				vm.tabIndex = e.detail.slideNumber;
+			})
+
+			//内层滑动滑完了则滑外层
+			document.querySelector('#slider').addEventListener('swiperight', function() {
+				if(document.querySelectorAll('.mui-control-item')[0].classList.contains('mui-active')) {
+					mui('#outSlider').slider().gotoItem(0, 500);
+					vm.showWhich = 0;
+				}
+			})
+
+			mui('.helpIndex-itemSort').on('tap', 'li', function() {
+				var me = this;
+				publicWebviewShow({
+					id: '/doc/help/serviceList.html',
+					extras: {
+						title: me.innerText
+					}
+				})
+			})
+			
+			mui('#screening').on('tap','li',function(){
+				for(var i=0;i<document.querySelectorAll('#screening li').length;i++){
+					document.querySelectorAll('#screening li')[i].classList.remove('active');
+				}
+				this.classList.add('active');
+			})
+			
+			mui('#screeningfixed').on('tap','li',function(){
+				for(var i=0;i<document.querySelectorAll('#screeningfixed li').length;i++){
+					document.querySelectorAll('#screeningfixed li')[i].classList.remove('active');
+				}
+				this.classList.add('active');
+			})
+			
+			//获取主体高度
+			function getBodyH() {
+				var windowH = document.documentElement.clientHeight;
+				var topH = document.querySelector('.common-header-content').offsetHeight;
+				return windowH - topH;
+			}
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,20 @@
+//不同屏幕大小的适配
+(function (doc, win) {
+    var docEl = doc.documentElement,
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+        recalc = function () {
+            var clientWidth = docEl.clientWidth > 750 ? 750 : docEl.clientWidth;
+            if (!clientWidth) {
+                return
+            };
+            docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+        };
+    recalc();
+    if (!doc.addEventListener) return;
+    win.addEventListener(resizeEvt, recalc, false);
+    doc.addEventListener('DOMContentLoaded', recalc, false);
+})(document, window)
+
+document.addEventListener('DOMContentLoaded', function () {
+    FastClick.attach(document.body);
+}, false);

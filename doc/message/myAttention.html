@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>我的关注</title>
+    <link rel="stylesheet" href="../../mui/css/mui.min.css" />
+    <link rel="stylesheet" href="../../mui/css/pull.css">
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/common.css" />
+    <link rel="stylesheet" href="../../css/jly.css" />
+    <script src="../../js/rem.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../plugin/js/fastclick.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+    <div id="myApp">
+        <header class="common-header">
+            <div class="common-header-content">
+                <a class="lf common-header-leftA">
+                    <img class="common-header-leftImg" src="../../img/back.png" alt="" />
+                </a>
+                <h1 class="common-header-h1">
+                    我的关注
+                </h1>
+                <div class="clear"></div>
+                <div class="myAppointment-tabs">
+                    <div class="myAppointment-tabs-main">
+                        <span @click="clickSwitch(0)" :class="{active:showWhich==0}" class="lf">我关注的</span>
+                        <span @click="clickSwitch(1)" :class="{active:showWhich==1}" class="rf">关注我的</span>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="common-content myAppointment-content">
+            <div class="common-content-padded myAppointment-padded">
+                <div class="mui-slider">
+                    <div class="mui-slider-group">
+                        <div class="mui-slider-item">
+                            <div class="mui-scroll-wrapper">
+                                <div class="mui-scroll">
+                                    <ul class="index-message-list myAttention-list">
+                                        <li v-bind:data-id="myAttenItem.id" v-for="myAttenItem in myAttenItems">
+											<div class="index-message-li-container">
+												<div class="lf index-message-list-avatar-div myAttention-avatar-div">
+													<img class="index-message-list-avatar" src="../../img/avatar.jpg" alt="">
+												</div>
+												<div class="lf index-message-list-main myAttention-nickName">
+													<span>sei莫挑</span>
+												</div>
+												<div class="clear"></div>
+											</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mui-slider-item">
+                            <div class="mui-scroll-wrapper">
+                                <div class="mui-scroll">
+                                    <ul class="index-message-list myAttention-list">
+                                        <li v-bind:data-id="attenMeItem.id" v-for="attenMeItem in attenMeItems">
+											<div class="index-message-li-container">
+												<div class="lf index-message-list-avatar-div myAttention-avatar-div">
+													<img class="index-message-list-avatar" src="../../img/avatar.jpg" alt="">
+												</div>
+												<div class="lf index-message-list-main myAttention-nickName">
+													<span>sei莫挑34retfd</span>
+												</div>
+												<div class="clear"></div>
+											</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../mui/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../mui/js/mui.pullToRefresh.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../mui/js/mui.pullToRefresh.material.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/param.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/system.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jly.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        var page1 = 1,
+            page2 = 1;
+
+        var pullUpObj1 = null,
+			pullUpObj2 = null;
+
+        var vm = new Vue({
+            el: "#myApp",
+            data: {
+                showWhich: 0,
+				attenMeItemsHadLoaded:false,
+                myAttenItems: [],
+                attenMeItems: []
+            },
+            methods: {
+                //点击切换
+                clickSwitch: function (e) {
+                    this.showWhich = e;
+                    mui('.mui-slider').slider().gotoItem(e, 300);
+                }
+            }
+        })
+
+        mui.init();
+
+        (function ($) {
+            //阻尼系数
+            var deceleration = mui.os.ios ? 0.003 : 0.0009;
+            $('.mui-scroll-wrapper').scroll({
+                bounce: false,
+                indicators: false, //是否显示滚动条
+                deceleration: deceleration
+            });
+            $.ready(function () {
+                //循环初始化所有下拉刷新，上拉加载。
+                $.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function (index,
+                    pullRefreshEl) {
+                    $(pullRefreshEl).pullToRefresh({
+                        down: {
+                            callback: function () {
+                                if (vm.showWhich === 0) {
+									if (pullUpObj1 !== null) {
+										pullUpObj1.refresh(true);
+									}
+                                    page1 = 1;
+                                    vm.myAttenItems = [];
+                                }
+                                if (vm.showWhich === 1) {
+									if (pullUpObj2 !== null) {
+										pullUpObj2.refresh(true);
+									}
+                                    page2 = 1;
+                                    vm.attenMeItems = [];
+                                }
+																
+								ajaxRequest('down', this);
+                            }
+                        },
+                        up: {
+                            callback: function () {
+                                if (vm.showWhich === 0) {
+                                    page1++;
+									pullUpObj1 = this;
+                                }
+                                if (vm.showWhich === 1) {
+                                    page2++;
+									pullUpObj2 = this;
+                                }
+                                
+                                ajaxRequest('up', this);
+                            }
+                        }
+                    });
+                });
+            });
+        })(mui);
+
+        mui.plusReady(function () {
+            publicBack();
+        })
+
+        publicStatusbar();
+
+        var h = getBodyH();
+        //设置滑动的最小高度
+        for (var i = 0; i < document.querySelectorAll('.mui-slider-item').length; i++) {
+            document.querySelector('.mui-slider-item:nth-child(' + (i + 1) + ')')
+                .style
+                .minHeight = h + 'px';
+				
+			document.querySelectorAll('.myAttention-list')[i].style.minHeight = h + 'px';
+        }
+
+        //滑动切换
+        document.querySelector('.mui-slider').addEventListener('slide', function (e) {
+            vm.showWhich = e.detail.slideNumber;
+
+            if (vm.showWhich === 1) {
+				if(!vm.attenMeItemsHadLoaded){
+					vm.attenMeItemsHadLoaded=true;
+					ajaxRequestFirst();
+				}
+            }
+        })
+
+        function getBodyH() {
+            var windowH = document.documentElement.clientHeight;
+            var topH = document.querySelector('.common-header-content').offsetHeight;
+            return windowH - topH;
+        }
+		
+		mui('.mui-slider').on('tap','li',function(){
+			publicToChat();
+		})
+
+        //第一次加载我关注的数据
+        ajaxRequestFirst();
+
+        function ajaxRequestFirst() {
+            mui.getJSON('myAttention.json', function (data) {
+                if (vm.showWhich === 0) {
+                    if (JSON.stringify(data).myAtten == "{}") {
+                        return;
+                    } else {
+                        for (var i in data.myAtten) {
+                            if (i == page1) {
+                                vm.myAttenItems = vm.myAttenItems.concat(data.myAtten[i]);
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (vm.showWhich === 1) {
+                    if (JSON.stringify(data).attenMe == "{}") {
+                        return;
+                    } else {
+                        for (var i in data.attenMe) {
+                            if (i == page2) {
+                                vm.attenMeItems = vm.attenMeItems.concat(data.attenMe[i]);
+                                break;
+                            }
+                        }
+                    }
+                }
+            })
+        }
+
+        function ajaxRequest(type, pullObj) {
+            mui.getJSON('myAttention.json', function (data) {
+                if (vm.showWhich === 0) {
+                    if (JSON.stringify(data).myAtten == "{}") {
+                        if (type === 'down') {
+                            setTimeout(function () {
+                                pullObj.endPullDownToRefresh();
+                            }, 500)
+                        }
+                        if (type === 'up') {
+                            setTimeout(function () {
+                                pullObj.endPullUpToRefresh(true);
+                            }, 500)
+                        }
+                    } else {
+                        var count = 0;
+                        for (var i in data.myAtten) {
+                            if (i == page1) {
+                                count = 1;
+                                vm.myAttenItems = vm.myAttenItems.concat(data.myAtten[i]);
+
+                                if (type === 'down') {
+                                    setTimeout(function () {
+                                        pullObj.endPullDownToRefresh();
+                                    }, 500)
+                                }
+                                if (type === 'up') {
+                                    setTimeout(function () {
+                                        pullObj.endPullUpToRefresh();
+                                    }, 500)
+                                }
+                                break;
+                            }
+                        }
+                        if (count === 0) {
+                            if (type === 'down') {
+                                setTimeout(function () {
+                                    pullObj.endPullDownToRefresh();
+                                }, 500)
+                            }
+                            if (type === 'up') {
+                                setTimeout(function () {
+                                    pullObj.endPullUpToRefresh(true);
+                                }, 500)
+                            }
+                        }
+                    }
+                }
+
+                if (vm.showWhich === 1) {
+                    if (JSON.stringify(data).attenMe == "{}") {
+                        if (type === 'down') {
+                            setTimeout(function () {
+                                pullObj.endPullDownToRefresh();
+                            }, 500)
+                        }
+                        if (type === 'up') {
+                            setTimeout(function () {
+                                pullObj.endPullUpToRefresh(true);
+                            }, 500)
+                        }
+                    } else {
+                        var count = 0;
+                        for (var i in data.attenMe) {
+                            if (i == page2) {
+                                count = 1;
+                                vm.attenMeItems = vm.attenMeItems.concat(data.attenMe[i]);
+
+                                if (type === 'down') {
+                                    setTimeout(function () {
+                                        pullObj.endPullDownToRefresh();
+                                    }, 500)
+                                }
+                                if (type === 'up') {
+                                    setTimeout(function () {
+                                        pullObj.endPullUpToRefresh();
+                                    }, 500)
+                                }
+                                break;
+                            }
+                        }
+                        if (count === 0) {
+                            if (type === 'down') {
+                                setTimeout(function () {
+                                    pullObj.endPullDownToRefresh();
+                                }, 500)
+                            }
+                            if (type === 'up') {
+                                setTimeout(function () {
+                                    pullObj.endPullUpToRefresh(true);
+                                }, 500)
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

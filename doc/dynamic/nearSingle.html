@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>附近单身</title>
+		<link rel="stylesheet" href="../../mui/css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/reset.css" />
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/jly.css" />
+		<script src="../../js/rem.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../plugin/js/fastclick.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div id="myApp">
+			<header class="common-header">
+				<div class="common-header-content">
+					<a class="lf common-header-leftA">
+						<img class="common-header-leftImg" src="../../img/back.png" alt="" />
+					</a>
+					<a @click="screening" class="rf common-header-rightA">
+						<img class="nearSingle-header-rightImg" src="../../img/screening.png" alt="" />
+					</a>
+					<h1 class="common-header-h1">
+					附近单身
+				</h1>
+					<div class="clear"></div>
+				</div>
+			</header>
+			<div class="common-content">
+				<div class="common-content-padded nearSingle-content-padded">
+					<ul class="nearSingle-list">
+						<li @click="toDetail" v-for="item in items">
+							<div class="lf nearSingle-list-avatar-container">
+								<img :src="item.avatar" alt="" />
+							</div>
+							<div class="lf">
+								<div class="nearSingle-list-nickname-and">
+									<span v-html="item.nickname"></span>
+									<img :src="sexHandle(item.sex)" alt="" />
+								</div>
+								<p v-html="item.distance" class="nearSingle-list-distance"></p>
+							</div>
+							<div class="clear"></div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<script src="../../vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../mui/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/param.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/system.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jly.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var page = 1;
+
+			var vm = new Vue({
+				el: "#myApp",
+				data: {
+					items: []
+				},
+				updated: function() {
+					var listH = document.querySelector('.common-content-padded').offsetHeight;
+					if(listH < h) {
+						mui('.common-content').pullRefresh().disablePullupToRefresh();
+					} else {
+						mui('.common-content').pullRefresh().enablePullupToRefresh();
+					}
+				},
+				methods: {
+					sexHandle: function(status) {
+						if(status === 1) {
+							return '../../img/man.png';
+						}
+						if(status === 2) {
+							return '../../img/woman.png';
+						}
+					},
+					screening: function() {
+						var arr = [
+							'查看全部',
+							'只看女生',
+							'只看男生'
+						]
+						selectUseActionsheet(arr, '选择性别', function(i) {
+							plus.nativeUI.toast('选择了'+arr[i - 1]);
+						})
+					},
+					toDetail:function(){
+						publicToUser();
+					}
+				}
+			})
+
+			mui.init({
+				pullRefresh: {
+					container: '.common-content',
+					down: {
+						style: 'circle',
+						auto: true,
+						callback: pulldownRefresh
+					},
+					up: {
+						callback: pullupLoadmore
+					}
+				}
+			});
+			mui.plusReady(function() {
+				publicBack();
+			})
+
+			publicStatusbar();
+
+			var h = getBodyH();
+
+			function getBodyH() {
+				var windowH = document.documentElement.clientHeight;
+				var topH = document.querySelector('.common-header').offsetHeight;
+				return windowH - topH;
+			}
+
+			function pulldownRefresh() {
+				page = 1;
+				vm.items = [];
+				ajaxRequest('down');
+
+				mui('.common-content').pullRefresh().enablePullupToRefresh();
+			}
+
+			function pullupLoadmore() {
+				page++;
+				ajaxRequest('up');
+			}
+
+			function ajaxRequest(type) {
+				mui.getJSON('nearSingle.json', function(data) {
+					if(JSON.stringify(data) == "{}") {
+						if(type === 'down') {
+							setTimeout(function() {
+								mui('.common-content').pullRefresh().endPulldown();
+							}, 500);
+						}
+						if(type === 'up') {
+							setTimeout(function() {
+								mui('.common-content').pullRefresh().endPullup(true);
+							}, 500);
+						}
+					} else {
+						var count = 0;
+						for(var i in data) {
+							if(i == page) {
+								count = 1;
+								vm.items = vm.items.concat(data[i]);
+
+								if(type === 'down') {
+									setTimeout(function() {
+										mui('.common-content').pullRefresh().endPulldown();
+									}, 500);
+								}
+								if(type === 'up') {
+									setTimeout(function() {
+										mui('.common-content').pullRefresh().endPullup();
+									}, 500);
+								}
+								break;
+							}
+						}
+						if(count === 0) {
+							if(type === 'down') {
+								setTimeout(function() {
+									mui('.common-content').pullRefresh().endPulldown();
+								}, 500);
+							}
+							if(type === 'up') {
+								setTimeout(function() {
+									mui('.common-content').pullRefresh().endPullup(true);
+								}, 500);
+							}
+						}
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>

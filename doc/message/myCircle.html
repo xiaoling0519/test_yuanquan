@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>我的圈子</title>
+		<link rel="stylesheet" href="../../mui/css/mui.min.css" />
+		<link rel="stylesheet" href="../../mui/css/pull.css">
+		<link rel="stylesheet" href="../../css/reset.css" />
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/jly.css" />
+		<script src="../../js/rem.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../plugin/js/fastclick.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div id="myApp">
+
+			<header class="common-header">
+				<div class="common-header-content">
+					<a class="lf common-header-leftA">
+						<img class="common-header-leftImg" src="../../img/back.png" alt="" />
+					</a>
+					<h1 class="common-header-h1">
+                    我的圈子
+                </h1>
+					<div class="clear"></div>
+					<div class="myAppointment-tabs">
+						<div class="myAppointment-tabs-main">
+							<span @click="clickSwitch(0)" :class="{active:showWhich==0}" class="lf">我加入的</span>
+							<span @click="clickSwitch(1)" :class="{active:showWhich==1}" class="rf">我创建的</span>
+							<div class="clear"></div>
+						</div>
+					</div>
+				</div>
+			</header>
+
+			<div class="common-content myAppointment-content">
+				<div class="common-content-padded myAppointment-padded">
+					<div class="mui-slider">
+						<div class="mui-slider-group">
+							<div class="mui-slider-item">
+								<div class="mui-scroll-wrapper">
+									<div class="mui-scroll">
+										<div class="common-content-padded">
+											<ul class="myCircle-ul">
+												<li v-for="item in join">
+													<div class="myCircle-num-and">
+														<span v-html="item.num" class="myCircle-num"></span>
+														<img class="myCircle-avatar" :src="item.avatar" alt="">
+													</div>
+													<img class="myCircle-transpond" src="../../img/myCircle/transpond.png" alt="">
+													<div class="myCircle-school">
+														<span v-html="item.school" class="overflowEllipsis"></span>
+													</div>
+													<p v-html="item.intro" class="overflowThreeEllipsis myCircle-intro"></p>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="mui-slider-item">
+								<div class="mui-scroll-wrapper">
+									<div class="mui-scroll">
+										<div class="common-content-padded">
+											<ul class="myCircle-ul">
+												<li v-for="item2 in create">
+													<div class="myCircle-num-and">
+														<span class="myCircle-num">88</span>
+														<img class="myCircle-avatar" src="../../img/avatar.jpg" alt="">
+													</div>
+													<img class="myCircle-transpond" src="../../img/myCircle/transpond.png" alt="">
+													<div class="myCircle-school">
+														<span>浙江大学</span>
+													</div>
+													<p class="overflowThreeEllipsis myCircle-intro">
+														但是，房间看电视分肯定是会计法度假酒店价格积分兑换干活发动机号个惊魂甫定几个号烦得很干活打飞机国际饭店和赶紧分第几个dbksdkdsj科技的科技收购价梵蒂冈和发动机国际饭店和就干活发动机号国际饭店和建国后发动机
+													</p>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../../vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../mui/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../mui/js/mui.pullToRefresh.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../mui/js/mui.pullToRefresh.material.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/param.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/system.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jly.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var page1 = 1,
+				page2 = 1;
+
+			var pullUpObj1 = null,
+				pullUpObj2 = null;
+
+			var vm = new Vue({
+				el: "#myApp",
+				data: {
+					showWhich: 0,
+					createHadLoaded: false,
+					join: [],
+					create: []
+				},
+				methods: {
+					//点击切换
+					clickSwitch: function(e) {
+						this.showWhich = e;
+						mui('.mui-slider').slider().gotoItem(e, 300);
+					}
+				}
+			})
+
+			mui.init();
+
+			(function($) {
+				//阻尼系数
+				var deceleration = mui.os.ios ? 0.003 : 0.0009;
+				$('.mui-scroll-wrapper').scroll({
+					bounce: false,
+					indicators: false, //是否显示滚动条
+					deceleration: deceleration
+				});
+				$.ready(function() {
+					//循环初始化所有下拉刷新，上拉加载。
+					$.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function(index,
+						pullRefreshEl) {
+						$(pullRefreshEl).pullToRefresh({
+							down: {
+								callback: function() {
+									if(vm.showWhich === 0) {
+										page1 = 1;
+										vm.join = [];
+
+										if(pullUpObj1 !== null) {
+											pullUpObj1.refresh(true);
+										}
+									}
+									if(vm.showWhich === 1) {
+										page2 = 1;
+										vm.create = [];
+
+										if(pullUpObj2 !== null) {
+											pullUpObj2.refresh(true);
+										}
+									}
+
+									ajaxRequest('down', this);
+								}
+							},
+							up: {
+								callback: function() {
+									if(vm.showWhich === 0) {
+										page1++;
+										pullUpObj1 = this;
+									}
+									if(vm.showWhich === 1) {
+										page2++;
+										pullUpObj2 = this;
+									}
+
+									ajaxRequest('up', this);
+								}
+							}
+						});
+					});
+				});
+			})(mui);
+
+			mui.plusReady(function() {
+				publicBack();
+			})
+
+			publicStatusbar();
+
+			var h = getBodyH();
+
+			//设置滑动的最小高度
+			for(var i = 0; i < document.querySelectorAll('.mui-slider-item').length; i++) {
+				document.querySelector('.mui-slider-item:nth-child(' + (i + 1) + ')')
+					.style
+					.minHeight = h + 'px';
+
+				document.querySelectorAll('.mui-scroll ul')[i].style.minHeight = h + 'px';
+			}
+
+			//滑动切换
+			document.querySelector('.mui-slider').addEventListener('slide', function(e) {
+				vm.showWhich = e.detail.slideNumber;
+				
+				if (vm.showWhich === 1) {
+	                if (!vm.createHadLoaded) {
+	                    vm.createHadLoaded = true;
+	                    ajaxRequestFirst();
+	                }
+	            }
+			})
+
+			//获取主体高度
+			function getBodyH() {
+				var windowH = document.documentElement.clientHeight;
+				var topH = document.querySelector('.common-header-content').offsetHeight;
+				return windowH - topH;
+			}
+
+			//第一次加载数据
+			ajaxRequestFirst();
+
+			function ajaxRequestFirst() {
+				mui.getJSON('myCircle.json', function(data) {
+					if(vm.showWhich === 0) {
+						if(JSON.stringify(data).join == "{}") {
+							return;
+						} else {
+							for(var i in data.join) {
+								if(i == page1) {
+									vm.join = vm.join.concat(data.join[i]);
+									break;
+								}
+							}
+						}
+					}
+					if(vm.showWhich === 1) {
+						if(JSON.stringify(data).create == "{}") {
+							return;
+						} else {
+							for(var i in data.create) {
+								if(i == page2) {
+									vm.create = vm.create.concat(data.create[i]);
+									break;
+								}
+							}
+						}
+					}
+				})
+			}
+
+			function ajaxRequest(type, pullObj) {
+				mui.getJSON('myCircle.json', function(data) {
+					if(vm.showWhich === 0) {
+						if(JSON.stringify(data).join == "{}") {
+							if(type === 'down') {
+								setTimeout(function() {
+									pullObj.endPullDownToRefresh();
+								}, 500)
+							}
+							if(type === 'up') {
+								setTimeout(function() {
+									pullObj.endPullUpToRefresh(true);
+								}, 500)
+							}
+						} else {
+							var count = 0;
+							for(var i in data.join) {
+								if(i == page1) {
+									count = 1;
+									vm.join = vm.join.concat(data.join[i]);
+
+									if(type === 'down') {
+										setTimeout(function() {
+											pullObj.endPullDownToRefresh();
+										}, 500)
+									}
+									if(type === 'up') {
+										setTimeout(function() {
+											pullObj.endPullUpToRefresh();
+										}, 500)
+									}
+									break;
+								}
+							}
+							if(count === 0) {
+								if(type === 'down') {
+									setTimeout(function() {
+										pullObj.endPullDownToRefresh();
+									}, 500)
+								}
+								if(type === 'up') {
+									setTimeout(function() {
+										pullObj.endPullUpToRefresh(true);
+									}, 500)
+								}
+							}
+						}
+					}
+
+					if(vm.showWhich === 1) {
+						if(JSON.stringify(data).create == "{}") {
+							if(type === 'down') {
+								setTimeout(function() {
+									pullObj.endPullDownToRefresh();
+								}, 500)
+							}
+							if(type === 'up') {
+								setTimeout(function() {
+									pullObj.endPullUpToRefresh(true);
+								}, 500)
+							}
+						} else {
+							var count = 0;
+							for(var i in data.create) {
+								if(i == page2) {
+									count = 1;
+									vm.create = vm.create.concat(data.create[i]);
+
+									if(type === 'down') {
+										setTimeout(function() {
+											pullObj.endPullDownToRefresh();
+										}, 500)
+									}
+									if(type === 'up') {
+										setTimeout(function() {
+											pullObj.endPullUpToRefresh();
+										}, 500)
+									}
+									break;
+								}
+							}
+							if(count === 0) {
+								if(type === 'down') {
+									setTimeout(function() {
+										pullObj.endPullDownToRefresh();
+									}, 500)
+								}
+								if(type === 'up') {
+									setTimeout(function() {
+										pullObj.endPullUpToRefresh(true);
+									}, 500)
+								}
+							}
+						}
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>

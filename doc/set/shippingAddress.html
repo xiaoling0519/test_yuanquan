@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>收货地址</title>
+    <link rel="stylesheet" href="../../mui/css/mui.min.css" />
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/common.css" />
+    <link rel="stylesheet" href="../../css/jly.css" />
+    <script src="../../js/rem.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../plugin/js/fastclick.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+    <div id="myApp">
+        <header class="common-header">
+            <div class="common-header-content">
+                <a @click="back()" class="lf common-header-leftA">
+                    <img class="common-header-leftImg" src="../../img/back.png" alt="" />
+                </a>
+                <h1 class="common-header-h1">
+                    收货地址
+                </h1>
+                <div class="clear"></div>
+            </div>
+        </header>
+        <div class="common-content">
+            <div class="common-content-padded shippingAddress-padded">
+                <ul class="shippingAddress-list">
+                    <li v-for="(item,index) in items" class="shippingAddress-li">
+                        <div class="shippingAddress-li-content">
+                            <div class="shippingAddress-main">
+                                <div>
+                                    <span v-html="item.name" class="shippingAddress-name"></span>
+                                    <span v-html="item.tel" class="shippingAddress-tel"></span>
+                                </div>
+                                <p v-text="item.address" class="shippingAddress-address"></p>
+                            </div>
+                            <div class="shippingAddress-operate">
+                                <span v-html="isDefaultText(index)" :class="{active:item.isDefault}" @click="setDefault(index)" class="lf shippingAddress-setDefault"></span>
+                                <span @click="deleteAddress(index)" class="rf shippingAddress-delete">删除</span>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="shippingAddress-submitBtn">
+                    <div @click="addAddress()" class="myWallet-rechargeBtn">
+                        <span>新增地址</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="popup" v-bind:style="{zIndex:popZIndex}" v-show="isShowAdd" class="common-popup">
+            <h3 class="common-popup-h3">添加新收货地址</h3>
+            <div>
+                <ul>
+                    <li class="common-popup-li shippingAddress-name-and">
+                        <input v-model="addInfo.name" id="name" class="lf shippingAddress-name" placeholder="姓名" type="text">
+                        <input v-model="addInfo.tel" id="tel" class="lf shippingAddress-tel" placeholder="电话" type="tel">
+                        <div class="clear"></div>
+                    </li>
+                    <li id="selectArea" class="common-popup-li">
+                        <label class="lf shippingAddress-selectArea-label">选择地区</label>
+                        <span v-html="addInfo.aboutAddress" class="rf overflowEllipsis shippingAddress-selectedArea"></span>
+                        <div class="clear"></div>
+                    </li>
+                    <li class="common-popup-li">
+                        <input v-model="addInfo.detailAddress" id="detailAddress" class="font30 shippingAddress-detailAddress" placeholder="详细地址 （如街道、小区、乡镇、村）"
+                            type="text">
+                    </li>
+                </ul>
+            </div>
+            <div class="common-popup-confirmBtn">
+                <div @click="save()" id="save" class="myWallet-rechargeBtn">
+                    保存
+                </div>
+            </div>
+        </div>
+
+        <div v-show="isShowArea" id="selectAreaDetail" class="shippingAddress-selectDetail">
+            <div class="shippingAddress-selectDetail-header">
+                <div class="lf">
+                    <span v-html="province" id="province" class="shippingAddress-selectDetail-level overflowEllipsis active"></span>
+                    <span v-html="city" id="city" style="display: none;" class="shippingAddress-selectDetail-level overflowEllipsis"></span>
+                    <span v-html="county" id="county" style="display: none;" class="shippingAddress-selectDetail-level overflowEllipsis"></span>
+                </div>
+                <span class="rf shippingAddress-selectDetail-cancel">取消</span>
+                <div class="clear"></div>
+            </div>
+            <ul class="shippingAddress-selectDetail-ul" id="areaList">
+
+            </ul>
+        </div>
+
+        <div v-show="confirmShow" class="common-popup common-confirm">
+            <h3>温馨提示</h3>
+            <div class="common-confirm-tipTxt">
+                确定删除此地址？
+            </div>
+            <div class="common-confirm-btns">
+                <span @click="cancelDelete()" class='lf common-confirm-cancel'>取消</span>
+                <span @click="confirmDelete()" class='lf common-confirm-yes'>确定</span>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/templete" id="areaLi">
+        <li class="shippingAddress-selectDetail-li">
+            <label>{{area}}</label>
+        </li>
+    </script>
+
+    <script src="../../vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../mui/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../mui/js/city.data-3.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/param.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/system.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jly.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        var currWebviewId = null;
+        var mask = mui.createMask();
+
+        var cloneInfo = {
+            name: '',
+            tel: '',
+            address: '',
+            isDefault: false
+        }
+
+        var vm = new Vue({
+            el: "#myApp",
+            data: {
+                confirmShow: false,
+                willDelete: null,
+                isShowAdd: false,
+                isShowArea: false,
+                popZIndex: '0',
+
+                province: "请选择",
+                city: "请选择",
+                county: "请选择",
+
+                addInfo: {
+                    name: '',
+                    tel: '',
+                    aboutAddress: '',
+                    detailAddress: ''
+                },
+                items: null
+            },
+            mounted: function () {
+                insertProvince();
+                ajaxRequest();
+            },
+            methods: {
+                isDefaultText: function (index) {
+                    if (this.items[index].isDefault) {
+                        return '已设为默认';
+                    } else {
+                        return '设为默认';
+                    }
+                },
+                //设置默认
+                setDefault: function (index) {
+                    if (this.items[index].isDefault === false) {
+                        this.items.forEach(function (e) {
+                            e.isDefault = false;
+                        })
+                        this.items[index].isDefault = true;
+                    }
+                },
+                //删除地址
+                deleteAddress: function (index) {
+                    this.willDelete = index;
+                    this.confirmShow = true;
+                    mask.show();
+
+                    document.querySelector('.mui-backdrop').addEventListener('click', function () {
+                        vm.confirmShow = false;
+                    })
+                },
+                //取消删除
+                cancelDelete: function () {
+                    this.confirmShow = false;
+                    mask.close();
+                },
+                //确定删除
+                confirmDelete: function () {
+                    if (this.items[this.willDelete].isDefault) {
+                        this.items.splice(this.willDelete, 1);
+
+                        mask.close();
+                        this.confirmShow = false;
+
+                        if (this.items.length > 0) {
+                            this.items[0].isDefault = true;
+                        }
+                    } else {
+                        this.items.splice(this.willDelete, 1);
+
+                        mask.close();
+                        this.confirmShow = false;
+                    }
+                },
+                //新增
+                addAddress: function () {
+                    this.isShowAdd = true;
+                    mask.show();
+                    this.popZIndex = '9999';
+
+                    document.querySelector('.mui-backdrop').addEventListener('click', function () {
+                        vm.isShowAdd = false;
+                    })
+                },
+                //保存
+                save: function () {
+                    if (this.addInfo.name === '') {
+                        plus.nativeUI.toast('请输入姓名');
+                        return;
+                    }
+                    if (this.addInfo.tel === '') {
+                        plus.nativeUI.toast('请输入电话');
+                        return;
+                    }
+                    if (document.querySelector('.shippingAddress-selectedArea').innerText === '') {
+                        plus.nativeUI.toast('请选择地区');
+                        return;
+                    }
+                    if (this.addInfo.detailAddress === '') {
+                        plus.nativeUI.toast('请输入详细地址');
+
+                        return;
+                    }
+                    plus.nativeUI.toast('添加新地址成功');
+
+                    this.isShowAdd = false;
+                    mask.close();
+
+                    var obj = cloneObj(cloneInfo);
+                    obj.name = this.addInfo.name;
+                    obj.tel = this.addInfo.tel;
+                    obj.address = this.addInfo.aboutAddress + this.addInfo.detailAddress;
+                    obj.isDefault = false;
+                    this.items.push(obj);
+
+                    if (this.items.length === 1) {
+                        this.items[0].isDefault = true;
+                    }
+                },
+                //选择地区
+                selectArea: function () {
+                    vm.isShowArea = true;
+                },
+                back: function () {
+                    Webview.close({
+                        id: currWebviewId
+                    });
+                }
+            }
+        })
+
+        mui.init();
+        mui.plusReady(function () {
+            currWebviewId = plus.webview.currentWebview().id;
+            mui.back = function () {
+                if (vm.isShowArea) {
+                    vm.isShowArea = false;
+                    vm.popZIndex = '9999';
+                } else if (vm.isShowAdd) {
+                    mask.close();
+                    vm.isShowAdd = false;
+                } else if (vm.confirmShow) {
+                    mask.close();
+                    vm.confirmShow = false;
+                } else {
+                    Webview.close({
+                        id: currWebviewId
+                    })
+                }
+            }
+        })
+
+        publicStatusbar();
+
+        //插入省份
+        function insertProvince() {
+            document.querySelector('#areaList').innerHTML = '';
+            for (var i = 0; i < cityData3.length; i++) {
+                var areaLi = document.querySelector('#areaLi').innerHTML
+                    .replace('{{area}}', cityData3[i].text)
+
+                document.querySelector('#areaList').innerHTML += areaLi;
+            }
+        }
+
+        //插入市
+        function insertCity(p) {
+            document.querySelector('#areaList').innerHTML = '';
+            for (var i = 0; i < cityData3.length; i++) {
+                if (p === cityData3[i].text) {
+                    for (var j = 0; j < cityData3[i].children.length; j++) {
+                        var areaLi = document.querySelector('#areaLi').innerHTML
+                            .replace('{{area}}', cityData3[i].children[j].text)
+
+                        document.querySelector('#areaList').innerHTML += areaLi;
+                    }
+                    break;
+                }
+            }
+        }
+
+        //插入县
+        function insertCounty(c) {
+            for (var i = 0; i < cityData3.length; i++) {
+                if (vm.province === cityData3[i].text) {
+                    for (var j = 0; j < cityData3[i].children.length; j++) {
+                        if (c === cityData3[i].children[j].text) {
+                            if (cityData3[i].children[j].hasOwnProperty('children')) {
+                                document.querySelector('#areaList').innerHTML = '';
+                                for (var k = 0; k < cityData3[i].children[j].children.length; k++) {
+                                    var areaLi = document.querySelector('#areaLi').innerHTML
+                                        .replace('{{area}}', cityData3[i].children[j].children[k].text)
+
+                                    document.querySelector('#areaList').innerHTML += areaLi;
+                                }
+                                document.querySelector('#county').style.display = 'inline-block';
+                                document.querySelector('#county').classList.add('active');
+                                document.querySelector('#city').classList.remove('active');
+
+                                break;
+                            } else {
+                                vm.isShowArea = false;
+                                vm.popZIndex = '9999';
+                                vm.addInfo.aboutAddress = vm.province + ' ' + vm.city;
+                            }
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+
+        //重新选择省
+        document.querySelector('#province').addEventListener('click', function () {
+            document.querySelector('.shippingAddress-selectDetail-level.active').classList.remove('active');
+            this.classList.add('active');
+
+            vm.province = '请选择';
+            vm.city = '请选择';
+            document.querySelector('#city').style.display = 'none';
+            vm.county = '请选择';
+            document.querySelector('#county').style.display = 'none';
+
+            insertProvince();
+        })
+
+        //重新选择市
+        document.querySelector('#city').addEventListener('click', function () {
+            document.querySelector('.shippingAddress-selectDetail-level.active').classList.remove('active');
+            this.classList.add('active');
+
+            vm.city = '请选择';
+            vm.county = '请选择';
+            document.querySelector('#county').style.display = 'none';
+
+            insertCity(vm.province);
+        })
+
+        //选中地区
+        mui('#areaList').on('click', '.shippingAddress-selectDetail-li', function () {
+            //省
+            if (document.querySelector('#province').classList.contains('active')) {
+                document.querySelector('#city').style.display = 'inline-block';
+                document.querySelector('#city').classList.add('active');
+                document.querySelector('#province').classList.remove('active');
+
+                vm.province = this.children[0].innerText;
+
+                insertCity(vm.province);
+                return;
+            }
+
+            //市
+            if (document.querySelector('#city').classList.contains('active')) {
+                vm.city = this.children[0].innerText;
+
+                insertCounty(vm.city);
+                return;
+            }
+
+            //县
+            if (document.querySelector('#county').classList.contains('active')) {
+                vm.county = this.children[0].innerText;
+
+                vm.isShowArea = false;
+                vm.popZIndex = '9999';
+                vm.addInfo.aboutAddress = vm.province + ' ' + vm.city + ' ' + this.children[
+                    0].innerText;
+                return;
+            }
+        })
+
+        //取消选择地区
+        document.querySelector('.shippingAddress-selectDetail-cancel').addEventListener('click', function () {
+            vm.isShowArea = false;
+            vm.popZIndex = '9999';
+        })
+
+        //阻止页面滚动
+        document.getElementById('popup').addEventListener('touchmove', function (e) {
+            e.preventDefault();
+        })
+
+        //选择地址
+        document.querySelector('#selectArea').addEventListener('click', function () {
+            vm.isShowArea = true;
+            vm.popZIndex = '0';
+
+            document.querySelector('.mui-backdrop').addEventListener('click', function () {
+                vm.isShowArea = false;
+                vm.popZIndex = '9999';
+                vm.isShowAdd = false;
+            })
+        })
+
+        function ajaxRequest() {
+            mui.getJSON('shippingAddress.json', function (data) {
+                if (data.length === 0) {
+                    plus.nativeUI.toast('还没有添加任何地址')
+                } else {
+                    vm.items = data;
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>

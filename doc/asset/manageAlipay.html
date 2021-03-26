@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>管理支付宝</title>
+		<link rel="stylesheet" href="../../mui/css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/reset.css" />
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/jly.css" />
+		<script src="../../js/rem.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../plugin/js/fastclick.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div id="myApp">
+			<header class="common-header">
+				<div class="common-header-content">
+					<a class="lf common-header-leftA">
+						<img class="common-header-leftImg" src="../../img/back.png" alt="" />
+					</a>
+					<h1 class="common-header-h1">
+					管理支付宝
+				</h1>
+					<div class="clear"></div>
+				</div>
+			</header>
+			<div class="common-content">
+				<div class="common-content-padded manageAlipay-padded">
+					<div>
+						<ul class="manageAlipay-asset-and">
+							<li>
+								支付宝账户：<input v-model="asset" type="text" />
+							</li>
+							<li>
+								支付宝姓名：<input v-model="name" type="text" />
+							</li>
+						</ul>
+					</div>
+					<div class="manageAlipay-main">
+						<div class="feedback-submitBtn manageAlipay-save">
+							<div @click="save" class="myWallet-rechargeBtn manageAlipay-save-main">
+								安全保存
+							</div>
+						</div>
+						<div class="manageAlipay-tips">
+							<h2>温馨提示</h2>
+							<div class="manageAlipay-tips-main">
+								<p>1.请确保支付宝已实名认证，并填写<span>真实姓名(请不要填写昵称)</span></p>
+								<p>2.为了保证顺利提现，<span>30天内</span>不要更换其他账号，否则会导致提现不通过</p>
+								<p>3.我们承诺不会向任何人透露您的个人信息</p>
+							</div>
+						</div>
+					</div>
+
+					<div v-show="safeShow" class="manageAlipay-bottom-safe">
+						<div class="common-content-padded">
+							<span>缘圈安全保障服务</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="../../vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../mui/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/param.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/system.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jly.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el: "#myApp",
+				data: {
+					asset: '',
+					name: '',
+					safeShow:true
+				},
+				methods: {
+					save: function() {
+						if(this.asset === '' || this.asset===undefined) {
+							plus.nativeUI.toast('请输入支付宝账号');
+							return;
+						}
+						if(this.name === '' || this.name===undefined) {
+							plus.nativeUI.toast('请输入你的真实姓名');
+							return;
+						}
+
+						plus.webview.currentWebview().opener().evalJS("vm.notAdd=false;vm.asset='" + this.asset + "';vm.name='" + this.name + "';document.querySelector('.withdraw-asset-content').style.backgroundImage='url(../../img/withdraw/right.png)';");
+						Webview.close({
+							id: plus.webview.currentWebview().id
+						});
+					}
+				}
+			})
+
+			mui.init();
+			mui.plusReady(function() {
+				publicBack();
+				
+				vm.asset=plus.webview.currentWebview().asset;
+				vm.name=plus.webview.currentWebview().name;
+			})
+
+			publicStatusbar();
+
+			var h = window.innerHeight;
+
+			window.onresize = function() {
+				if(window.innerHeight === h) {
+					vm.safeShow=true;
+				} else {
+					vm.safeShow=false;
+				}
+			}
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>全部评价</title>
+		<link rel="stylesheet" href="../../mui/css/mui.min.css" />
+		<link rel="stylesheet" href="../../mui/css/previewImage.css">
+		<link rel="stylesheet" href="../../css/reset.css" />
+		<link rel="stylesheet" href="../../css/common.css" />
+		<link rel="stylesheet" href="../../css/jly.css" />
+		<script src="../../js/rem.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../plugin/js/fastclick.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div id="myApp">
+			<header class="common-header">
+				<div class="common-header-content">
+					<a @click="close" class="lf common-header-leftA">
+						<img class="common-header-leftImg" src="../../img/back.png" alt="" />
+					</a>
+					<a @click="share" class="rf common-header-rightA">
+						<img class="goodDetail-header-rightImg" src="../../img/goodsDetail/share.png" alt="" />
+					</a>
+					<h1 class="common-header-h1">
+					全部评价
+				</h1>
+					<div class="clear"></div>
+
+					<ul class="comments-tabs">
+						<li @click="switchTab('all')" class="lf active">
+							全部(<span>5454</span>)
+						</li>
+						<li @click="switchTab('hasImg')" class="lf">
+							有图(<span>5454</span>)
+						</li>
+						<li @click="switchTab('bad')" class="lf">
+							差评(<span>5454</span>)
+						</li>
+					</ul>
+				</div>
+			</header>
+			<div class="common-content" style="padding-bottom: .98rem;">
+				<div class="common-content-padded comments-padded">
+					<ul>
+						<li class="comments-li">
+							<div class="goodDetail-evaluationDetail">
+								<div>
+									<div class="lf toUser"><img src="../../img/avatar.jpg" class="goodDetail-evaluation-avatar"> <span class="goodDetail-evaluation-nickname">小鱼儿</span></div> <span class="goodDetail-evaluation-date rf">2018-03-10</span>
+									<div class="clear"></div>
+								</div>
+								<p class="goodDetail-evaluation-txt">都是看来公开sdfkjgk咖啡店就赶快看得见顾客的房间顾客放得开发电机股份的科技</p>
+								<ul class="comments-imgs-ul">
+									<li class="lf">
+										<img data-preview-group="1" data-preview-src="" src="../../img/avatar.jpg" alt="" />
+									</li>
+									<li class="lf">
+										<img data-preview-group="1" data-preview-src="" src="../../img/avatar.jpg" alt="" />
+									</li>
+									<li class="lf">
+										<img data-preview-group="1" data-preview-src="" src="../../img/avatar.jpg" alt="" />
+									</li>
+									<li class="lf">
+										<img data-preview-group="1" data-preview-src="" src="../../img/avatar.jpg" alt="" />
+									</li>
+								</ul>
+								<div class="comments-color-and">
+									<span>颜色：<label>黑色</label></span>
+									<span>尺寸：<label>属性显示</label></span>
+								</div>
+							</div>
+						</li>
+						<li class="comments-li">
+							<div class="goodDetail-evaluationDetail">
+								<div>
+									<div class="lf toUser"><img src="../../img/avatar.jpg" class="goodDetail-evaluation-avatar"> <span class="goodDetail-evaluation-nickname">小鱼儿</span></div> <span class="goodDetail-evaluation-date rf">2018-03-10</span>
+									<div class="clear"></div>
+								</div>
+								<p class="goodDetail-evaluation-txt">都是看来公开sdfkjgk咖啡店就赶快看得见顾客的房间顾客放得开发电机股份的科技</p>
+								<ul class="comments-imgs-ul">
+
+								</ul>
+								<div class="comments-color-and">
+									<span>颜色：<label>黑色</label></span>
+									<span>尺寸：<label>属性显示</label></span>
+								</div>
+							</div>
+						</li>
+						<li class="comments-li">
+							<div class="goodDetail-evaluationDetail">
+								<div>
+									<div class="lf toUser"><img src="../../img/avatar.jpg" class="goodDetail-evaluation-avatar"> <span class="goodDetail-evaluation-nickname">小鱼儿</span></div> <span class="goodDetail-evaluation-date rf">2018-03-10</span>
+									<div class="clear"></div>
+								</div>
+								<p class="goodDetail-evaluation-txt">都是看来公开sdfkjgk咖啡店就赶快看得见顾客的房间顾客放得开发电机股份的科技</p>
+								<ul class="comments-imgs-ul">
+									<li class="lf">
+										<img data-preview-group="2" data-preview-src="" src="../../img/avatar.jpg" alt="" />
+									</li>
+									<li class="lf">
+										<img data-preview-group="2" data-preview-src="" src="../../img/avatar.jpg" alt="" />
+									</li>
+									<li class="lf">
+										<img data-preview-group="2" data-preview-src="" src="../../img/avatar.jpg" alt="" />
+									</li>
+									<li class="lf">
+										<img data-preview-group="2" data-preview-src="" src="../../img/avatar.jpg" alt="" />
+									</li>
+								</ul>
+								<div class="comments-color-and">
+									<span>颜色：<label>黑色</label></span>
+									<span>尺寸：<label>属性显示</label></span>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="common-bottom goodDetail-bottom">
+				<div class="common-content-padded goodDetail-bottom-padded">
+					<div class="lf goodDetail-bottom-help-and">
+						<div @click="chat" class="lf goodDetail-bottom-help">
+							<img src="../../img/goodsDetail/help.png" alt="" />
+							<div>联系客服</div>
+						</div>
+						<div @click="collect" class="lf goodDetail-bottom-collect">
+							<img :src="collectImg" alt="" />
+							<div>收藏</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="rf goodDetail-bottom-buy">
+						立即购买
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div v-show="showSpecification" id="selectSpecification" class="common-bottom goodDetail-specification">
+				<div class="common-content-padded">
+					<div class="goodDetail-specification-basicInfo">
+						<div class="lf goodDetail-specification-img-container">
+							<img src="../../img/avatar.jpg" alt="" />
+						</div>
+						<div class="goodDetail-specification-basicInfo-main">
+							<p class="overflowTwoEllipsis goodDetail-specification-basicInfo-intro">三大框架给快递费款第三方玲玲的房间开公开发的科技馆可减肥的开关即可发动机盖会计法的闪光点发动</p>
+							<div class="goodDetail-specification-basicInfo-price">￥<span>198</span></div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<ul class="goodDetail-specification-type-ul">
+						<li class="goodDetail-specification-type color">
+							<h3>颜色</h3>
+							<ul>
+								<li :class="{active:index===selectColorIndex}" @click="selectColor(index)" v-html="color" v-for="(color,index) in colors" class="lf"></li>
+							</ul>
+						</li>
+						<li class="goodDetail-specification-type size">
+							<h3>尺寸</h3>
+							<ul>
+								<li :class="{active:index===selectSizeIndex}" @click="selectSize(index)" v-html="size" v-for="(size,index) in sizes" class="lf"></li>
+							</ul>
+						</li>
+					</ul>
+					<div class="confirmOrder-buyNum">
+						<label class="confirmOrder-buyNum-label lf">请选择数量</label>
+						<div class="rf confirmOrder-buyNum-select">
+							<span @click="subtract" class="lf confirmOrder-buyNum-subtract">-</span>
+							<input v-model="num" class="lf confirmOrder-buyNum-input" type="number" />
+							<span @click="add" class="lf confirmOrder-buyNum-add">+</span>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div @click="confirm" class="chat-appointmcentDetail-confirmBtn">
+						<span>确</span>
+						<span class="last">定</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="../../vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../mui/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../mui/js/mui.zoom.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../mui/js/mui.previewimage.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/param.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/system.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/jly.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var mask = mui.createMask();
+			var currWebviewId = null;
+
+			var vm = new Vue({
+				el: "#myApp",
+				data: {
+					num: 1,
+					showSpecification: false,
+					collected: false,
+					collectImg: '../../img/goodsDetail/collect.png',
+					selectColorIndex: 0,
+					selectSizeIndex: 0,
+					colors: [
+						'黄色', '白色', '黑色', '褐色', '紫色'
+					],
+					sizes: [
+						29, 40, 42
+					]
+				},
+				methods: {
+					confirm: function() {
+						publicWebviewShow({
+							id: '/doc/circleShopping/confirmOrder.html'
+						})
+					},
+					subtract: function() {
+						if(this.num > 1) {
+							this.num--;
+						}
+					},
+					add: function() {
+						this.num++;
+					},
+					share: function() {
+						plus.nativeUI.toast('点了分享');
+					},
+					chat: function() {
+						plus.nativeUI.toast('点了联系客服');
+					},
+					collect: function() {
+						if(this.collected) {
+							this.collectImg = '../../img/goodsDetail/collect.png';
+							this.collected = false;
+							return;
+						} else {
+							this.collectImg = '../../img/goodsDetail/collected.png';
+							this.collected = true;
+							return;
+						}
+					},
+					close: function() {
+						Webview.close({
+							id: currWebviewId
+						})
+					},
+					selectColor: function(i) {
+						this.selectColorIndex = i;
+					},
+					selectSize: function(i) {
+						this.selectSizeIndex = i;
+					},
+					switchTab: function(type) {
+						for(var i = 0; i < document.querySelectorAll('.comments-tabs li').length; i++) {
+							document.querySelectorAll('.comments-tabs li')[i].classList.remove('active');
+						}
+
+						if(type === 'all') {
+							document.querySelectorAll('.comments-tabs li')[0].classList.add('active');
+						}
+						if(type === 'hasImg') {
+							document.querySelectorAll('.comments-tabs li')[1].classList.add('active');
+						}
+						if(type === 'bad') {
+							document.querySelectorAll('.comments-tabs li')[2].classList.add('active');
+						}
+					}
+				}
+			})
+
+			mui.init({
+				pullRefresh: {
+					container: '.common-content',
+					down: {
+						style: 'circle',
+						auto: true,
+						callback: pulldownRefresh
+					},
+					up: {
+						callback: pullupLoadmore
+					}
+				},
+				gestureConfig: {
+					longtap: true
+				}
+			});
+			mui.plusReady(function() {
+				currWebviewId = plus.webview.currentWebview().id;
+
+				mui.back = function() {
+					var previewImage = mui.isFunction(mui.getPreviewImage) && mui.getPreviewImage();
+					if(previewImage && previewImage.isShown()) { //图片预览
+						previewImage.close();
+					} else if(vm.showSpecification) {
+						vm.showSpecification = false;
+						mask.close();
+					} else {
+						Webview.close({
+							id: currWebviewId
+						})
+					}
+				}
+			})
+
+			mui(document).on('tap', '.toUser', function() {
+				publicToUser();
+			})
+
+			//图片预览
+			mui.previewImage();
+			
+			mui('#__MUI_PREVIEWIMAGE').on('longtap', '.mui-zoom', function () {
+	            saveImage(this.getAttribute('src'));
+	        })
+
+			publicStatusbar();
+
+			document.querySelector('.goodDetail-bottom-buy').onclick = function() {
+				vm.showSpecification = true;
+				mask.show();
+
+				document.querySelector('.mui-backdrop').addEventListener('click', function() {
+					vm.showSpecification = false;
+				})
+			}
+
+			function pulldownRefresh() {
+				setTimeout(function() {
+					mui('.common-content').pullRefresh().endPulldown();
+				}, 500)
+			}
+
+			function pullupLoadmore() {
+				setTimeout(function() {
+					mui('.common-content').pullRefresh().endPullup();
+				}, 500)
+			}
+		</script>
+	</body>
+
+</html>
